@@ -1,66 +1,88 @@
 import React from 'react';
 import { Container, Content, Text } from 'native-base';
-import { Animals } from '../../enum/Form';
+import { Animal, Color } from '../../enum/Form';
 import Item from './components/Item';
+import { IAgeWidgetvalue } from '../../components/widgets/AgeWidget';
 
-interface ISearchState {
-    animal: Animals,
-    ages: number[]
+export interface IItemsState {
+    animal: Animal,
+    ages: IAgeWidgetvalue,
+    colors: Color[]
 }
-  
-const Items: React.FC<ISearchState> = (props) => {
+
+const Items: React.FC<IItemsState> = (props) => {
     const items = {
         dog: [
             {
                 id: 1,
                 title: 'Хочет домой лосковый пес',
-                image: 'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg'
+                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
+                age: 15,
+                images: [
+                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
+                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
+                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
+                ]
             },
             {
                 id: 2,
-                title: 'Хозяева бросили на улицу',
-                image: 'https://www.meme-arsenal.com/memes/6727eee92277ff6c2a3ea6f4d95ddb09.jpg'
+                title: 'Хочет',
+                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
+                age: 15,
+                images: [
+                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
+                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
+                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
+                ]
             },
             {
                 id: 3,
-                title: 'Помогите псу',
-                image: 'https://i.ytimg.com/vi/-ZpHKf-pztM/maxresdefault.jpg'
-            },
-            {
-                id: 4,
-                title: 'Заберите домой )))',
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgqfqfP29TtYj1IY6C8DENsftwcnGHWEOhqN9heV4vqPb-2wIa&usqp=CAU'
-            },
-            {
-                id: 5,
-                title: 'щенок ищет хозяина',
-                image: 'https://bm.img.com.ua/img/prikol/images/large/2/5/209652.jpg'
+                title: 'Хочет домой лосковый пес',
+                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
+                age: 15,
+                images: [
+                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
+                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
+                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
+                ]
             }
         ],
         cat: [
             {
-                id: 6,
-                title: 'Котик мяу мяу',
-                image: 'https://demotos.ru/sites/default/files/caricatures/2017-05-14-1494767759.jpg'
+                id: 4,
+                title: 'Кот',
+                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
+                age: 15,
+                images: [
+                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
+                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
+                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
+                ]
             },
             {
-                id: 7,
-                title: 'сотик гаф',
-                image: 'https://cs.pikabu.ru/post_img/2012-12_7/1356961016_1908146245.jpg'
-            },
+                id: 5,
+                title: 'Хочет домой лосковый кот',
+                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
+                age: 15,
+                images: [
+                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
+                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
+                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
+                ]
+            }
         ],
     };
 
 
-  return (
-    <Container>
-        <Content padder>
-            {( items[props.animal].map((item: any) => {
-                return <Item key={item.id} title={item.title} image={item.image} id={item.id} />
-            }))}
-        </Content>
-    </Container>
-  );
+    return (
+        <Container>
+            <Content padder>
+                {( items[props.animal].map((item: any, index) => {
+                    return <Item key={index} item={item} />
+                }))}
+            </Content>
+        </Container>
+    );
 };
 
 export default Items;

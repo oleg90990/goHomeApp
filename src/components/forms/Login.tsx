@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import {  Form, Item, Label, Input, Button, Text } from 'native-base';
-import { Action, Scens } from '../../utilites/appNavigation';
+import { toAccounnt } from '../../utilites/appNavigation';
 
 const Login: React.FC = () => {
   const [
@@ -13,10 +13,6 @@ const Login: React.FC = () => {
     password,
     setPassword
    ] = useState<string>('')
-  
-  const toLogin = () => {
-    Action(Scens.accounnt);
-  }
   
   return (
     <Form >
@@ -34,7 +30,7 @@ const Login: React.FC = () => {
               onChangeText={setPassword}
             />
         </Item>
-        <Button style={styles.Btn} onPress={toLogin}>
+        <Button style={styles.Btn} onPress={toAccounnt}>
             <Text>Вход</Text>
         </Button>
     </Form>

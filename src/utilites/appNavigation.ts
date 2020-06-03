@@ -2,16 +2,29 @@ import { Actions } from 'react-native-router-flux';
 import { Scens as ScensEnum } from '../enum/Scens'
 import { isLoggedIn } from '../utilites/auth'
 
-const authPages: ScensEnum[] = [
-    ScensEnum.accounnt
-];
+import { IItemsState } from '../scens/Items';
+import { IItemState} from '../scens/Item';
 
-export const Scens = ScensEnum;
+export const toItems = (props: IItemsState) => {
+    Actions[ScensEnum.items](props);
+}
 
-export const Action = (scene: ScensEnum, props?: any) => {
-    if (authPages.indexOf(scene) > -1 && !isLoggedIn()) {
-        Actions[ScensEnum.login]();
+export const toAccounnt = () => {
+    if (!isLoggedIn()) {
+        toLogin();
     } else {
-        Actions[scene](props);
+        Actions[ScensEnum.accounnt]();
     }
+}
+
+export const toItem = (props: IItemState) => {
+    Actions[ScensEnum.item](props);
+}
+
+export const toLogin = () => {
+    Actions[ScensEnum.login]();
+}
+
+export const toDashboard = () => {
+    Actions[ScensEnum.dashboard]();
 }

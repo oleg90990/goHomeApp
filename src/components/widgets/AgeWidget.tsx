@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { Picker, Label, View, Card, CardItem, Body } from 'native-base';
 
-export interface IAnimalsWidgetvalue {
+export interface IAgeWidgetvalue {
     from: number,
     to: number
 }
 
 interface IAnimalsWidgetsState {
-  value?: IAnimalsWidgetvalue,
-  onChange?: (value: IAnimalsWidgetvalue) => void
+  value?: IAgeWidgetvalue,
+  onChange?: (value: IAgeWidgetvalue) => void
 }
 
-const defaultValue: IAnimalsWidgetvalue = { from: 0, to: 5 };
+const defaultValue: IAgeWidgetvalue = { from: 0, to: 5 };
 
 const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
     const { from, to } = props.value ?  props.value : defaultValue;
@@ -20,7 +20,7 @@ const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
     const [
         value,
         setValue
-    ] = useState<IAnimalsWidgetvalue>({ from, to, });
+    ] = useState<IAgeWidgetvalue>({ from, to, });
 
     useEffect(() => {
         if (props.onChange) {

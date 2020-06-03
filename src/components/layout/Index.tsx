@@ -1,12 +1,12 @@
 import React from 'react';
-import { Action, Scens } from '../../utilites/appNavigation';
+import { toDashboard, toAccounnt } from '../../utilites/appNavigation';
 import { Scens as ScensEnum } from '../../enum/Scens'
 import { Container, Header, Title, Footer, FooterTab, Button, Text, Right, Body, Icon, Left } from 'native-base';
 import { Image, StyleSheet } from 'react-native';
 
 interface IFooterButton {
     title: string;
-    scen: ScensEnum;
+    action: () => any;
     icon: string;
 }
 
@@ -14,18 +14,18 @@ const Layout: React.FC = (props) => {
     const buttons: IFooterButton[] = [
         {
             title: 'Аккаунт',
-            scen: Scens.accounnt,
-            icon: 'person'
+            icon: 'person',
+            action: toAccounnt
         },
         {
             title: 'Гланая',
-            scen: Scens.dashboard,
-            icon: 'menu'
+            icon: 'menu',
+            action: toDashboard
         }
     ];
 
     const toScen = (scen: ScensEnum) => {
-        Action(scen);
+        // Action(scen);
     }
 
     return (
@@ -43,9 +43,9 @@ const Layout: React.FC = (props) => {
             <Footer>
                 <FooterTab>
                     {(
-                        buttons.map(button => {
+                        buttons.map((button, i) => {
                             return (
-                                <Button key={button.scen} vertical onPress={() => toScen(button.scen)}>
+                                <Button key={i} vertical onPress={button.action}>
                                     <Icon name={button.icon} />
                                     <Text>{button.title}</Text>
                                 </Button>

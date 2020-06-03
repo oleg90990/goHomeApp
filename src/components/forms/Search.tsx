@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text } from "react-native";
 import { Container, Content, Form, View, Button } from 'native-base';
-import { Animal, Color } from '../../enum/Form';
+import { Animal } from '../../enum/Form';
 import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
-import AgeWidget from '../widgets/AgeWidget';
-import ColorWidget from '../widgets/ColorWidget';
+import { toItems } from '../../utilites/appNavigation'
+import { IItemsState } from '../../scens/Items';
 
-interface ISearchStateForm {
-  animal?: Animal,
-  ages?: {
-    from: number,
-    to: number
-  },
-  colors?: Color[]
-}
+import ColorWidget from '../widgets/ColorWidget';
+import AgeWidget, { IAgeWidgetvalue } from '../widgets/AgeWidget';
 
 const Search: React.FC = () => {
-  const [data, setData] = useState<ISearchStateForm>({
+  const [data, setData] = useState<IItemsState>({
     animal: Animal.dog,
     ages: {
-      from: 0,
-      to: 9
+      from: 1,
+      to: 3
     },
     colors: []
   });
@@ -32,8 +26,7 @@ const Search: React.FC = () => {
   } = data;
 
   function toFind() {
-    console.log(data)
-    // Action(Scens.items);
+    toItems(data);
   }
 
   return (
@@ -76,10 +69,7 @@ const styles = StyleSheet.create({
   },
   Item: {
     marginBottom: 5,
-    paddingBottom: 0,
-    // borderColor: '#eff0f1',
-    // borderStyle: 'solid',
-    // borderBottomWidth: 1
+    paddingBottom: 0
   },
   Animal:{
     marginTop: 10

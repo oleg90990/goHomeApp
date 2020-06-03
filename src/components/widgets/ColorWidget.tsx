@@ -15,7 +15,6 @@ const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
     ] = useState<Color[]>(props.value ? props.value : []);
 
     useEffect(() => {
-        console.log(value)
         if (props.onChange) {
             props.onChange(value)
         }

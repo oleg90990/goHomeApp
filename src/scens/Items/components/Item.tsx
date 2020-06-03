@@ -1,35 +1,34 @@
 import React from 'react';
 import { CardItem, Text , Card, Left, Body } from 'native-base';
 import { Image, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import { Action, Scens } from '../../../utilites/appNavigation';
+import { toItem as toItemScen  } from '../../../utilites/appNavigation';
+import { IItemState } from '../../Item';
 
-interface IItemState {
-    id: number,
-    title: string,
-    image: string
+export interface IItemListInterface {
+    item: IItemState
 }
-  
-const Item: React.FC<IItemState> = (props) => {
-  function toItem() {
-    Action(Scens.item, {
-        id: props.id
-    })
-  }
 
-  return (
-      <TouchableNativeFeedback onPress={() => toItem() }>
-        <Card>
-            <CardItem cardBody>
-            <Image source={{uri: props.image }} style={styles.Image}/>
-            </CardItem>
-            <CardItem>
-                <Body>
-                    <Text>{ props.title }</Text>
-                </Body>
-            </CardItem>
-        </Card>
-      </TouchableNativeFeedback>
-  );
+const Item: React.FC<IItemListInterface> = (props) => {
+    const { item } = props;
+    
+    function toItem() {
+        toItemScen(item);
+    }
+
+    return (
+        <TouchableNativeFeedback onPress={toItem}>
+            <Card>
+                {( item.images[0] ? <CardItem cardBody>
+                    <Image source={{uri: item.images[0] }} style={styles.Image}/>
+                </CardItem> : null)}
+                <CardItem>
+                    <Body>
+                        <Text>{ item.title }</Text>
+                    </Body>
+                </CardItem>
+            </Card>
+        </TouchableNativeFeedback>
+    );
 };
 
 const styles = StyleSheet.create({

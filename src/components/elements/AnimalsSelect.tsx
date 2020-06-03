@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image, TouchableNativeFeedback } from "react-native";
-import { View, Text } from 'native-base';
+import { View } from 'native-base';
 import { Animal } from '../../enum/Form';
 
 interface IAnimalState {
