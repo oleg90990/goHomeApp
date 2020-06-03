@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Content, Text } from 'native-base';
-import { Animals } from '../enum/Form';
-import Item from '../components/elements/Item';
+import { Animals } from '../../enum/Form';
+import Item from './components/Item';
 
 interface ISearchState {
     animal: Animals,

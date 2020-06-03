@@ -30,7 +30,7 @@ const App = () => {
       <Router>
         <Stack key="root" hideNavBar>
           <Scene back key={Scens.login} component={Login} />
-          <Scene key={Scens.dashboard} component={Dashboard} title="Dashboard" initial />
+          <Scene key={Scens.dashboard} component={Dashboard} title="Гланая" initial />
           <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
           <Scene key={Scens.items} component={Items} title="Объявления" />
           <Scene key={Scens.item} component={Item} title="Объявление" />

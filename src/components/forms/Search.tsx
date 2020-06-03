@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text } from "react-native";
 import { Container, Content, Form, View, Label, Button } from 'native-base';
-import AnimalsSelect from '../elements/AnimalsSelect';
-import { Animals, AnimalsTitle } from '../../enum/Form';
+import { Animals } from '../../enum/Form';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Action, Scens } from '../../utilites/appNavigation';
+import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
+import AgeWidget from '../widgets/AgeWidget';
 
-interface ISearchState {
-  animal: Animals,
-  ages: number[]
+interface ISearchStateForm {
+  animal?: Animals,
+  ages?: {
+    from: number,
+    to: number
+  }
 }
 
-const Search: React.FC<ISearchState> = (props) => {
-  const [animal, setAnimal] = useState<Animals>(props.animal);
-  const [ages, setAges] = useState<number[]>(props.ages);
+const Search: React.FC = () => {
+  const [data, setData] = useState<ISearchStateForm>({
+    animal: undefined,
+    ages: undefined
+  });
+
+  let {
+    animal,
+    ages
+  } = data;
 
   function toFind() {
-    Action(Scens.items, {
-      animal,
-      ages
-    });
+    console.log(data)
+    // Action(Scens.items);
   }
 
   return (
@@ -27,20 +36,15 @@ const Search: React.FC<ISearchState> = (props) => {
         <Content padder>
             <Form>
               <View style={styles.Item}>
-                <Label style={styles.Title}>
-                  { `Я ищу: ${ AnimalsTitle[animal] }` }
-                </Label>
-                <AnimalsSelect onChange={setAnimal} value={animal} />
+                <AnimalsSelectWidgets
+                  onChange={(animal) => setData({...data, animal}) }
+                  value={animal}
+                />
               </View>
               <View style={styles.Item}>
-                <Label style={styles.Title}>
-                  { `Возраст: ${ages.join(' - ')} лет` }
-                </Label>
-                <MultiSlider
-                  values={ages}
-                  min={0}
-                  max={20}
-                  onValuesChange={setAges}
+                <AgeWidget
+                  onChange={(ages) => setData({...data, ages}) }
+                  value={ages}
                 />
               </View>
               <View style={styles.Item}>

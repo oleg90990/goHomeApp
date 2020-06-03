@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardItem, Text , Card, Left, Body } from 'native-base';
 import { Image, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import { Action, Scens } from '../../utilites/appNavigation';
+import { Action, Scens } from '../../../utilites/appNavigation';
 
 interface IItemState {
     id: number,

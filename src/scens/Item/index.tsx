@@ -14,19 +14,17 @@ const Item: React.FC<ISearchState> = (props) => {
         title: 'Хочет домой лосковый пес',
         image: 'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
         content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
-        age: 15
+        age: 15,
+        images: [
+            'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
+            'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
+            'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
+        ]
     };
-
-    const images = [
-        'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
-        'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
-        'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
-    ]
-
 
   return (
     <Container>
-        <SliderBox images={images} />
+        <SliderBox images={item.images} />
         <Content padder>
             <Text style={styles.Title}>
                 { item.title }

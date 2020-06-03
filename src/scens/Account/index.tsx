@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import Layout from "../components/layout/Index";
+import Layout from "../../components/layout/Index";
 import { Text } from 'native-base';
 
 const Account: React.FC = (props) => {
