@@ -58,7 +58,7 @@ const Search: React.FC = () => {
                   value={colors}
                 />
               </View>
-              <View>
+              <View style={styles.ItemBtn}>
                 <Button style={styles.Btn} onPress={toFind}>
                   <Text style={styles.ButtonText}>Найти</Text>
                 </Button>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   Item: {
-    marginBottom: 20,
+    marginBottom: 5,
     paddingBottom: 0,
     // borderColor: '#eff0f1',
     // borderStyle: 'solid',
@@ -84,9 +84,11 @@ const styles = StyleSheet.create({
   Animal:{
     marginTop: 10
   },
+  ItemBtn: {
+    marginTop: 5
+  },
   Btn: {
-    justifyContent: 'center',
-    marginTop: -10
+    justifyContent: 'center'
   },
   ButtonText: {
     color: 'white'

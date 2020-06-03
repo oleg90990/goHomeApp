@@ -36,15 +36,9 @@ const AnimalsSelect: React.FC<IAnimalState> = (props) => {
   }, [value]);
 
   function getImageStyle(animal: IAnimalItem) {
-    let imageStyles = Object.assign({}, styles.Image);
-
-    if (animal.name === value) {
-      imageStyles = Object.assign(imageStyles, {
-        opacity: 1
-      });
-    }
-
-    return imageStyles;
+    return {
+      opacity: animal.name === value ? 1 : 0.5,
+    };
   }
 
   return (
@@ -52,7 +46,7 @@ const AnimalsSelect: React.FC<IAnimalState> = (props) => {
         {(
           animals.map(animal => {
             return <TouchableNativeFeedback key={animal.name} onPress={() => setValue(animal.name)}>
-              <Image source={animal.source} style={getImageStyle(animal)} />
+              <Image source={animal.source} style={[styles.Image, getImageStyle(animal)]} />
             </TouchableNativeFeedback>
           })
         )}
@@ -66,9 +60,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   Image:{
-    opacity: 0.5,
-    height: 73,
-    width: 90,
+    height: 57,
+    width: 70,
     marginRight: 20,
   }
 });

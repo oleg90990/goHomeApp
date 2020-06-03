@@ -14,3 +14,10 @@ export enum Color {
     black = 'black',
     white = 'white'
 }
+
+export enum ColorTitle {
+    red = 'красный',
+    blue = 'голубой',
+    black = 'черный',
+    white = 'белый'
+}

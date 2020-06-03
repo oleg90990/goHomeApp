@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { View, Label } from 'native-base';
+import { Label, Card, CardItem, Body } from 'native-base';
 import AnimalsSelect from '../elements/AnimalsSelect';
 import { Animal, AnimalTitle } from '../../enum/Form';
 
@@ -22,19 +22,24 @@ const AnimalsSelectWidgets: React.FC<IAnimalsWidgetsState> = (props) => {
   }, [value]);
 
   return (
-    <View>
-      <Label style={styles.Title}>
-          { `Я ищу: ${AnimalTitle[value]}` }
-      </Label>
-      <AnimalsSelect onChange={setAnimal} value={value} />
-    </View>
+    <Card>
+        <CardItem header>
+            <Label style={styles.Title}>
+            { `Я ищу: ${AnimalTitle[value]}` }
+            </Label>
+        </CardItem>
+        <CardItem>
+            <Body>
+              <AnimalsSelect onChange={setAnimal} value={value} />
+            </Body>
+        </CardItem>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   Title: {
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: 18
   }
 });
 

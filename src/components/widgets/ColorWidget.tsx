@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, TouchableNativeFeedback } from "react-native";
-import { Text, Label, View } from 'native-base';
-import { Color } from '../../enum/Form';
+import { Label, View, Card, CardItem, Body } from 'native-base';
+import { Color, ColorTitle } from '../../enum/Form';
 
 interface IColorWidgetsState {
   value?: Color[],
@@ -9,12 +9,13 @@ interface IColorWidgetsState {
 }
 
 const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
-    const [
+    let [
         value,
         setValue
     ] = useState<Color[]>(props.value ? props.value : []);
 
     useEffect(() => {
+        console.log(value)
         if (props.onChange) {
             props.onChange(value)
         }
@@ -24,54 +25,57 @@ const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
         const index = value.indexOf(color);
 
         if (index > -1) {
-            delete value[index];
+            value.splice(index, 1);
         } else {
             value.push(color);
         }
 
-        console.log(value)
+        setValue([...value])
     }
 
-    function getStyleColor(color: Color) {
-        return Object.assign({}, styles.Color, {
-            backgroundColor: color
-        });
-    }
+    function getSelectedStyle(color: Color) {
+        return {
+          opacity: value.indexOf(color) > -1 ? 1 : 0.5,
+          borderColor: value.indexOf(color) > -1 ? '#4050b4' : '#eee'
+        };
+    } 
 
     return (
-        <View>
-            <Label style={styles.Title}>
-                { `Цвет:` }
-            </Label>
-            <View style={styles.Colors}>
-                {( Object.keys(Color).map((color: any) => {
-                    return <TouchableNativeFeedback key={color} onPress={() => fetchValue(color)}>
-                        <View key={color} style={getStyleColor(color)}>
-                        </View>
-                    </TouchableNativeFeedback>
-                }))}
-            </View>
-        </View>
+        <Card>
+            <CardItem header>
+                <Label style={styles.Title}>
+                    { `Рассцевтка: ${value.map(color => ColorTitle[color]).join(', ') }` }
+                </Label>
+            </CardItem>
+            <CardItem>
+                <Body style={styles.Colors}>
+                    {( Object.keys(Color).map((color: any, index) => {
+                        return <TouchableNativeFeedback key={index} onPress={() => fetchValue(color)}>
+                            <View key={index} style={[styles.ColorContainer, getSelectedStyle(color)]}>
+                                <View key={index} style={[styles.Color, { backgroundColor: color }]}>
+                                </View>
+                            </View>
+                        </TouchableNativeFeedback>
+                    }))}
+                </Body>
+            </CardItem>
+        </Card>
     );
 };
 
 const styles = StyleSheet.create({
   Title: {
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: 18
+  },
+  ColorContainer: {
+    padding: 2,
+    borderWidth: 2,
+    borderColor: '#eee',
+    marginRight: 10,
   },
   Color: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
-    padding: 2,
-    backgroundColor: 'red',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2
+    width: 40,
+    height: 40,
   },
   Colors: {
     flexDirection: 'row'
