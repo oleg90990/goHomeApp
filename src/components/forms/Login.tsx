@@ -20,14 +20,14 @@ const Login: React.FC = () => {
   
   return (
     <Form >
-        <Item stackedLabel>
+        <Item inlineLabel>
             <Label>Имя</Label>
             <Input
               value={username}
               onChangeText={setUserName}
             />
         </Item>
-        <Item stackedLabel>
+        <Item inlineLabel>
             <Label>Пароль</Label>
             <Input
               value={password}
@@ -45,7 +45,8 @@ const Login: React.FC = () => {
 const styles = StyleSheet.create({
   Btn: {
     marginTop: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: 200
   }
 });
 

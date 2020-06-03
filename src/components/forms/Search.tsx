@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text } from "react-native";
-import { Container, Content, Form, View, Label, Button } from 'native-base';
-import { Animals } from '../../enum/Form';
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { Action, Scens } from '../../utilites/appNavigation';
+import { Container, Content, Form, View, Button } from 'native-base';
+import { Animal, Color } from '../../enum/Form';
 import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
 import AgeWidget from '../widgets/AgeWidget';
+import ColorWidget from '../widgets/ColorWidget';
 
 interface ISearchStateForm {
-  animal?: Animals,
+  animal?: Animal,
   ages?: {
     from: number,
     to: number
-  }
+  },
+  colors?: Color[]
 }
 
 const Search: React.FC = () => {
   const [data, setData] = useState<ISearchStateForm>({
-    animal: undefined,
-    ages: undefined
+    animal: Animal.dog,
+    ages: {
+      from: 0,
+      to: 9
+    },
+    colors: []
   });
 
   let {
     animal,
-    ages
+    ages,
+    colors
   } = data;
 
   function toFind() {
@@ -48,6 +53,12 @@ const Search: React.FC = () => {
                 />
               </View>
               <View style={styles.Item}>
+                <ColorWidget
+                  onChange={(colors) => setData({...data, colors}) }
+                  value={colors}
+                />
+              </View>
+              <View>
                 <Button style={styles.Btn} onPress={toFind}>
                   <Text style={styles.ButtonText}>Найти</Text>
                 </Button>
@@ -64,7 +75,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   Item: {
-    marginBottom: 30
+    marginBottom: 20,
+    paddingBottom: 0,
+    // borderColor: '#eff0f1',
+    // borderStyle: 'solid',
+    // borderBottomWidth: 1
   },
   Animal:{
     marginTop: 10

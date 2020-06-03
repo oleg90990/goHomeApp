@@ -1,9 +1,16 @@
-export enum Animals {
+export enum Animal {
     cat = 'cat',
     dog = 'dog'
 }
 
-export enum AnimalsTitle {
+export enum AnimalTitle {
     cat = 'Кошку',
     dog = 'Собаку'
+}
+
+export enum Color {
+    red = 'red',
+    blue = 'blue',
+    black = 'black',
+    white = 'white'
 }

@@ -32,7 +32,7 @@ const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
         let options = [];
 
         for (let index = from; index <= to; index++) {
-            options.push(<Picker.Item label={index.toString()} value={index} />)
+            options.push(<Picker.Item key={index} label={index.toString()} value={index} />)
         }
 
         return options;

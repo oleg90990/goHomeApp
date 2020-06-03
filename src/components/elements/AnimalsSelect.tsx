@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image, TouchableNativeFeedback } from "react-native";
 import { View, Text } from 'native-base';
-import { Animals } from '../../enum/Form';
+import { Animal } from '../../enum/Form';
 
 interface IAnimalState {
-  value?: Animals,
+  value?: Animal,
   onChange?: Function
 }
 
 interface IAnimalItem {
     source: any;
-    name: Animals;
+    name: Animal;
 }
 
 const AnimalsSelect: React.FC<IAnimalState> = (props) => {
@@ -21,11 +21,11 @@ const AnimalsSelect: React.FC<IAnimalState> = (props) => {
   const animals: IAnimalItem[] = [
       {
           source: require('~/../../assets/img/animals/cat.png'),
-          name: Animals.cat
+          name: Animal.cat
       },
       {
           source: require('~/../../assets/img/animals/dog.png'),
-          name: Animals.dog
+          name: Animal.dog
       }
   ];
 
