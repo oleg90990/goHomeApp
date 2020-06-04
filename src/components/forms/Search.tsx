@@ -4,13 +4,14 @@ import { Container, Content, Form, View, Button } from 'native-base';
 import { Animal } from '../../enum/Form';
 import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
 import { toItems } from '../../utilites/appNavigation'
-import { IItemsState } from '../../scens/Items';
+import { IItemsProps } from '../../scens/Items/types';
 
 import ColorWidget from '../widgets/ColorWidget';
 import AgeWidget, { IAgeWidgetvalue } from '../widgets/AgeWidget';
 
+
 const Search: React.FC = () => {
-  const [data, setData] = useState<IItemsState>({
+  const [data, setData] = useState<IItemsProps>({
     animal: Animal.dog,
     ages: {
       from: 1,

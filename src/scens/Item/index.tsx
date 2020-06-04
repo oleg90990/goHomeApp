@@ -2,16 +2,9 @@ import React from 'react';
 import { Container, Content, Button, Icon } from 'native-base';
 import { SliderBox } from "react-native-image-slider-box";
 import { StyleSheet, Text } from "react-native";
-
-export interface IItemState {
-    id: number,
-    title: string,
-    images: string[],
-    content: string,
-    age: number,
-}
+import { IItemProps } from "./types";
   
-const Item: React.FC<IItemState> = (props) => {
+const Item: React.FC<IItemProps> = (props) => {
   return (
     <Container>
         <SliderBox images={props.images} />

@@ -1,16 +1,9 @@
 import React from 'react';
 import { Container, Content, Text } from 'native-base';
-import { Animal, Color } from '../../enum/Form';
 import Item from './components/Item';
-import { IAgeWidgetvalue } from '../../components/widgets/AgeWidget';
+import { IItemsProps } from "./types";
 
-export interface IItemsState {
-    animal: Animal,
-    ages: IAgeWidgetvalue,
-    colors: Color[]
-}
-
-const Items: React.FC<IItemsState> = (props) => {
+const Items: React.FC<IItemsProps> = (props) => {
     const items = {
         dog: [
             {

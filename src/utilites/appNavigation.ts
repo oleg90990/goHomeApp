@@ -1,30 +1,41 @@
 import { Actions } from 'react-native-router-flux';
-import { Scens as ScensEnum } from '../enum/Scens'
+import { Scens } from '../enum/Scens'
 import { isLoggedIn } from '../utilites/auth'
 
-import { IItemsState } from '../scens/Items';
-import { IItemState} from '../scens/Item';
+import { IItemsProps } from '../scens/Items/types';
+import { IItemProps} from '../scens/Item/types';
+import { IDashboardProps} from '../scens/Dashboard/types';
+import { ILoginProps} from '../scens/Login/types';
+import { IAccountProps} from '../scens/Account/types';
 
-export const toItems = (props: IItemsState) => {
-    Actions[ScensEnum.items](props);
-}
+const scensauth: Scens[] = [
+    Scens.accounnt
+];
 
-export const toAccounnt = () => {
-    if (!isLoggedIn()) {
-        toLogin();
+function middlewareAuth(scen: Scens, props: any = {}) {
+    if (!isLoggedIn() && scensauth.indexOf(scen) > -1) {
+        Actions[Scens.login]();
     } else {
-        Actions[ScensEnum.accounnt]();
+        Actions[scen](props);
     }
 }
 
-export const toItem = (props: IItemState) => {
-    Actions[ScensEnum.item](props);
+export const toItems = (props: IItemsProps) => {
+    middlewareAuth(Scens.items, props);
 }
 
-export const toLogin = () => {
-    Actions[ScensEnum.login]();
+export const toItem = (props: IItemProps) => {
+    middlewareAuth(Scens.item, props);
 }
 
-export const toDashboard = () => {
-    Actions[ScensEnum.dashboard]();
+export const toAccounnt = (props: IAccountProps) => {
+    middlewareAuth(Scens.accounnt, props);
+}
+
+export const toLogin = (props: ILoginProps) => {
+    middlewareAuth(Scens.login, props);
+}
+
+export const toDashboard = (props: IDashboardProps) => {
+    middlewareAuth(Scens.dashboard, props);;
 }
