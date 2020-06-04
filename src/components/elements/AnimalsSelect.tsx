@@ -2,32 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Image, TouchableNativeFeedback } from "react-native";
 import { View } from 'native-base';
 import { Animal } from '../../enum/Form';
+import Animals, { IAnimalItem } from '../../data/animals';
 
 interface IAnimalState {
-  value?: Animal,
-  onChange?: Function
-}
-
-interface IAnimalItem {
-    source: any;
-    name: Animal;
+  value: Animal,
+  onChange: Function
 }
 
 const AnimalsSelect: React.FC<IAnimalState> = (props) => {
-  const [
-    value, setValue
-  ] = useState<string>(props.value ? props.value : '' )
-
-  const animals: IAnimalItem[] = [
-      {
-          source: require('~/../../assets/img/animals/cat.png'),
-          name: Animal.cat
-      },
-      {
-          source: require('~/../../assets/img/animals/dog.png'),
-          name: Animal.dog
-      }
-  ];
+  const [value, setValue] = useState<Animal>(props.value);
 
   useEffect(() => {
     if (props.onChange) {
@@ -44,7 +27,7 @@ const AnimalsSelect: React.FC<IAnimalState> = (props) => {
   return (
       <View style={styles.Options}>
         {(
-          animals.map(animal => {
+          Animals.map(animal => {
             return <TouchableNativeFeedback key={animal.name} onPress={() => setValue(animal.name)}>
               <Image source={animal.source} style={[styles.Image, getImageStyle(animal)]} />
             </TouchableNativeFeedback>
