@@ -1,38 +1,15 @@
 import React from 'react';
-import { toDashboard, toAccounnt } from '../../utilites/appNavigation';
-import { Scens as ScensEnum } from '../../enum/Scens'
 import { Container, Header, Title, Footer, FooterTab, Button, Text, Right, Body, Icon, Left } from 'native-base';
 import { Image, StyleSheet } from 'react-native';
-
-interface IFooterButton {
-    title: string;
-    action: () => any;
-    icon: string;
-}
+import buttons from '../../data/footerButtons';
+import logo from '../../assets/img/cat.png';
 
 const Layout: React.FC = (props) => {
-    const buttons: IFooterButton[] = [
-        {
-            title: 'Аккаунт',
-            icon: 'person',
-            action: toAccounnt
-        },
-        {
-            title: 'Гланая',
-            icon: 'menu',
-            action: toDashboard
-        }
-    ];
-
-    const toScen = (scen: ScensEnum) => {
-        // Action(scen);
-    }
-
     return (
         <Container>
         <Header>
             <Left>
-                <Image source={require('../../assets/img/cat.png')} style={styles.logo} />
+                <Image source={logo} style={styles.logo} />
             </Left>
             <Body>
                 <Title>Иду домой</Title>
