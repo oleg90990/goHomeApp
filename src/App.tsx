@@ -22,6 +22,12 @@ import Item from './scens/Item';
 
 import Layout from "./components/layout/Index";
 
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { rootReducer } from './redux';
+import thunk from 'redux-thunk';
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {

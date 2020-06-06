@@ -7,10 +7,29 @@ import { toItems } from '../../utilites/appNavigation'
 import { IItemsProps } from '../../scens/Items/types';
 
 import ColorWidget from '../widgets/ColorWidget';
-import AgeWidget, { IAgeWidgetvalue } from '../widgets/AgeWidget';
+import AgeWidget from '../widgets/AgeWidget';
+
+import { RootState } from '../../redux';
+import { addText } from '../../redux/search';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state: RootState) => ({
+  test: state.searchForm.test,
+});
+
+const mapDispatchToProps = { addText };
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
 
-const Search: React.FC = () => {
+// import { connect } from "react-redux";
+// import { Inventory } from "../../redux/inventory/types";
+// import { fetchRequest } from "../../redux/inventory/actions";
+// import { ThunkDispatch } from "redux-thunk";
+// import { AnyAction } from "redux";
+// import { ApplicationState } from "../../redux/types";
+
+const Search: React.FC = (props) => {
   const [data, setData] = useState<IItemsProps>({
     animal: Animal.dog,
     ages: {
@@ -86,4 +105,23 @@ const styles = StyleSheet.create({
   }, 
 });
 
-export default Search;
+// const mapStateToProps = ({ inventory }: ApplicationState) => ({
+//   loading: inventory.loading,
+//   errors: inventory.errors,
+//   data: inventory.data
+// });
+
+// const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+//   return {
+//     fetchRequest: () => {
+//       dispatch(fetchRequest());
+//     }
+//   };
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Search);
+
+export const Auth = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search);
