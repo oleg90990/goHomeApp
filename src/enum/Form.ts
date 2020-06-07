@@ -9,15 +9,17 @@ export enum AnimalTitle {
 }
 
 export enum Color {
-    red = 'red',
-    blue = 'blue',
+    brown = 'brown',
+    yellow = 'yellow',
     black = 'black',
-    white = 'white'
+    white = 'white',
+    gray = 'gray'
 }
 
 export enum ColorTitle {
-    red = 'красный',
-    blue = 'голубой',
+    brown = 'коричневый',
+    yellow = 'Желтный',
     black = 'черный',
-    white = 'белый'
+    white = 'белый',
+    gray = 'серый'
 }

@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text } from "react-native";
 import { Container, Content, Form, View, Button } from 'native-base';
-import { Animal } from '../../enum/Form';
+import { Animal, Color } from '../../enum/Form';
 import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
 import { toItems } from '../../utilites/appNavigation'
-import { IItemsProps } from '../../scens/Items/types';
 
 import ColorWidget from '../widgets/ColorWidget';
-import AgeWidget, { IAgeWidgetvalue } from '../widgets/AgeWidget';
+import AgeWidget, {IAgeWidgetvalue} from '../widgets/AgeWidget';
+
+import { connect } from 'react-redux';
+import { setAges, setAnimal, setColors  } from '../../store/searchFormReducer/actions';
+import { IStateSearchFormReducer } from '../../store/searchFormReducer';
+import { IState } from '../../store/types';
 
 
-const Search: React.FC = () => {
-  const [data, setData] = useState<IItemsProps>({
-    animal: Animal.dog,
-    ages: {
-      from: 1,
-      to: 3
-    },
-    colors: []
-  });
+interface IProps extends IStateSearchFormReducer {
+  setAnimal(animal: Animal): any;
+  setColors(colors: Color[]): any;
+  setAges(ages: IAgeWidgetvalue): any;
+}
 
-  let {
-    animal,
-    ages,
-    colors
-  } = data;
-
+const Search: React.FC<IProps> = (props) => {
   function toFind() {
-    toItems(data);
+    // console.log(props)
+    // toItems(data);
+    // props.setText('dddd')
   }
 
   return (
@@ -36,20 +33,20 @@ const Search: React.FC = () => {
             <Form>
               <View style={styles.Item}>
                 <AnimalsSelectWidgets
-                  onChange={(animal) => setData({...data, animal}) }
-                  value={animal}
+                  value={props.animal}
+                  onChange={value => props.setAnimal(value)}
                 />
               </View>
               <View style={styles.Item}>
                 <AgeWidget
-                  onChange={(ages) => setData({...data, ages}) }
-                  value={ages}
+                  value={props.ages}
+                  onChange={value => props.setAges(value)}
                 />
               </View>
               <View style={styles.Item}>
                 <ColorWidget
-                  onChange={(colors) => setData({...data, colors}) }
-                  value={colors}
+                  value={props.colors}
+                  onChange={value => props.setColors(value)}
                 />
               </View>
               <View style={styles.ItemBtn}>
@@ -86,4 +83,12 @@ const styles = StyleSheet.create({
   }, 
 });
 
-export default Search;
+const mapStateToProps = ({ searchForm }: IState) => {
+  return searchForm;
+};
+
+export default connect(mapStateToProps, {
+  setAges,
+  setAnimal,
+  setColors
+})(Search);

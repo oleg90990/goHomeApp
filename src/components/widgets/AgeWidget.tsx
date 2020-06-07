@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 import { Picker, Label, View, Card, CardItem, Body } from 'native-base';
 
 export interface IAgeWidgetvalue {
-    from: number,
-    to: number
+    from: number;
+    to: number;
 }
 
 interface IAnimalsWidgetsState {

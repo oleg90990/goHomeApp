@@ -22,21 +22,27 @@ import Item from './scens/Item';
 
 import Layout from "./components/layout/Index";
 
-declare const global: {HermesInternal: null | {}};
+import {Provider} from 'react-redux';
+import {applyMiddleware, createStore} from 'redux';
+import ReduxThunk from 'redux-thunk';
+import reducers from './store';
+
 
 const App = () => {
   return (
-    <Layout>
-      <Router>
-        <Stack key="root" hideNavBar>
-          <Scene back key={Scens.login} component={Login} />
-          <Scene key={Scens.dashboard} component={Dashboard} title="Гланая" initial />
-          <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
-          <Scene key={Scens.items} component={Items} title="Объявления" />
-          <Scene key={Scens.item} component={Item} title="Объявление" />
-        </Stack>
-      </Router>
-    </Layout>
+    <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
+      <Layout>
+        <Router>
+          <Stack key="root" hideNavBar>
+            <Scene back key={Scens.login} component={Login} />
+            <Scene key={Scens.dashboard} component={Dashboard} title="Гланая" initial />
+            <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
+            <Scene key={Scens.items} component={Items} title="Объявления" />
+            <Scene key={Scens.item} component={Item} title="Объявление" />
+          </Stack>
+        </Router>
+      </Layout>
+    </Provider>
   );
 };
 

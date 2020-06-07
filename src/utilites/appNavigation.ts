@@ -8,12 +8,12 @@ import { IDashboardProps} from '../scens/Dashboard/types';
 import { ILoginProps} from '../scens/Login/types';
 import { IAccountProps} from '../scens/Account/types';
 
-const scensauth: Scens[] = [
+const scensAuth: Scens[] = [
     Scens.accounnt
 ];
 
 function middlewareAuth(scen: Scens, props: any = {}) {
-    if (!isLoggedIn() && scensauth.indexOf(scen) > -1) {
+    if (!isLoggedIn() && scensAuth.indexOf(scen) > -1) {
         Actions[Scens.login]();
     } else {
         Actions[scen](props);
