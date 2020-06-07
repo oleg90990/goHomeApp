@@ -33,9 +33,9 @@ const App = () => {
     <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
       <Layout>
         <Router>
-          <Stack key="root" hideNavBar>
-            <Scene back key={Scens.login} component={Login} />
-            <Scene key={Scens.dashboard} component={Dashboard} title="Гланая" initial />
+          <Stack key="root" hideNavBar={true}>
+            <Scene back key={Scens.login} component={Login} title="Вход" />
+            <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" initial />
             <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
             <Scene key={Scens.items} component={Items} title="Объявления" />
             <Scene key={Scens.item} component={Item} title="Объявление" />

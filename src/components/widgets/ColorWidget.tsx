@@ -9,10 +9,7 @@ interface IColorWidgetsState {
 }
 
 const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
-    let [
-        value,
-        setValue
-    ] = useState<Color[]>(props.value);
+    let [value, setValue] = useState(props.value);
 
     useEffect(() => {
         props.onChange(value);

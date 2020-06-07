@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { Label, Card, CardItem, Body } from 'native-base';
 import { Animal } from '../../enum/Form';
@@ -12,12 +12,20 @@ interface IBreedsWidgetProps {
 }
 
 const BreedsWidget: React.FC<IBreedsWidgetProps> = (props) => {
-    let [breedTitle, setBreedTitle] = useState(props.value ? props.value.title : '');
+    let [breedTitle, setBreedTitle] = useState('');
 
-    function onChange(item: IBreedItem) {
-        props.onChange(item);
-        setBreedTitle(item.title);
+    function getTitleFromValue() {
+        return setBreedTitle(props.value ? props.value.title : '');
     }
+    
+    function setInputValue(value: IBreedItem) {
+        setBreedTitle(value.title);
+        props.onChange(value);
+    }
+
+    useEffect(() => {
+        getTitleFromValue();
+    })
     
     return (
         <Card>
@@ -29,7 +37,7 @@ const BreedsWidget: React.FC<IBreedsWidgetProps> = (props) => {
             <CardItem>
                 <Body>
                     <BreedSelect
-                        onSelected={item => onChange(item)}
+                        onSelected={setInputValue}
                         animal={props.animal}
                     />
                 </Body>

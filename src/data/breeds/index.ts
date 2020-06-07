@@ -3,8 +3,7 @@ import dog from './dogs';
 
 export interface IBreedItem {
     title: string,
-    img: any,
-    text: string
+    img: any
 }
 
 export default {

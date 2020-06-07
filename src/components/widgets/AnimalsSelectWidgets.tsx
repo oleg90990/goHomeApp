@@ -10,10 +10,7 @@ interface IAnimalsWidgetsState {
 }
 
 const AnimalsSelectWidgets: React.FC<IAnimalsWidgetsState> = (props) => {
-  const [
-    value,
-    setAnimal
-  ] = useState<Animal>(props.value);
+  const [value, setAnimal] = useState(props.value);
 
   useEffect(() => {
       props.onChange(value)

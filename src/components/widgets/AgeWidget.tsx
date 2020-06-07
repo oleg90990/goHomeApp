@@ -12,20 +12,11 @@ interface IAgesWidgetsProps {
     onChange: (value: IAgeWidgetvalue) => void
 }
 
-const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {
-    const { from, to } = props.value;
-    
-    const [
-        value,
-        setValue
-    ] = useState<IAgeWidgetvalue>({
-        from, to
-    });
+const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {  
+    const [value, setValue] = useState(props.value);
 
     useEffect(() => {
-        if (props.onChange) {
-            props.onChange(value)
-        }
+        props.onChange(value);
     }, [value]);
 
     function getOtions(from: number, to: number) {

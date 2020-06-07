@@ -7,16 +7,7 @@ import logo from '../../assets/img/cat.png';
 const Layout: React.FC = (props) => {
     return (
         <Container>
-        <Header>
-            <Left>
-                <Image source={logo} style={styles.logo} />
-            </Left>
-            <Body>
-                <Title>Иду домой</Title>
-            </Body>
-            <Right />
-            </Header>
-                { props.children }
+            { props.children }
             <Footer>
                 <FooterTab>
                     {(

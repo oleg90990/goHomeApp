@@ -18,7 +18,7 @@ export enum Color {
 
 export enum ColorTitle {
     brown = 'коричневый',
-    yellow = 'Желтный',
+    yellow = 'желтный',
     black = 'черный',
     white = 'белый',
     gray = 'серый'
