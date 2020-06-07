@@ -6,7 +6,7 @@ import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
 import { toItems } from '../../utilites/appNavigation'
 
 import ColorWidget from '../widgets/ColorWidget';
-import AgeWidget, {IAgeWidgetvalue} from '../widgets/AgeWidget';
+import AgeWidget, { IAgeWidgetvalue } from '../widgets/AgeWidget';
 
 import { connect } from 'react-redux';
 import { setAges, setAnimal, setColors  } from '../../store/searchFormReducer/actions';

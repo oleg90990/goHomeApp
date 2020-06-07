@@ -8,15 +8,15 @@ interface IFooterButton {
 
 const buttons: IFooterButton[] = [
     {
-        title: 'Аккаунт',
+        title: 'профиль',
         icon: 'person',
         action: () => {
             toAccounnt({});
         }
     },
     {
-        title: 'Гланая',
-        icon: 'menu',
+        title: 'Поиск',
+        icon: 'search',
         action: () => {
             toDashboard({});
         }

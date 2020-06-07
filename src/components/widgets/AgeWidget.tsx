@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { Picker, Label, View, Card, CardItem, Body } from 'native-base';
+import { Picker, Label, View, Card, CardItem, Body, Text } from 'native-base';
 
 export interface IAgeWidgetvalue {
     from: number;
@@ -8,11 +8,14 @@ export interface IAgeWidgetvalue {
 }
 
 interface IAnimalsWidgetsState {
-  value?: IAgeWidgetvalue,
-  onChange?: (value: IAgeWidgetvalue) => void
+    value?: IAgeWidgetvalue,
+    onChange?: (value: IAgeWidgetvalue) => void
 }
 
-const defaultValue: IAgeWidgetvalue = { from: 0, to: 5 };
+const defaultValue: IAgeWidgetvalue = {
+    from: 0,
+    to: 5
+};
 
 const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
     const { from, to } = props.value ?  props.value : defaultValue;
@@ -20,7 +23,9 @@ const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
     const [
         value,
         setValue
-    ] = useState<IAgeWidgetvalue>({ from, to, });
+    ] = useState<IAgeWidgetvalue>({
+        from, to
+    });
 
     useEffect(() => {
         if (props.onChange) {
@@ -48,6 +53,9 @@ const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
             <CardItem>
                 <Body>
                     <View style={styles.Pickers}>
+                        <Text style={styles.PickerTitle}>
+                            От
+                        </Text>
                         <Picker
                             note
                             mode="dropdown"
@@ -57,6 +65,9 @@ const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
                         >
                             { getOtions(0, value.to) }
                         </Picker>
+                        <Text style={styles.PickerTitle}>
+                            До
+                        </Text>
                         <Picker
                             note
                             mode="dropdown"
@@ -78,12 +89,16 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   Picker: {
-    width: '50%',
+    width: 100,
     borderWidth: 2,
     borderColor: '#eee',
   },
   Pickers: {
     flexDirection: 'row',
+    alignItems: 'center'
+  },
+  PickerTitle: {
+    marginRight: 10
   }
 });
 
