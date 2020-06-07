@@ -5,20 +5,18 @@ import AnimalsSelect from '../elements/AnimalsSelect';
 import { Animal, AnimalTitle } from '../../enum/Form';
 
 interface IAnimalsWidgetsState {
-  value?: Animal,
-  onChange?: (value: Animal) => void
+  value: Animal,
+  onChange: (value: Animal) => void
 }
 
 const AnimalsSelectWidgets: React.FC<IAnimalsWidgetsState> = (props) => {
   const [
     value,
     setAnimal
-  ] = useState<Animal>(props.value ? props.value : Animal.cat);
+  ] = useState<Animal>(props.value);
 
   useEffect(() => {
-    if (props.onChange && value !== undefined) {
       props.onChange(value)
-    }
   }, [value]);
 
   return (

@@ -4,20 +4,18 @@ import { Label, View, Card, CardItem, Body } from 'native-base';
 import { Color, ColorTitle } from '../../enum/Form';
 
 interface IColorWidgetsState {
-  value?: Color[],
-  onChange?: (value: Color[]) => void
+  value: Color[],
+  onChange: (value: Color[]) => void
 }
 
 const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
     let [
         value,
         setValue
-    ] = useState<Color[]>(props.value ? props.value : []);
+    ] = useState<Color[]>(props.value);
 
     useEffect(() => {
-        if (props.onChange) {
-            props.onChange(value)
-        }
+        props.onChange(value);
     }, [value]);
 
     function fetchValue(color: Color) {

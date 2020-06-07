@@ -7,18 +7,13 @@ export interface IAgeWidgetvalue {
     to: number;
 }
 
-interface IAnimalsWidgetsState {
-    value?: IAgeWidgetvalue,
-    onChange?: (value: IAgeWidgetvalue) => void
+interface IAgesWidgetsProps {
+    value: IAgeWidgetvalue,
+    onChange: (value: IAgeWidgetvalue) => void
 }
 
-const defaultValue: IAgeWidgetvalue = {
-    from: 0,
-    to: 5
-};
-
-const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
-    const { from, to } = props.value ?  props.value : defaultValue;
+const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {
+    const { from, to } = props.value;
     
     const [
         value,
@@ -75,7 +70,7 @@ const AgeWidget: React.FC<IAnimalsWidgetsState> = (props) => {
                             selectedValue={value.to}
                             onValueChange={(to) => setValue({...value, to})}
                         >
-                            { getOtions(value.from, 10) }
+                            { getOtions(value.from, 20) }
                         </Picker>
                     </View>
                 </Body>
