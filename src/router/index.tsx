@@ -17,29 +17,24 @@ import { loadDictionaries  } from '../store/dictionaries/actions';
 import { IStateDictionariesReducer } from '../store/dictionaries';
 
 interface IRouterProps extends IStateDictionariesReducer {
-    loadDictionaries(): any;
+    loadDictionaries(): any
 }
 
 const RouterApp: React.FC<IRouterProps> = (props) => {
   props.loadDictionaries();
-   console.log('RouterApp')
-
-//   useEffect(() => {
-//     console.log(props.loading)
-//   })
-
-  return (
-    <Router>
-        <Scene key="root" hideNavBar={true}>
-            <Scene key={Scens.loading} component={Loading} initial />
-            <Scene key={Scens.login} component={Login} title="Вход" />
-            <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" />
-            <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
-            <Scene key={Scens.items} component={Items} title="Объявления" />
-            <Scene key={Scens.item} component={Item} title="Объявление" />
-        </Scene>
-    </Router>
-  );
+  return ( props.loading ? <Loading /> : 
+    <Layout>
+      <Router>
+          <Scene key="root" hideNavBar={true}>
+              <Scene key={Scens.login} component={Login} title="Вход" initial />
+              <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" />
+              <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
+              <Scene key={Scens.items} component={Items} title="Объявления" />
+              <Scene key={Scens.item} component={Item} title="Объявление" />
+          </Scene>
+      </Router>
+    </Layout>
+  )
 };
 
 const mapStateToProps = ({ dictionaries }: IState) => {

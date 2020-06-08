@@ -4,17 +4,15 @@ import { IAction } from '../types';
 export interface IDictionaryItem {
     id: number,
     title: string,
-    img?: string
+    img: string
 }
 
-export interface IBreedsType {
-    cat: IDictionaryItem[],
-    dog: IDictionaryItem[]
+export interface IAnimalType extends IDictionaryItem {
+    breeds: IDictionaryItem[]
 }
 
 export interface IStatedictionaries {
-    animals: IDictionaryItem[],
-    breeds: IBreedsType
+    animals: IAnimalType[]
 }
 
 export interface IStateDictionariesReducer {
@@ -25,11 +23,7 @@ export interface IStateDictionariesReducer {
 const INITIAL_STATE: IStateDictionariesReducer = {
     loading: true,
     dictionaries: {
-        animals: [],
-        breeds: {
-            cat: [],
-            dog: []
-        }
+        animals: []
     }
 };
 

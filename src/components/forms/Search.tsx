@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import { setAges, setAnimal, setColors, setBreed  } from '../../store/searchFormReducer/actions';
 import { IStateSearchFormReducer } from '../../store/searchFormReducer';
 import { IState } from '../../store/types';
-import { IBreedItem } from '../../fakeData/breeds';
 
 interface IProps extends IStateSearchFormReducer {
   setAnimal(animal: Animal): any;

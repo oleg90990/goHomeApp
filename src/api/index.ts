@@ -7,7 +7,7 @@ export default class Api {
             setTimeout(() => {
                 const d: any = data;
                 resolve(d);
-            }, 1000)
+            }, 2000)
         });
     }
 }

@@ -4,17 +4,16 @@ import API from '../../api';
 
 export const loadDictionaries = () => {
   return (dispatch: Dispatch<any>) => {
-    dispatch({ type: SET_LOADING, payload: true });
     API.loadDictionaries()
         .then(payload => {
-           dispatch({ type: SET_ALL, payload });
-           dispatch({ type: SET_LOADING, payload: false });
+          dispatch({ type: SET_ALL, payload });
+          dispatch({ type: SET_LOADING, payload: false });
         });
   };
 };
 
-export const setLoading = (loading: boolean) => {
+export const setLoading = (payload: boolean) => {
     return (dispatch: Dispatch<any>) => {
-      dispatch({ type: SET_LOADING, loading });
+      dispatch({ type: SET_LOADING, payload });
     };
 };
