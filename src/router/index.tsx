@@ -38,7 +38,7 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
 };
 
 const mapStateToProps = ({ dictionaries }: IState) => {
-return dictionaries;
+  return dictionaries;
 };
 
 export default connect(mapStateToProps, {
