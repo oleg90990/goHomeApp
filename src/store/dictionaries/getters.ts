@@ -1,6 +1,6 @@
 import { IState } from '../types';
-import { IAnimalType } from '../dictionaries';
+import { IDictionaryAnimalType } from '../dictionaries';
 
-export const getAnimal = ({ dictionaries }: IState) => (findlId: number): IAnimalType | undefined  => {
-    return dictionaries.dictionaries.animals.find(({ id }) => id === findlId);
+export const getAnimal = ({ dictionaries }: IState) => (animalId: number): IDictionaryAnimalType | undefined  => {
+    return dictionaries.dictionaries.animals.find(({ id }) => id === animalId);
 }
