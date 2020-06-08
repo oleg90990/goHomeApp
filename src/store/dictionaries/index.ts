@@ -7,27 +7,35 @@ export interface IDictionaryItem {
     img: string
 }
 
-export interface IAnimalType extends IDictionaryItem {
+export interface IDictionaryColorItem {
+    id: number,
+    title: string,
+    value: string
+}
+
+export interface IDictionaryAnimalType extends IDictionaryItem {
     breeds: IDictionaryItem[]
 }
 
-export interface IStatedictionaries {
-    animals: IAnimalType[]
+export interface IStateDictionaries {
+    animals: IDictionaryAnimalType[],
+    colors: IDictionaryColorItem[]
 }
 
 export interface IStateDictionariesReducer {
     loading: boolean,
-    dictionaries: IStatedictionaries
+    dictionaries: IStateDictionaries
 }
 
 const INITIAL_STATE: IStateDictionariesReducer = {
     loading: true,
     dictionaries: {
-        animals: []
+        animals: [],
+        colors: []
     }
 };
 
-export default (state = INITIAL_STATE, action: IAction<IStatedictionaries | boolean>) => {
+export default (state = INITIAL_STATE, action: IAction<IStateDictionaries | boolean>) => {
   switch (action.type) {
     case SET_ALL:;
         const dictionaries = action.payload;

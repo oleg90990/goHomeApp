@@ -18,7 +18,6 @@ import reducers from './store';
 
 
 const App = () => {
-  console.log('App')
   return (
     <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
         <Router />

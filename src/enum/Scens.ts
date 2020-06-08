@@ -6,3 +6,5 @@ export enum Scens {
     item = 'item',
     loading = 'loading'
 }
+
+export default Scens;

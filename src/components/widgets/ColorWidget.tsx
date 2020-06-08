@@ -1,36 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, TouchableNativeFeedback } from "react-native";
 import { Label, View, Card, CardItem, Body } from 'native-base';
-import { Color, ColorTitle } from '../../enum/Form';
 
-interface IColorWidgetsState {
-  value: Color[],
-  onChange: (value: Color[]) => void
+import { connect } from 'react-redux';
+import { IState } from '../../store/types';
+import { IStateDictionariesReducer } from '../../store/dictionaries';
+
+interface IColorWidgetsState extends IStateDictionariesReducer {
+  value: number[],
+  onChange: (value: number[]) => void
 }
 
-const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
-    let [value, setValue] = useState(props.value);
-
-    useEffect(() => {
-        props.onChange(value);
-    }, [value]);
-
-    function fetchValue(color: Color) {
-        const index = value.indexOf(color);
+const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange, dictionaries }) => {
+    function fetchValue(id: number) {
+        const index = value.indexOf(id);
 
         if (index > -1) {
             value.splice(index, 1);
         } else {
-            value.push(color);
+            value.push(id);
         }
 
-        setValue([...value])
+        onChange([...value])
     }
 
-    function getSelectedStyle(color: Color) {
+    function getSelectedStyle(id: number) {
         return {
-          opacity: value.indexOf(color) > -1 ? 1 : 0.5,
-          borderColor: value.indexOf(color) > -1 ? '#4050b4' : '#eee'
+          opacity: value.indexOf(id) > -1 ? 1 : 0.5,
+          borderColor: value.indexOf(id) > -1 ? '#4050b4' : '#eee'
         };
     } 
 
@@ -38,15 +35,15 @@ const ColorWidget: React.FC<IColorWidgetsState> = (props) => {
         <Card>
             <CardItem header>
                 <Label style={styles.Title}>
-                    { `Рассцевтка: ${value.map(color => ColorTitle[color]).join(', ') }` }
+                    { `Рассцевтка` }
                 </Label>
             </CardItem>
             <CardItem>
                 <Body style={styles.Colors}>
-                    {( Object.keys(Color).map((color: any, index) => {
-                        return <TouchableNativeFeedback key={index} onPress={() => fetchValue(color)}>
-                            <View key={index} style={[styles.ColorContainer, getSelectedStyle(color)]}>
-                                <View key={index} style={[styles.Color, { backgroundColor: color }]}>
+                    {( dictionaries.colors.map(({ id, value }) => {
+                        return <TouchableNativeFeedback key={id} onPress={() => fetchValue(id)}>
+                            <View style={[styles.ColorContainer, getSelectedStyle(id)]}>
+                                <View style={[styles.Color, { backgroundColor: value }]}>
                                 </View>
                             </View>
                         </TouchableNativeFeedback>
@@ -76,4 +73,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ColorWidget;
+const mapStateToProps = ({ dictionaries }: IState) => {
+  return dictionaries;
+};
+  
+export default connect(mapStateToProps, {})(ColorWidget);

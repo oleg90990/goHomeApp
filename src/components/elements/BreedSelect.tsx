@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, Modal, View, Text, TouchableNativeFeedback } from "react-native";
-import Breeds, { IBreedItem } from '../../data/breeds';
-import { Animal } from '../../enum/Form';
-import { List, Item, ListItem, Thumbnail, Left, Body, Right, Button, Input, Icon } from 'native-base';
+import { StyleSheet, ScrollView, Modal, View, Text } from "react-native";
+import { List, Item, ListItem, Thumbnail, Left, Body, Button, Input, Icon } from 'native-base';
 
-interface IBreedsWidgetProps {
-  onSelected: (value: IBreedItem) => void,
-  animal: Animal
+import { connect } from 'react-redux';
+import { IState } from '../../store/types';
+import { IStateDictionariesReducer } from '../../store/dictionaries';
+
+interface IBreedsWidgetProps extends IStateDictionariesReducer {
+  onSelected: (value: number) => void,
+  animal: number | undefined
 }
 
-const BreedSelect: React.FC<IBreedsWidgetProps> = (props) => {
-    const items = Breeds[props.animal];
+const BreedSelect: React.FC<IBreedsWidgetProps> = ({ dictionaries, onSelected, animal }) => {
+    const [visible, setVisible] = useState(false);
+    const [input, setInput] = useState('');
+    
+    function onFiltered() {
+        if (!animal) {
+            return [];
+        }
 
-    const [
-        visible,
-        setVisible
-    ] = useState<boolean>(false);
+        const selectedAnimal = dictionaries
+            .animals
+            .find(({ id }) => id === animal);
 
-    const [
-        input,
-        setInput
-    ] = useState('');
-
-    function onSelected(item: IBreedItem) {
-        setVisible(false);
-        props.onSelected(item);
+        return selectedAnimal ? selectedAnimal.breeds.filter(item => {
+            return item.title.toString().search(input) !== -1;
+        }) : [];
     }
 
-    function onFiltered() {
-        return items.filter(item => {
-            return item.title.toString().search(input) !== -1;
-        });
+    function onItemSelected(id: number) {
+        onSelected(id);
+        setVisible(false);
     }
 
     return (
@@ -47,13 +48,13 @@ const BreedSelect: React.FC<IBreedsWidgetProps> = (props) => {
                 </View>
                 <ScrollView>
                     <List style={styles.List}>
-                        {(onFiltered().map((item, key) => {
-                            return <ListItem key={key} thumbnail onPress={() => onSelected(item)}>
+                        {(onFiltered().map(({ id, title, img }, key) => {
+                            return <ListItem key={key} thumbnail onPress={() => onItemSelected(id)}>
                                 <Left>
-                                    <Thumbnail square source={ item.img } />
+                                    <Thumbnail square source={{ uri: img }} />
                                 </Left>
                                 <Body>
-                                    <Text>{ item.title }</Text>
+                                    <Text>{ title }</Text>
                                 </Body>
                             </ListItem>
                         }))}
@@ -85,4 +86,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default BreedSelect;
+const mapStateToProps = ({ dictionaries }: IState) => {
+    return dictionaries;
+  };
+  
+export default connect(mapStateToProps, {})(BreedSelect);

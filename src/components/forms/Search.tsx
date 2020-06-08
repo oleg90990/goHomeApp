@@ -1,33 +1,68 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { Container, Content, Form, View } from 'native-base';
-import { Animal, Color } from '../../enum/Form';
-import AnimalsSelectWidgets from '../widgets/AnimalsSelectWidgets';
+import { Content, Form, View } from 'native-base';
 
+
+import AnimalsSelectWidget from '../widgets/AnimalsSelectWidget';
 import ColorWidget from '../widgets/ColorWidget';
-import AgeWidget, { IAgeWidgetvalue } from '../widgets/AgeWidget';
+import AgeWidget from '../widgets/AgeWidget';
 import BreedsWidget from '../widgets/BreedsWidget';
 
 import { connect } from 'react-redux';
-import { setAges, setAnimal, setColors, setBreed  } from '../../store/searchFormReducer/actions';
-import { IStateSearchFormReducer } from '../../store/searchFormReducer';
+import { setAges, setAnimal, setColors, addBreed, removeBreed  } from '../../store/searchForm/actions';
+import { IStateSearchFormReducer, AgeState } from '../../store/searchForm';
 import { IState } from '../../store/types';
 
 interface IProps extends IStateSearchFormReducer {
-  setAnimal(animal: Animal): any;
-  setColors(colors: Color[]): any;
-  setAges(ages: IAgeWidgetvalue): any;
-  setBreed(breed: IBreedItem): any;
+  setAnimal(id?: number): any;
+  setColors(colors: number[]): any;
+  setAges(age: AgeState): any;
+  addBreed(id: number): any;
+  removeBreed(id: number): any;
 }
 
-const Search: React.FC<IProps> = (props) => {
-  return (
-    <Container>
-        <Content padder>
-            <Form></Form>
-          
-        </Content>
-    </Container>
+const Search: React.FC<IProps> = ({
+    animal, setAnimal,
+    ages, setAges,
+    colors, setColors,
+    breeds, addBreed, removeBreed
+  }) => {
+
+    useEffect(() => {
+      // console.log(breeds)
+    })
+
+    return (
+      <Content padder>
+          <Form>
+            <View style={styles.Item}>
+                <AnimalsSelectWidget
+                  value={animal}
+                  onChange={setAnimal}
+                />
+            </View>
+            <View style={styles.Item}>
+                <BreedsWidget
+                  animal={animal}
+                  addBreed={addBreed}
+                  removeBreed={removeBreed}
+                  value={breeds}
+                />
+              </View>
+            <View style={styles.Item}>
+              <AgeWidget
+                value={ages}
+                onChange={setAges}
+              />
+            </View>
+            <View style={styles.Item}>
+              <ColorWidget
+                value={colors}
+                onChange={setColors}
+              />
+            </View>
+          </Form>
+      </Content>
   );
 };
 
@@ -53,5 +88,6 @@ export default connect(mapStateToProps, {
   setAges,
   setAnimal,
   setColors,
-  setBreed
+  addBreed,
+  removeBreed
 })(Search);

@@ -26,8 +26,8 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
     <Layout>
       <Router>
           <Scene key="root" hideNavBar={true}>
-              <Scene key={Scens.login} component={Login} title="Вход" initial />
-              <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" />
+              <Scene key={Scens.login} component={Login} title="Вход" />
+              <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" initial />
               <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
               <Scene key={Scens.items} component={Items} title="Объявления" />
               <Scene key={Scens.item} component={Item} title="Объявление" />

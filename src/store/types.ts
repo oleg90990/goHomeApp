@@ -1,4 +1,4 @@
-import { IStateSearchFormReducer } from './searchFormReducer';
+import { IStateSearchFormReducer } from './searchForm';
 import { IStateDictionariesReducer } from './dictionaries';
 
 export interface IAction<T> {

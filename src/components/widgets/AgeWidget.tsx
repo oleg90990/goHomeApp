@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { Picker, Label, View, Card, CardItem, Body, Text } from 'native-base';
-
-export interface IAgeWidgetvalue {
-    from: number;
-    to: number;
-}
+import { AgeState } from '../../store/searchForm';
 
 interface IAgesWidgetsProps {
-    value: IAgeWidgetvalue,
-    onChange: (value: IAgeWidgetvalue) => void
+    value: AgeState,
+    onChange: (value: AgeState) => void
 }
 
-const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {  
-    const [value, setValue] = useState(props.value);
-
-    useEffect(() => {
-        props.onChange(value);
-    }, [value]);
-
+const AgeWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange }) => {  
     function getOtions(from: number, to: number) {
         let options = [];
 
@@ -33,7 +23,7 @@ const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {
         <Card>
             <CardItem header>
                 <Label style={styles.Title}>
-                    { `Возраст: ${value.from} - ${value.to} лет` }
+                    { `Возраст` }
                 </Label>
             </CardItem>
             <CardItem>
@@ -47,7 +37,7 @@ const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {
                             mode="dropdown"
                             style={styles.Picker}
                             selectedValue={value.from}
-                            onValueChange={(from) => setValue({...value, from})}
+                            onValueChange={(from) => onChange({...value, from})}
                         >
                             { getOtions(0, value.to) }
                         </Picker>
@@ -59,7 +49,7 @@ const AgeWidget: React.FC<IAgesWidgetsProps> = (props) => {
                             mode="dropdown"
                             style={styles.Picker}
                             selectedValue={value.to}
-                            onValueChange={(to) => setValue({...value, to})}
+                            onValueChange={(to) => onChange({...value, to})}
                         >
                             { getOtions(value.from, 20) }
                         </Picker>

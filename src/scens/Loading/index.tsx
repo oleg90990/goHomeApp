@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import { ILoadingProps } from "./types";
 
 const Loading: React.FC<ILoadingProps> = (props) => { 
-  // console.log('Loading')
   return (
     <View style={styles.Spinner}>
       <Spinner />
