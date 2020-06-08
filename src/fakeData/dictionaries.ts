@@ -7,13 +7,13 @@ const val: IStateDictionaries = {
         {
             id: 1,
             title: 'Кот',
-            img: 'http://46.17.40.175/sites/default/files/gohome/img/animals/cat.png',
+            img: 'https://penguin-art.ru/storage/app/media/gohome/img/animals/cat.png',
             breeds: cats
         },
         {
             id: 2,
             title: 'Собака',
-            img: 'http://46.17.40.175/sites/default/files/gohome/img/animals/dog.png',
+            img: 'https://penguin-art.ru/storage/app/media/gohome/img/animals/dog.png',
             breeds: dogs
         }
     ],

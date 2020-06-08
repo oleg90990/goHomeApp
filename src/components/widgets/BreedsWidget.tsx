@@ -38,7 +38,7 @@ const BreedsWidget: React.FC<IBreedsWidgetProps> = ({ animal, value, addBreed, r
             </CardItem>
                 {( value.length === 0 ? 
                     <CardItem style={styles.CardItem} >
-                        {( animal ? <Text>- Выбрано все -</Text> : null )}
+                        {( animal ? <Text style={styles.CardItemText}>- Выбрано все -</Text> : null )}
                     </CardItem> : getSelectedBreeds().map((breed, key) => {
                         return breed ? <CardItem key={key} style={styles.CardItem}>
                             <Text style={styles.CardItemText}>
