@@ -3,10 +3,11 @@ import { Scens } from '../enum/Scens'
 import { isLoggedIn } from '../utilites/auth'
 
 import { IItemsProps } from '../scens/Items/types';
-import { IItemProps} from '../scens/Item/types';
-import { IDashboardProps} from '../scens/Dashboard/types';
-import { ILoginProps} from '../scens/Login/types';
-import { IAccountProps} from '../scens/Account/types';
+import { IItemProps } from '../scens/Item/types';
+import { IDashboardProps } from '../scens/Dashboard/types';
+import { ILoginProps } from '../scens/Login/types';
+import { IAccountProps } from '../scens/Account/types';
+import { ILoadingProps } from '../scens/Loading/types';
 
 const scensAuth: Scens[] = [
     Scens.accounnt
@@ -37,5 +38,9 @@ export const toLogin = (props: ILoginProps) => {
 }
 
 export const toDashboard = (props: IDashboardProps) => {
-    middlewareAuth(Scens.dashboard, props);;
+    middlewareAuth(Scens.dashboard, props);
+}
+
+export const toLoading = (props: ILoadingProps) => {
+    middlewareAuth(Scens.loading, props);
 }

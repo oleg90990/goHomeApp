@@ -3,5 +3,6 @@ export enum Scens {
     dashboard = 'dashboard',
     accounnt = 'accounnt',
     items = 'items',
-    item = 'item'
+    item = 'item',
+    loading = 'loading'
 }

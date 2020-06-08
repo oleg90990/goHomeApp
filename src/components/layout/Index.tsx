@@ -1,8 +1,29 @@
 import React from 'react';
-import { Container, Header, Title, Footer, FooterTab, Button, Text, Right, Body, Icon, Left } from 'native-base';
-import { Image, StyleSheet } from 'react-native';
-import buttons from '../../data/footerButtons';
-import logo from '../../assets/img/cat.png';
+import { Container, Footer, FooterTab, Button, Text, Icon } from 'native-base';
+import { toDashboard, toAccounnt } from '../../utilites/appNavigation';
+
+interface IFooterButton {
+    title: string;
+    icon: string;
+    action: () => any;
+}
+
+const buttons: IFooterButton[] = [
+    {
+        title: 'профиль',
+        icon: 'person',
+        action: () => {
+            toAccounnt({});
+        }
+    },
+    {
+        title: 'Поиск',
+        icon: 'search',
+        action: () => {
+            toDashboard({});
+        }
+    }
+]
 
 const Layout: React.FC = (props) => {
     return (
@@ -25,14 +46,5 @@ const Layout: React.FC = (props) => {
         </Container>
     );
 };
-
-// styles
-const styles = StyleSheet.create({
-    logo: {
-        height: 30,
-        width: 30,
-        marginLeft: 10
-    }
-});
 
 export default Layout;

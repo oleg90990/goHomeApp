@@ -36,10 +36,7 @@ const BreedsWidget: React.FC<IBreedsWidgetProps> = (props) => {
             </CardItem>
             <CardItem>
                 <Body>
-                    <BreedSelect
-                        onSelected={setInputValue}
-                        animal={props.animal}
-                    />
+                    <BreedSelect onSelected={setInputValue} animal={props.animal} />
                 </Body>
             </CardItem>
         </Card>
