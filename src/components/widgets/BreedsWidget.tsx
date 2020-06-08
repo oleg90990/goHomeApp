@@ -41,8 +41,10 @@ const BreedsWidget: React.FC<IBreedsWidgetProps> = ({ animal, value, addBreed, r
                         {( animal ? <Text>- Выбрано все -</Text> : null )}
                     </CardItem> : getSelectedBreeds().map((breed, key) => {
                         return breed ? <CardItem key={key} style={styles.CardItem}>
-                            <Text>{ breed.title }</Text>
-                            <Icon
+                            <Text style={styles.CardItemText}>
+                                { breed.title }
+                            </Text>
+                            <Icon style={styles.CardItemIcon}
                                 name="close"
                                 onPress={() => removeBreed(breed.id)}
                             />
@@ -65,9 +67,16 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   CardItem: {
-      width: '100%',
       justifyContent: 'space-between'
-  }
+  },
+  CardItemText: {
+      fontSize: 14,
+      width: '90%',
+  },
+  CardItemIcon: {
+    width: '10%',
+    marginLeft: 15
+}
 });
  
 const mapStateToProps = ({ dictionaries }: IState) => {

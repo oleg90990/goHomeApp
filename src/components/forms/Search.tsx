@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { Content, Form, View } from 'native-base';
 
-
 import AnimalsSelectWidget from '../widgets/AnimalsSelectWidget';
 import ColorWidget from '../widgets/ColorWidget';
 import AgeWidget from '../widgets/AgeWidget';
