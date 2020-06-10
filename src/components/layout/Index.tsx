@@ -13,21 +13,23 @@ const buttons: IFooterButton[] = [
         title: 'профиль',
         icon: 'person',
         action: () => {
-            toAccounnt({});
+            toAccounnt();
         }
     },
     {
         title: 'Поиск',
         icon: 'search',
         action: () => {
-            toDashboard({});
+            toDashboard();
         }
     }
 ]
 
 const Layout: React.FC = (props) => {
     return (
-        <Container>
+        <Container theme={{
+            brandPrimary: 'red'
+        }}> 
             { props.children }
             <Footer>
                 <FooterTab>

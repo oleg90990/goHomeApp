@@ -79,6 +79,9 @@ target 'goHome' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'goHomeTests' do
     inherit! :complete
     # Pods for testing

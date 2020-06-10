@@ -11,16 +11,22 @@
 import React from 'react';
 import Router from './router';
 
+import { StyleProvider } from 'native-base';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './store';
 
+import getTheme from './native-base-theme/components';
+import commonColor from './native-base-theme/variables/commonColor';
+
 
 const App = () => {
   return (
     <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
-        <Router />
+        <StyleProvider style={getTheme(commonColor)}>
+          <Router />
+        </StyleProvider>
     </Provider>
   );
 };

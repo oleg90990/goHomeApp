@@ -4,7 +4,8 @@ export enum Scens {
     accounnt = 'accounnt',
     items = 'items',
     item = 'item',
-    loading = 'loading'
+    loading = 'loading',
+    profile = 'profile'
 }
 
 export default Scens;

@@ -1,52 +1,113 @@
 import React from 'react';
-import { Container, Content, Button, Icon } from 'native-base';
+import { Container, Content, View, List, ListItem, Button, Icon } from 'native-base';
 import { SliderBox } from "react-native-image-slider-box";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, Linking} from "react-native";
 import { IItemProps } from "./types";
-  
-const Item: React.FC<IItemProps> = (props) => {
-  return (
-    <Container>
-        <SliderBox images={props.images} />
-        <Content padder>
-            <Text style={styles.Title}>
-                { props.title }
-            </Text>
-            <Text style={styles.Age}>
-                { `Возраст: ${props.age} лет` }
-            </Text>
-            <Text style={styles.Text}>
-                { props.content }
-            </Text>
-            <Button style={styles.Btn}>
-            <Text style={styles.ButtonText}>Позвонить</Text>
-            </Button>
-        </Content>
-    </Container>
-  );
+
+import { connect } from 'react-redux';
+import { IState } from '../../store/types';
+
+const Item: React.FC<IItemProps> = ({ images, title, age, dictionaries, colors, breed, animal, content, phone }) => {
+    const useColors = dictionaries.colors.filter(({id}) => colors.indexOf(id) > -1);
+    const useAnimal = dictionaries.animals.find(({ id }) => id === animal);
+    const useBreed = useAnimal ? useAnimal.breeds.find(({ id }) => id === breed) : false;
+
+    function toCall() {
+        Linking.openURL(`tel:${phone}`);
+    }
+
+    return (
+        <Container>
+            <Content>
+                <SliderBox sliderBoxHeight={300} images={images} />
+                <View style={[styles.ViewTitle, styles.View]}>
+                    <Text style={styles.Title}>
+                        { title }
+                    </Text>
+                </View>
+                <List style={{ paddingRight: 20}}>
+                    {( useBreed ? 
+                    <ListItem>
+                        <Text style={[styles.Text, styles.Label]}>
+                            { `Порода:` }
+                        </Text>
+                        <Text style={styles.Text}>
+                            { useBreed.title }
+                        </Text>
+                    </ListItem> : null
+                    )}
+                    <ListItem>
+                        <Text style={[styles.Text, styles.Label]}>
+                            { `Возраст:` }
+                        </Text>
+                        <Text style={styles.Text}>
+                            { age }
+                        </Text>
+                    </ListItem>
+                    <ListItem>
+                        <Text style={[styles.Text, styles.Label]}>
+                            { `Цвет:` }
+                        </Text>
+                        { useColors.map((color, key) => {
+                            return <View key={key} style={[styles.Color, { backgroundColor: color.value }]} />
+                        })}
+                    </ListItem>
+                </List>
+                <View style={[styles.View, styles.Footer]}>
+                    <Text style={[styles.Text, styles.Content]}>
+                    { content }
+                    </Text>
+
+                    <Button primary block onPress={toCall}>
+                        <Text style={styles.Button}>
+                            Позвонить
+                        </Text>
+                    </Button>
+                </View>
+            </Content>
+        </Container>
+    );
 };
 
 const styles = StyleSheet.create({
-    Title: {
-        fontSize: 24,
-        marginTop: 0
+    Button: {
+        color: 'white'
     },
-    Age: {
-        marginTop: 10,
-        fontSize: 20,
+    ViewTitle: {
+        marginBottom: -10
+    },
+    View: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+    },
+    Color: {
+        width: 25,
+        height: 25,
+        marginRight: 10
     },
     Text: {
-        fontSize: 16,
-        marginTop: 10
+        fontSize: 18
     },
-    Btn: {
-        justifyContent: 'center',
-        marginTop: 20
+    Label: {
+        marginRight: 10
     },
-    ButtonText: {
-        color: 'white',
-        marginLeft: 10
-    }, 
+    Title: {
+        fontSize: 24,
+        marginBottom: 0
+    },
+    ListItem: {
+        padding: 0
+    },
+    Content: {
+        marginBottom: 20
+    },
+    Footer: {
+        marginBottom: 15
+    }
 });
 
-export default Item;
+const mapStateToProps = ({ dictionaries }: IState) => {
+    return dictionaries;
+};
+
+export default connect(mapStateToProps, {})(Item);

@@ -37,7 +37,7 @@ const BreedSelect: React.FC<IBreedsWidgetProps> = ({ dictionaries, onSelected, a
     return (
         <View>
             <Button style={styles.Button} onPress={() => setVisible(!visible)}>
-                <Text style={styles.ButtonText}>Выбрать породу</Text>
+                <Text style={styles.ButtonText}>Добавить породу</Text>
             </Button>
             <Modal animationType="slide" visible={visible} >
                 <View style={styles.ModalInput}>

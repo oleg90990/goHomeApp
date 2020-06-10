@@ -1,23 +1,40 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { IAccountProps } from "./types";
-import { Text } from 'native-base';
+import { Text, Content, List, ListItem } from 'native-base';
+import { toProfile } from '../../utilites/appNavigation';
+
+import { connect } from 'react-redux';
+import { logout  } from '../../store/user/actions';
+import { toAccounnt } from '../../utilites/appNavigation';
 
 const Account: React.FC<IAccountProps> = (props) => {
-    return (
-      <Text style={styles.Root}>
-          { 'Account' }
-      </Text>
-    );
+  function toLogout() {
+    props.logout();
+    toAccounnt();
+  }
+  
+  return (
+    <Content>
+      <List>
+        <ListItem onPress={() => toProfile() }>
+          <Text>Профиль</Text>
+        </ListItem>
+        <ListItem>
+          <Text>Мои объявления</Text>
+        </ListItem>
+        <ListItem onPress={() => toLogout() }>
+          <Text>Выход</Text>
+        </ListItem>
+      </List>
+    </Content>
+  );
 };
 
 // styles
 const styles = StyleSheet.create({
-  Root: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    height: 500
-  }
 });
 
-export default Account;
+export default connect(null, {
+  logout
+})(Account);

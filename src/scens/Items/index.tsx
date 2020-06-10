@@ -1,81 +1,70 @@
-import React from 'react';
-import { Container, Content, Text } from 'native-base';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet } from "react-native";
+import { Container, Content, Spinner, View } from 'native-base';
+import { ScrollView } from "react-native";
 import Item from './components/Item';
 import { IItemsProps } from "./types";
+import Api from "../../api";
+import { Sortby } from '../../enum/Form';
+import { IItem } from '../Item/types';
+import RNPickerSelect from 'react-native-picker-select';
 
-const Items: React.FC<IItemsProps> = (props) => {
-    const items = {
-        dog: [
-            {
-                id: 1,
-                title: 'Хочет домой лосковый пес',
-                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
-                age: 15,
-                images: [
-                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
-                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
-                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
-                ]
-            },
-            {
-                id: 2,
-                title: 'Хочет',
-                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
-                age: 15,
-                images: [
-                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
-                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
-                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
-                ]
-            },
-            {
-                id: 3,
-                title: 'Хочет домой лосковый пес',
-                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
-                age: 15,
-                images: [
-                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
-                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
-                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
-                ]
-            }
-        ],
-        cat: [
-            {
-                id: 4,
-                title: 'Кот',
-                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
-                age: 15,
-                images: [
-                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
-                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
-                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
-                ]
-            },
-            {
-                id: 5,
-                title: 'Хочет домой лосковый кот',
-                content: 'Щенок ищет дом. Очень ласковый и дружелюбный. Любит кошек и людей.',
-                age: 15,
-                images: [
-                    'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
-                    'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
-                    'https://bipbap.ru/wp-content/uploads/2017/03/Prikolnye-foto-sobak-14.jpg'
-                ]
-            }
-        ],
-    };
+import { connect } from 'react-redux';
+import { IState } from '../../store/types';
 
+const sortByItems = [
+    { label: 'По возрасту', value: Sortby.age },
+    { label: 'По дате', value: Sortby.date },
+];
+
+const Items: React.FC<IItemsProps> = ({ searchForm }) => {
+    const [sortBy, setSortBy] = useState(Sortby.date);
+    const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState<IItem[]>([]);
+    
+    function loadItems() {
+        setLoading(true);
+        Api.loadItems(searchForm, sortBy)
+            .then(items => {
+                setItems(items);
+                setLoading(false);
+            });
+    }
+
+    useEffect(loadItems, [sortBy]);
 
     return (
         <Container>
             <Content padder>
-                {( items[props.animal].map((item: any, index) => {
-                    return <Item key={index} item={item} />
-                }))}
+                <View>
+                    <RNPickerSelect
+                        onValueChange={setSortBy}
+                        items={sortByItems}
+                        value={sortBy}
+                    />
+                </View>
+                {( loading ? ( <View style={styles.Spinner}><Spinner/></View> ): 
+                    <ScrollView>
+                        {( items.map((item: any, index) => {
+                            return <Item key={index} item={item} />
+                        }))}
+                    </ScrollView> )}
             </Content>
         </Container>
     );
 };
 
-export default Items;
+const styles = StyleSheet.create({
+    Spinner: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 600
+    }
+});
+
+const mapStateToProps = (state: IState) => {
+    return state;
+  };
+  
+  export default connect(mapStateToProps, {})(Items);

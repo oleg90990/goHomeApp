@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { Content, Form, View } from 'native-base';
+import { Content, Form, View, Button, Text } from 'native-base';
+import { toItems } from '../../utilites/appNavigation';
 
 import AnimalsSelectWidget from '../widgets/AnimalsSelectWidget';
 import ColorWidget from '../widgets/ColorWidget';
@@ -26,42 +27,40 @@ const Search: React.FC<IProps> = ({
     colors, setColors,
     breeds, addBreed, removeBreed
   }) => {
-
-    useEffect(() => {
-      // console.log(breeds)
-    })
-
     return (
-      <Content padder>
-          <Form>
-            <View style={styles.Item}>
-                <AnimalsSelectWidget
-                  value={animal}
-                  onChange={setAnimal}
-                />
-            </View>
-            <View style={styles.Item}>
-                <BreedsWidget
-                  animal={animal}
-                  addBreed={addBreed}
-                  removeBreed={removeBreed}
-                  value={breeds}
-                />
-              </View>
-            <View style={styles.Item}>
-              <AgeWidget
-                value={ages}
-                onChange={setAges}
-              />
-            </View>
-            <View style={styles.Item}>
-              <ColorWidget
-                value={colors}
-                onChange={setColors}
-              />
-            </View>
-          </Form>
-      </Content>
+      <Form>
+        <View style={styles.Item}>
+            <AnimalsSelectWidget
+              value={animal}
+              onChange={setAnimal}
+            />
+        </View>
+        <View style={styles.Item}>
+            <BreedsWidget
+              animal={animal}
+              addBreed={addBreed}
+              removeBreed={removeBreed}
+              value={breeds}
+            />
+          </View>
+        <View style={styles.Item}>
+          <AgeWidget
+            value={ages}
+            onChange={setAges}
+          />
+        </View>
+        <View style={styles.Item}>
+          <ColorWidget
+            value={colors}
+            onChange={setColors}
+          />
+        </View>
+        <View style={[styles.Item, { marginTop: 5 }]}>
+          <Button block primary onPress={() => toItems()}>
+            <Text>Поиск друзей</Text>
+          </Button>
+        </View>
+      </Form>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { Label, Card, CardItem, Body, Text, Icon ,Right} from 'native-base';
+import { Label, Card, CardItem, Body, Text, Icon } from 'native-base';
 import BreedSelect from '../elements/BreedSelect';
 
 import { connect } from 'react-redux';

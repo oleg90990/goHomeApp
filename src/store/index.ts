@@ -1,8 +1,10 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import searchForm from './searchForm';
 import dictionaries from './dictionaries';
+import user from './user';
 
 export default combineReducers({
     searchForm,
-    dictionaries
+    dictionaries,
+    user
 });
