@@ -1,4 +1,4 @@
-import { IStateDictionariesReducer } from '../../store/dictionaries';
+import { IStateDictionariesReducer, IDictionaryColorItem, IDictionaryItem } from '../../store/dictionaries';
 
 export interface IItem {
     id: number,
@@ -9,9 +9,10 @@ export interface IItem {
     colors: number[],
     animal: number,
     breed: number,
-    phone: string
+    phone: string,
+    getColorsByIds: (colors: number[]) => IDictionaryColorItem[],
+    getBreedById: (breedId: number, animal: number) => IDictionaryItem | undefined 
 }
 
-export interface IItemProps extends IItem, IStateDictionariesReducer {
-    
+export interface IItemProps extends IItem {
 }

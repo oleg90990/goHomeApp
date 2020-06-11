@@ -3,70 +3,80 @@ import { Container, Content, View, List, ListItem, Button, Icon } from 'native-b
 import { SliderBox } from "react-native-image-slider-box";
 import { StyleSheet, Text, Linking} from "react-native";
 import { IItemProps } from "./types";
+import { getColorsByIds, getBreedById } from "../../store/dictionaries/getters";
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
-const Item: React.FC<IItemProps> = ({ images, title, age, dictionaries, colors, breed, animal, content, phone }) => {
-    const useColors = dictionaries.colors.filter(({id}) => colors.indexOf(id) > -1);
-    const useAnimal = dictionaries.animals.find(({ id }) => id === animal);
-    const useBreed = useAnimal ? useAnimal.breeds.find(({ id }) => id === breed) : false;
+const Item: React.FC<IItemProps> = ({
+        images,
+        title,
+        age,
+        colors,
+        breed,
+        content,
+        phone,
+        getColorsByIds,
+        getBreedById
+    }) => {
+        const useColors = getColorsByIds(colors);
+        const useBreed = getBreedById(breed);
 
-    function toCall() {
-        Linking.openURL(`tel:${phone}`);
-    }
+        function toCall() {
+            Linking.openURL(`tel:${phone}`);
+        }
 
-    return (
-        <Container>
-            <Content>
-                <SliderBox sliderBoxHeight={300} images={images} />
-                <View style={[styles.ViewTitle, styles.View]}>
-                    <Text style={styles.Title}>
-                        { title }
-                    </Text>
-                </View>
-                <List style={{ paddingRight: 20}}>
-                    {( useBreed ? 
-                    <ListItem>
-                        <Text style={[styles.Text, styles.Label]}>
-                            { `Порода:` }
+        return (
+            <Container>
+                <Content>
+                    <SliderBox sliderBoxHeight={300} images={images} />
+                    <View style={[styles.ViewTitle, styles.View]}>
+                        <Text style={styles.Title}>
+                            { title }
                         </Text>
-                        <Text style={styles.Text}>
-                            { useBreed.title }
+                    </View>
+                    <List style={{ paddingRight: 20}}>
+                        {( useBreed ? 
+                        <ListItem>
+                            <Text style={[styles.Text, styles.Label]}>
+                                { `Порода:` }
+                            </Text>
+                            <Text style={styles.Text}>
+                                { useBreed.title }
+                            </Text>
+                        </ListItem> : null
+                        )}
+                        <ListItem>
+                            <Text style={[styles.Text, styles.Label]}>
+                                { `Возраст:` }
+                            </Text>
+                            <Text style={styles.Text}>
+                                { age } { 'года'}
+                            </Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text style={[styles.Text, styles.Label]}>
+                                { `Цвет:` }
+                            </Text>
+                            { useColors.map((color, key) => {
+                                return <View key={key} style={[styles.Color, { backgroundColor: color.value }]} />
+                            })}
+                        </ListItem>
+                    </List>
+                    <View style={[styles.View, styles.Footer]}>
+                        <Text style={[styles.Text, styles.Content]}>
+                        { content }
                         </Text>
-                    </ListItem> : null
-                    )}
-                    <ListItem>
-                        <Text style={[styles.Text, styles.Label]}>
-                            { `Возраст:` }
-                        </Text>
-                        <Text style={styles.Text}>
-                            { age }
-                        </Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text style={[styles.Text, styles.Label]}>
-                            { `Цвет:` }
-                        </Text>
-                        { useColors.map((color, key) => {
-                            return <View key={key} style={[styles.Color, { backgroundColor: color.value }]} />
-                        })}
-                    </ListItem>
-                </List>
-                <View style={[styles.View, styles.Footer]}>
-                    <Text style={[styles.Text, styles.Content]}>
-                    { content }
-                    </Text>
 
-                    <Button primary block onPress={toCall}>
-                        <Text style={styles.Button}>
-                            Позвонить
-                        </Text>
-                    </Button>
-                </View>
-            </Content>
-        </Container>
-    );
+                        <Button primary block onPress={toCall}>
+                            <Text style={styles.Button}>
+                                Позвонить
+                            </Text>
+                        </Button>
+                    </View>
+                </Content>
+            </Container>
+        );
 };
 
 const styles = StyleSheet.create({
@@ -106,8 +116,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({ dictionaries }: IState) => {
-    return dictionaries;
+const mapStateToProps = (state: IState) => {
+    return {
+        getColorsByIds: getColorsByIds(state),
+        getBreedById: getBreedById(state),
+    };
 };
 
 export default connect(mapStateToProps, {})(Item);
