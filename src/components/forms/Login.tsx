@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
-import {  Form, Item, Label, Input, Button, Text, View, Spinner } from 'native-base';
-import { toAccounnt } from '../../utilites/appNavigation';
-import API from '../../api';
-
-
+import { Form, Item, Label, Input, Button, Text, Spinner, View } from 'native-base';
 import { connect } from 'react-redux';
-import { setUser  } from '../../store/user/actions';
-import { IStateUserReducer } from '../../store/user';
+import { login  } from '../../store/user/actions';
+import { toAccounnt } from '../../utilites/appNavigation';
 
 interface ILoginProps {
-  setUser: (user: IStateUserReducer) => void
+  login: (username: string, password: string) => Promise<any>
 }
 
-const Login: React.FC<ILoginProps> = props => {
+const Login: React.FC<ILoginProps> = ({ login }) => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,20 +17,19 @@ const Login: React.FC<ILoginProps> = props => {
 
   function toLogin() {
     setLoading(true);
-    API.login(username, password)
-      .then(user => {
-        props.setUser(user);
+    login(username, password)
+      .then(() => {
         toAccounnt();
-      })
-      .catch(error => {
-        setError(error);
         setLoading(false);
-      });
+      }).catch(e => {
+        setError(e);
+        setLoading(false);
+      })
   }
 
   return (
     <Form >
-        <Item inlineLabel>
+        <Item inlineLabel style={styles.Item}>
             <Label>Имя</Label>
             <Input
               value={username}
@@ -42,7 +37,7 @@ const Login: React.FC<ILoginProps> = props => {
               disabled={loading}
             />
         </Item>
-        <Item inlineLabel>
+        <Item inlineLabel style={styles.Item}>
             <Label>Пароль</Label>
             <Input
               value={password}
@@ -51,14 +46,10 @@ const Login: React.FC<ILoginProps> = props => {
               secureTextEntry={true}
             />
         </Item>
-        {( error ? <View style={styles.Padder}>
-            <Text style={styles.ErrorText}>{ error }</Text>
-          </View> : null
-        )}
-        {( loading ? <Spinner /> : 
-          <Button block style={[styles.Btn, styles.Padder]} onPress={toLogin}>
-              <Text>Вход</Text>
-          </Button> )}
+        {( error ? <Text style={styles.ErrorText}>{ error }</Text> : null )}
+        <Button style={styles.Btn} onPress={toLogin} disabled={loading}>
+            {( loading ? <Spinner color={'white'} /> :  <Text>Вход</Text> )}
+        </Button> 
     </Form>
   );
 };
@@ -66,19 +57,19 @@ const Login: React.FC<ILoginProps> = props => {
 // styles
 const styles = StyleSheet.create({
   Btn: {
-    marginTop: 20,
     justifyContent: 'center',
-    width: 200
-  },
-  Padder: {
-    paddingHorizontal: 15,
-    marginVertical: 15
+    width: 200,
+    marginTop: 15
   },
   ErrorText: {
-    color: 'red'
+    color: 'red',
+    marginTop: 15
+  },
+  Item: {
+    marginLeft: 0
   }
 });
 
 export default connect(null, {
-  setUser
+  login
 })(Login);

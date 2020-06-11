@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
 const Item: React.FC<IItemProps> = ({
+        animal,
         images,
         title,
         age,
@@ -20,7 +21,7 @@ const Item: React.FC<IItemProps> = ({
         getBreedById
     }) => {
         const useColors = getColorsByIds(colors);
-        const useBreed = getBreedById(breed);
+        const useBreed = getBreedById(breed, animal);
 
         function toCall() {
             Linking.openURL(`tel:${phone}`);

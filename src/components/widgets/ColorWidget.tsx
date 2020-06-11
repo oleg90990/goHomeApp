@@ -25,9 +25,10 @@ const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange, dictionari
     }
 
     function getSelectedStyle(id: number) {
+      const isSelected: boolean = value.indexOf(id) > -1;
         return {
-          opacity: value.indexOf(id) > -1 ? 1 : 0.5,
-          borderColor: value.indexOf(id) > -1 ? '#4050b4' : '#eee'
+          opacity: isSelected ? 1 : 0.5,
+          borderColor: isSelected ? '#4050b4' : '#eee'
         };
     } 
 

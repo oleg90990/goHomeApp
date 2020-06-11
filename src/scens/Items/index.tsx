@@ -4,7 +4,7 @@ import { Container, Content, Spinner, View } from 'native-base';
 import { ScrollView } from "react-native";
 import Item from './components/Item';
 import { IItemsProps } from "./types";
-import Api from "../../api";
+import Api from "../../api/apiItems";
 import { Sortby } from '../../enum/Form';
 import { IItem } from '../Item/types';
 import RNPickerSelect from 'react-native-picker-select';

@@ -15,14 +15,17 @@ import Layout from "../components/layout/Index";
 import { connect } from 'react-redux';
 import { IState } from '../store/types';
 import { loadDictionaries  } from '../store/dictionaries/actions';
+import { loadUserFromStorage  } from '../store/user/actions';
 import { IStateDictionariesReducer } from '../store/dictionaries';
 
 interface IRouterProps extends IStateDictionariesReducer {
-    loadDictionaries(): any
+    loadDictionaries(): any,
+    loadUserFromStorage(): any
 }
 
 const RouterApp: React.FC<IRouterProps> = (props) => {
   props.loadDictionaries();
+  props.loadUserFromStorage();
   return ( props.loading ? <Loading /> : 
     <Layout>
       <Router>
@@ -44,5 +47,6 @@ const mapStateToProps = ({ dictionaries }: IState) => {
 };
 
 export default connect(mapStateToProps, {
-    loadDictionaries
+    loadDictionaries,
+    loadUserFromStorage
 })(RouterApp);
