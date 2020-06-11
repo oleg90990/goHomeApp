@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { IAccountProps } from "./types";
 import { Text, Content, List, ListItem } from 'native-base';
-import { toProfile } from '../../utilites/appNavigation';
+import { toProfile, toMyAds } from '../../utilites/appNavigation';
 
 import { connect } from 'react-redux';
 import { logout  } from '../../store/user/actions';
@@ -20,7 +20,7 @@ const Account: React.FC<IAccountProps> = (props) => {
         <ListItem onPress={() => toProfile() }>
           <Text>Профиль</Text>
         </ListItem>
-        <ListItem>
+        <ListItem onPress={() => toMyAds() }>
           <Text>Мои объявления</Text>
         </ListItem>
         <ListItem onPress={() => toLogout() }>

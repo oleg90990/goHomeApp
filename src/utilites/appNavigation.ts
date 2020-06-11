@@ -11,7 +11,9 @@ import { ILoadingProps } from '../scens/Loading/types';
 import { IProfileProps } from '../scens/Profile/types';
 
 const scensAuth: Scens[] = [
-    Scens.accounnt
+    Scens.accounnt,
+    Scens.profile,
+    Scens.myAds
 ];
 
  async function middlewareAuth(scen: Scens, props: any = {}) {
@@ -50,4 +52,8 @@ export const toDashboard = () => {
 
 export const toLoading = () => {
     middlewareAuth(Scens.loading);
+}
+
+export const toMyAds = () => {
+    middlewareAuth(Scens.myAds);
 }

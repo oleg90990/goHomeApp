@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { Content, Form, View, Button, Text } from 'native-base';
+import { Form, View, Button, Text } from 'native-base';
 import { toItems } from '../../utilites/appNavigation';
 
 import AnimalsSelectWidget from '../widgets/AnimalsSelectWidget';

@@ -9,6 +9,7 @@ import Items from '../scens/Items';
 import Item from '../scens/Item';
 import Loading from '../scens/Loading';
 import Profile from '../scens/Profile';
+import MyAds from '../scens/MyAds';
 
 import Layout from "../components/layout/Index";
 
@@ -36,6 +37,7 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
               <Scene key={Scens.items} component={Items} title="Объявления" />
               <Scene key={Scens.item} component={Item} title="Объявление" />
               <Scene key={Scens.profile} component={Profile} title="Профиль" />
+              <Scene key={Scens.myAds} component={MyAds} title="Мои объявления" />
           </Scene>
       </Router>
     </Layout>

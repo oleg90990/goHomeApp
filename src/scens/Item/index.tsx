@@ -36,6 +36,11 @@ const Item: React.FC<IItemProps> = ({
                             { title }
                         </Text>
                     </View>
+                    <Button primary block onPress={toCall} style={styles.BtnCall}>
+                        <Text style={styles.Button}>
+                            Позвонить
+                        </Text>
+                    </Button>
                     <List style={{ paddingRight: 20}}>
                         {( useBreed ? 
                         <ListItem>
@@ -52,7 +57,7 @@ const Item: React.FC<IItemProps> = ({
                                 { `Возраст:` }
                             </Text>
                             <Text style={styles.Text}>
-                                { age } { 'года'}
+                                { age }
                             </Text>
                         </ListItem>
                         <ListItem>
@@ -64,16 +69,11 @@ const Item: React.FC<IItemProps> = ({
                             })}
                         </ListItem>
                     </List>
+
                     <View style={[styles.View, styles.Footer]}>
                         <Text style={[styles.Text, styles.Content]}>
                         { content }
                         </Text>
-
-                        <Button primary block onPress={toCall}>
-                            <Text style={styles.Button}>
-                                Позвонить
-                            </Text>
-                        </Button>
                     </View>
                 </Content>
             </Container>
@@ -114,6 +114,10 @@ const styles = StyleSheet.create({
     },
     Footer: {
         marginBottom: 15
+    },
+    BtnCall: {
+        margin: 20,
+        marginBottom: 10
     }
 });
 
