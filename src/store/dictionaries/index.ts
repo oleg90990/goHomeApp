@@ -1,5 +1,6 @@
 import { SET_ALL, SET_LOADING } from './types';
 import { IAction } from '../types';
+import { Gender } from '../../enum/Form';
 
 export interface IDictionaryItem {
     id: number,
@@ -14,7 +15,12 @@ export interface IDictionaryColorItem {
 }
 
 export interface IDictionaryAnimalType extends IDictionaryItem {
-    breeds: IDictionaryItem[]
+    breeds: IDictionaryItem[],
+    genders: {
+        [Gender.male]: string,
+        [Gender.female]: string,
+        [Gender.none]: string,
+    }
 }
 
 export interface IStateDictionaries {

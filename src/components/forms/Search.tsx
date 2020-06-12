@@ -7,11 +7,14 @@ import AnimalsSelectWidget from '../widgets/AnimalsSelectWidget';
 import ColorWidget from '../widgets/ColorWidget';
 import AgeWidget from '../widgets/AgeWidget';
 import BreedsWidget from '../widgets/BreedsWidget';
+import GenderSelectWidget from '../widgets/GenderSelectWidget';
+import SterilizationCastrationSelectWidget from '../widgets/SterilizationCastrationSelectWidget';
 
 import { connect } from 'react-redux';
-import { setAges, setAnimal, setColors, addBreed, removeBreed  } from '../../store/searchForm/actions';
+import { setAges, setAnimal, setColors, addBreed, removeBreed, setGender, setSterilization  } from '../../store/searchForm/actions';
 import { IStateSearchFormReducer, AgeState } from '../../store/searchForm';
 import { IState } from '../../store/types';
+import { Gender , YesNo} from 'src/enum/Form';
 
 interface IProps extends IStateSearchFormReducer {
   setAnimal(id?: number): any;
@@ -19,13 +22,17 @@ interface IProps extends IStateSearchFormReducer {
   setAges(age: AgeState): any;
   addBreed(id: number): any;
   removeBreed(id: number): any;
+  setGender(gender: Gender): any;
+  setSterilization(value: YesNo): any;
 }
 
 const Search: React.FC<IProps> = ({
     animal, setAnimal,
     ages, setAges,
     colors, setColors,
-    breeds, addBreed, removeBreed
+    breeds, addBreed, removeBreed,
+    gender, setGender,
+    sterilization, setSterilization
   }) => {
     return (
       <Form>
@@ -42,7 +49,20 @@ const Search: React.FC<IProps> = ({
               removeBreed={removeBreed}
               value={breeds}
             />
-          </View>
+        </View>
+        <View style={styles.Item}>
+          <GenderSelectWidget
+            value={gender}
+            onChange={setGender}
+            animal={animal}
+          />
+        </View>
+        <View style={styles.Item}>
+          <SterilizationCastrationSelectWidget
+            value={sterilization}
+            onChange={setSterilization}
+          />
+        </View>
         <View style={styles.Item}>
           <AgeWidget
             value={ages}
@@ -87,5 +107,7 @@ export default connect(mapStateToProps, {
   setAnimal,
   setColors,
   addBreed,
-  removeBreed
+  removeBreed,
+  setGender,
+  setSterilization
 })(Search);

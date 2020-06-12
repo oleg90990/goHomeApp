@@ -1,5 +1,6 @@
-import { SET_AGES, SET_ANIMAL, SET_COLORS, ADD_BREED, REMOVE_BREED } from './types';
+import { SET_AGES, SET_ANIMAL, SET_COLORS, ADD_BREED, REMOVE_BREED,SET_GENDER, SET_STERILIZATION } from './types';
 import { IAction } from '../types';
+import { Gender, YesNo } from '../../enum/Form';
 
 export interface AgeState {
   from: number
@@ -11,6 +12,8 @@ export interface IStateSearchFormReducer {
   ages: AgeState;
   colors: number[];
   breeds: number[];
+  gender: Gender,
+  sterilization: YesNo
 }
 
 const INITIAL_STATE: IStateSearchFormReducer = {
@@ -20,7 +23,9 @@ const INITIAL_STATE: IStateSearchFormReducer = {
     to: 5
   },
   colors: [],
-  breeds: []
+  breeds: [],
+  gender: Gender.none,
+  sterilization: YesNo.none
 };
 
 export default (state = INITIAL_STATE, action: IAction<any>) => {
@@ -43,6 +48,18 @@ export default (state = INITIAL_STATE, action: IAction<any>) => {
       return {
         ...state,
         colors
+      };
+    case SET_GENDER:
+      const gender = action.payload;
+      return {
+        ...state,
+        gender
+      };
+    case SET_STERILIZATION:
+      const sterilization = action.payload;
+      return {
+        ...state,
+        sterilization
       };
     case ADD_BREED:
       let breedsAdded = state.breeds;

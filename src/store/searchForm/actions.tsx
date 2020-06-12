@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
-import { SET_AGES, SET_ANIMAL, SET_COLORS, ADD_BREED, REMOVE_BREED } from './types';
+import { SET_AGES, SET_ANIMAL, SET_COLORS, ADD_BREED, REMOVE_BREED, SET_GENDER, SET_STERILIZATION } from './types';
 import { AgeState} from './index';
+import { Gender, YesNo } from '../../enum/Form';
 
 export const setAnimal = (payload: number) => {
   return (dispatch: Dispatch<any>) => {
@@ -17,6 +18,18 @@ export const setAges = (payload: AgeState) => {
 export const setColors = (payload: number[]) => {
   return (dispatch: Dispatch<any>) => {
     dispatch({type: SET_COLORS, payload});
+  };
+};
+
+export const setGender = (payload: Gender) => {
+  return (dispatch: Dispatch<any>) => {
+    dispatch({type: SET_GENDER, payload});
+  };
+};
+
+export const setSterilization = (payload: YesNo) => {
+  return (dispatch: Dispatch<any>) => {
+    dispatch({type: SET_STERILIZATION, payload});
   };
 };
 

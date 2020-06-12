@@ -4,37 +4,34 @@ import { Form, Item, Input, Picker, Label, Textarea, View, Button, Text } from '
 
 import ColorsSelect from '../../components/elements/ColorsSelect';
 import AgeSelect from '../../components/elements/AgeSelect';
+import GenderSelect from '../../components/elements/GenderSelect';
+import SterilizationCastrationSelect from '../elements/SterilizationCastrationSelect';
+
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 import { IStateDictionariesReducer, IDictionaryItem } from '../../store/dictionaries';
+import { IStateUserReducer } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
+import { Gender, YesNo } from '../../enum/Form';
 
-interface IProps extends IStateDictionariesReducer {
+interface IProps extends IStateDictionariesReducer, IStateUserReducer {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[]
 }
 
-const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
+const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }) => {
     const [title, setTitle] = useState('');
     const [animal, setAnimal] = useState(1);
     const [colors, setColors] = useState<number[]>([]);
     const [age, setAge] = useState<number>(1);
     const [breed, setBreed] = useState(0);
-    const [phone, setPhone] = useState('');
+    const [phoneinput, setPhone] = useState(phone);
     const [description, setDescription] = useState('');
+    const [gender, setGender] = useState<Gender>(Gender.none);
+    const [sterilization, setSterilization] = useState<YesNo>(YesNo.none);
 
     useEffect(() => {
       setBreed(0);
     }, [animal])
-
-    function getOtions() {
-      let options = [];
-
-      for (let index = 1; index <= 20; index++) {
-          options.push(<Picker.Item key={index} label={index.toString()} value={index} />)
-      }
-
-      return options;
-    }
 
     function createPost() {
 
@@ -76,6 +73,25 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
         </Item>
         <Item style={styles.Item}>
           <Label>
+            Пол
+          </Label>
+          <GenderSelect
+            value={gender}
+            onChange={setGender}
+            animal={animal}
+          />
+        </Item>
+        <Item style={styles.Item}>
+          <Label>
+            Стирилизация/Кастрация
+          </Label>
+          <SterilizationCastrationSelect
+            value={sterilization}
+            onChange={setSterilization}
+          />
+        </Item>
+        <Item style={styles.Item}>
+          <Label>
             Цвет
           </Label>
           <View style={styles.ColorsSelect}>
@@ -99,7 +115,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
             Телефон
           </Label>
           <Input
-            value={phone}
+            value={phoneinput}
             onChangeText={setPhone}
           />
         </Item>
@@ -137,8 +153,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: IState) => {
   const dictionaries = state.dictionaries;
+  const user = state.user;
   return {
     ...dictionaries,
+    ...user,
     getBreedsByAnimal: getBreedsByAnimal(state)
   };
 };
