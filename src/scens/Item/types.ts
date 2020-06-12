@@ -1,4 +1,5 @@
 import { IStateDictionariesReducer, IDictionaryColorItem, IDictionaryItem } from '../../store/dictionaries';
+import { IStateUserReducer } from '../../store/user';
 
 export interface IItem {
     id: number,
@@ -17,4 +18,5 @@ export interface IItem {
 }
 
 export interface IItemProps extends IItem {
+    user: IStateUserReducer
 }

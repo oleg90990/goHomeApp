@@ -13,7 +13,8 @@ import { IProfileProps } from '../scens/Profile/types';
 const scensAuth: Scens[] = [
     Scens.accounnt,
     Scens.profile,
-    Scens.myAds
+    Scens.myAds,
+    Scens.createPost
 ];
 
  async function middlewareAuth(scen: Scens, props: any = {}) {
@@ -56,4 +57,8 @@ export const toLoading = () => {
 
 export const toMyAds = () => {
     middlewareAuth(Scens.myAds);
+}
+
+export const toCreatePost = () => {
+    middlewareAuth(Scens.createPost);
 }

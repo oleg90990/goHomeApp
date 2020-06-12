@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, Dimensions } from "react-native";
-import { Button, Content, Spinner, View, Text } from 'native-base';
+import { StyleSheet, ScrollView } from "react-native";
+import { Button, Spinner, View, Text } from 'native-base';
 import { IMyAdsProps } from "./types";
 import ApiItems from '../../api/apiItems';
 import Item from './components/Item';
 import { IItem } from '../Item/types';
-
-import { connect } from 'react-redux';
-import { IState } from '../../store/types';
+import { toCreatePost } from '../../utilites/appNavigation';
 
 const MyAds: React.FC<IMyAdsProps> = () => {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState<IItem[]>([]);
-
-    function toNewPost() {
-
-    }
 
     useEffect(() => {
         ApiItems.loadMyAds()
@@ -28,7 +22,7 @@ const MyAds: React.FC<IMyAdsProps> = () => {
     return (
         <View style={{flex: 1}}>
             <View style={styles.ButtonBlock}>
-                <Button block onPress={toNewPost} >
+                <Button block onPress={toCreatePost} >
                     <Text>Создать пост</Text>
                 </Button> 
             </View>
@@ -63,7 +57,8 @@ const styles = StyleSheet.create({
         padding: 5
     },
     ButtonBlock: {
-        padding: 5
+        padding: 7,
+        paddingTop: 10
     },
     ScrollView: {
         flex: 1,
@@ -71,8 +66,4 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = (state: IState) => {
-    return state;
-};
-
-export default connect(mapStateToProps, {})(MyAds);
+export default MyAds;

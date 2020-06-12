@@ -7,6 +7,7 @@ import { getColorsByIds, getBreedById } from "../../store/dictionaries/getters";
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
+import { act } from 'react-test-renderer';
 
 const Item: React.FC<IItemProps> = ({
         animal,
@@ -17,14 +18,30 @@ const Item: React.FC<IItemProps> = ({
         breed,
         content,
         phone,
+        user,
+        user_id,
+        active,
         getColorsByIds,
         getBreedById
     }) => {
         const useColors = getColorsByIds(colors);
         const useBreed = getBreedById(breed, animal);
+        const isEdit = user.id === user_id;
 
         function toCall() {
             Linking.openURL(`tel:${phone}`);
+        }
+
+        function toEdit() {
+            
+        }
+
+        function toDisPublish() {
+            
+        }
+
+        function toEnPublish() {
+            
         }
 
         return (
@@ -41,6 +58,24 @@ const Item: React.FC<IItemProps> = ({
                             Позвонить
                         </Text>
                     </Button>
+                    {(isEdit ? <Button warning block onPress={toEdit} style={styles.BtnEdit}>
+                        <Text style={styles.Button}>
+                            Редактировать
+                        </Text>
+                    </Button> : null )}
+                    {(isEdit ? 
+                    ( active ?  
+                        <Button warning block onPress={toDisPublish} style={styles.BtnEdit}>
+                            <Text style={styles.Button}>
+                                Снять с публикации
+                            </Text>
+                        </Button> : 
+                        <Button warning block onPress={toEnPublish} style={styles.BtnEdit}>
+                            <Text style={styles.Button}>
+                                Опубликовать
+                            </Text>
+                        </Button>)
+                    : null )}
                     <List style={{ paddingRight: 20 }}>
                         {( useBreed ? 
                         <ListItem>
@@ -50,8 +85,7 @@ const Item: React.FC<IItemProps> = ({
                             <Text style={styles.Text}>
                                 { useBreed.title }
                             </Text>
-                        </ListItem> : null
-                        )}
+                        </ListItem> : null)}
                         <ListItem>
                             <Text style={[styles.Text, styles.Label]}>
                                 { `Возраст:` }
@@ -118,6 +152,11 @@ const styles = StyleSheet.create({
     BtnCall: {
         margin: 20,
         marginBottom: 10
+    },
+    BtnEdit: {
+        margin: 20,
+        marginTop: 0,
+        marginBottom: 10
     }
 });
 
@@ -125,6 +164,7 @@ const mapStateToProps = (state: IState) => {
     return {
         getColorsByIds: getColorsByIds(state),
         getBreedById: getBreedById(state),
+        user: state.user
     };
 };
 

@@ -1,37 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableNativeFeedback } from "react-native";
-import { Label, View, Card, CardItem, Body } from 'native-base';
+import React from 'react';
+import { StyleSheet } from "react-native";
+import { Label, Card, CardItem, Body } from 'native-base';
+import ColorsSelect from '../../components/elements/ColorsSelect';
 
-import { connect } from 'react-redux';
-import { IState } from '../../store/types';
-import { IStateDictionariesReducer } from '../../store/dictionaries';
-
-interface IColorWidgetsState extends IStateDictionariesReducer {
+interface IColorWidgetsState {
   value: number[],
   onChange: (value: number[]) => void
 }
 
-const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange, dictionaries }) => {
-    function fetchValue(id: number) {
-        const index = value.indexOf(id);
-
-        if (index > -1) {
-            value.splice(index, 1);
-        } else {
-            value.push(id);
-        }
-
-        onChange([...value])
-    }
-
-    function getSelectedStyle(id: number) {
-      const isSelected: boolean = value.indexOf(id) > -1;
-        return {
-          opacity: isSelected ? 1 : 0.5,
-          borderColor: isSelected ? '#4050b4' : '#eee'
-        };
-    } 
-
+const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange }) => {
     return (
         <Card>
             <CardItem header>
@@ -40,15 +17,11 @@ const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange, dictionari
                 </Label>
             </CardItem>
             <CardItem>
-                <Body style={styles.Colors}>
-                    {( dictionaries.colors.map(({ id, value }) => {
-                        return <TouchableNativeFeedback key={id} onPress={() => fetchValue(id)}>
-                            <View style={[styles.ColorContainer, getSelectedStyle(id)]}>
-                                <View style={[styles.Color, { backgroundColor: value }]}>
-                                </View>
-                            </View>
-                        </TouchableNativeFeedback>
-                    }))}
+                <Body>
+                    <ColorsSelect 
+                      value={value}
+                      onChange={onChange}
+                    />
                 </Body>
             </CardItem>
         </Card>
@@ -58,24 +31,7 @@ const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange, dictionari
 const styles = StyleSheet.create({
   Title: {
     fontSize: 18
-  },
-  ColorContainer: {
-    padding: 2,
-    borderWidth: 2,
-    borderColor: '#eee',
-    marginRight: 10,
-  },
-  Color: {
-    width: 40,
-    height: 40,
-  },
-  Colors: {
-    flexDirection: 'row'
   }
 });
 
-const mapStateToProps = ({ dictionaries }: IState) => {
-  return dictionaries;
-};
-  
-export default connect(mapStateToProps, {})(ColorWidget);
+export default ColorWidget;

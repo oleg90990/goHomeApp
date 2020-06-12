@@ -13,3 +13,8 @@ export const getBreedById = ({ dictionaries }: IState) => (breedId: number, anim
     const useAnimal = dictionaries.dictionaries.animals.find(({ id }) => id === animal);
     return useAnimal ? useAnimal.breeds.find(({ id }) => id === breedId) : undefined;
 }
+
+export const getBreedsByAnimal = ({ dictionaries }: IState) => (animal: number): IDictionaryItem[]  => {
+    const useAnimal = dictionaries.dictionaries.animals.find(({ id }) => id === animal);
+    return useAnimal ? useAnimal.breeds : [];
+}
