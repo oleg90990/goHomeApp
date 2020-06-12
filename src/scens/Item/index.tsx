@@ -41,7 +41,7 @@ const Item: React.FC<IItemProps> = ({
                             Позвонить
                         </Text>
                     </Button>
-                    <List style={{ paddingRight: 20}}>
+                    <List style={{ paddingRight: 20 }}>
                         {( useBreed ? 
                         <ListItem>
                             <Text style={[styles.Text, styles.Label]}>

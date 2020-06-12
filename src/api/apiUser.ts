@@ -1,4 +1,5 @@
 import { IStateUserReducer } from '../store/user';
+import {  Toast } from 'native-base';
 
 export default class ApiUser {
     public static login(username: string, password: string): Promise<IStateUserReducer> {
@@ -16,7 +17,7 @@ export default class ApiUser {
                 } else {
                     resolve(d);
                 }
-            }, 2500)
+            }, 500)
         });
     }
 
@@ -30,7 +31,7 @@ export default class ApiUser {
                     jwt: 'wqdqwd'
                 };
                 resolve(d);
-            }, 2500)
+            }, 500)
         });
     }
 }

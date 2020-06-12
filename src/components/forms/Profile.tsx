@@ -16,23 +16,14 @@ const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
   const [password, setPassword] = useState('');
   const [reply_password, setReplyPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   function onSave() {
-    if (password !== reply_password) {
-      setError('Пароли не совпадают');
-    } else {
-      setLoading(true);
-      saveUserData(phoneInput, password, reply_password)
-        .then(() => {
-          toAccounnt();
-          setLoading(false);
-        })
-        .catch(e => {
-          setError(e);
-          setLoading(false);
-        });
-    }
+    setLoading(true);
+    saveUserData(phoneInput, password, reply_password)
+      .then(() => {
+        toAccounnt();
+        setLoading(false);
+      });
   }
 
   return (
@@ -61,7 +52,6 @@ const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
           disabled={loading}
         />
       </Item>
-      {( error ? <Text style={styles.ErrorText}>{ error }</Text> : null )}
       <Button style={styles.Btn} onPress={onSave} disabled={loading}>
         {( loading ? <Spinner color={'white'} /> : <Text>Сохранить</Text> )}
       </Button> 
@@ -77,11 +67,7 @@ const styles = StyleSheet.create({
   },
   Item: {
     marginLeft: 0
-  },
-  ErrorText: {
-    color: 'red',
-    marginTop: 15
-  },
+  }
 });
 
 const mapStateToProps = ({ user }: IState) => {

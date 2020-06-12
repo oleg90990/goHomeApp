@@ -2,22 +2,26 @@ import React from 'react';
 import { CardItem, Text , Card, Left, Body } from 'native-base';
 import { Image, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import { toItem as toItemScen  } from '../../../utilites/appNavigation';
-import { IItemState } from '../../Item';
+import { IItem } from '../../Item/types';
 
 export interface IItemListInterface {
-    item: IItemState
+    item: IItem
 }
 
-const Item: React.FC<IItemListInterface> = (props) => {
-    const { item } = props;
-    
+const Item: React.FC<IItemListInterface> = ({ item }) => { 
     function toItem() {
         toItemScen(item);
     }
 
+    function setActiveStyle() {
+        return {
+            opacity: item.active ? 1 : 0.4
+        }
+    }
+
     return (
         <TouchableNativeFeedback onPress={toItem}>
-            <Card>
+            <Card style={setActiveStyle()}>
                 {( item.images[0] ? <CardItem cardBody>
                     <Image source={{uri: item.images[0] }} style={styles.Image}/>
                 </CardItem> : null)}

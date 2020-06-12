@@ -2,15 +2,13 @@ import React from 'react';
 import { CardItem, Text , Card, Left, Body } from 'native-base';
 import { Image, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import { toItem as toItemScen  } from '../../../utilites/appNavigation';
-import { IItemState } from '../../Item';
+import { IItem } from '../../Item/types';
 
 export interface IItemListInterface {
-    item: IItemState
+    item: IItem
 }
 
-const Item: React.FC<IItemListInterface> = (props) => {
-    const { item } = props;
-    
+const Item: React.FC<IItemListInterface> = ({ item }) => {
     function toItem() {
         toItemScen(item);
     }

@@ -4,7 +4,7 @@ import { Container, Content, Spinner, View } from 'native-base';
 import { ScrollView } from "react-native";
 import Item from './components/Item';
 import { IItemsProps } from "./types";
-import Api from "../../api/apiItems";
+import ApiItems from "../../api/apiItems";
 import { Sortby } from '../../enum/Form';
 import { IItem } from '../Item/types';
 import RNPickerSelect from 'react-native-picker-select';
@@ -24,7 +24,7 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     
     function loadItems() {
         setLoading(true);
-        Api.loadItems(searchForm, sortBy)
+        ApiItems.findItems(searchForm, sortBy)
             .then(items => {
                 setItems(items);
                 setLoading(false);
@@ -34,23 +34,21 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     useEffect(loadItems, [sortBy]);
 
     return (
-        <Container>
-            <Content padder>
-                <View>
-                    <RNPickerSelect
-                        onValueChange={setSortBy}
-                        items={sortByItems}
-                        value={sortBy}
-                    />
-                </View>
-                {( loading ? ( <View style={styles.Spinner}><Spinner/></View> ): 
-                    <ScrollView>
-                        {( items.map((item: any, index) => {
-                            return <Item key={index} item={item} />
-                        }))}
-                    </ScrollView> )}
-            </Content>
-        </Container>
+        <Content padder>
+            <View>
+                <RNPickerSelect
+                    onValueChange={setSortBy}
+                    items={sortByItems}
+                    value={sortBy}
+                />
+            </View>
+            {( loading ? ( <View style={styles.Spinner}><Spinner/></View> ): 
+                <ScrollView>
+                    {( items.map((item: any, index) => {
+                        return <Item key={index} item={item} />
+                    }))}
+                </ScrollView> )}
+        </Content>
     );
 };
 

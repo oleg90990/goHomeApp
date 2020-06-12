@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
-import { Form, Item, Label, Input, Button, Text, Spinner, View } from 'native-base';
+import { Form, Item, Label, Input, Button, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { login  } from '../../store/user/actions';
 import { toAccounnt } from '../../utilites/appNavigation';
@@ -12,7 +12,6 @@ interface ILoginProps {
 const Login: React.FC<ILoginProps> = ({ login }) => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   function toLogin() {
@@ -21,10 +20,10 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
       .then(() => {
         toAccounnt();
         setLoading(false);
-      }).catch(e => {
-        setError(e);
-        setLoading(false);
       })
+      .catch(() => {
+        setLoading(false);
+      });
   }
 
   return (
@@ -46,7 +45,6 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
               secureTextEntry={true}
             />
         </Item>
-        {( error ? <Text style={styles.ErrorText}>{ error }</Text> : null )}
         <Button style={styles.Btn} onPress={toLogin} disabled={loading}>
             {( loading ? <Spinner color={'white'} /> :  <Text>Вход</Text> )}
         </Button> 
@@ -59,10 +57,6 @@ const styles = StyleSheet.create({
   Btn: {
     justifyContent: 'center',
     width: 200,
-    marginTop: 15
-  },
-  ErrorText: {
-    color: 'red',
     marginTop: 15
   },
   Item: {

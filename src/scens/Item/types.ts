@@ -10,6 +10,8 @@ export interface IItem {
     animal: number,
     breed: number,
     phone: string,
+    active: boolean,
+    user_id: number,
     getColorsByIds: (colors: number[]) => IDictionaryColorItem[],
     getBreedById: (breedId: number, animal: number) => IDictionaryItem | undefined 
 }
