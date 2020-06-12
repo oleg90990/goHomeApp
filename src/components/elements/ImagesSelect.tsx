@@ -4,6 +4,8 @@ import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
 import { View, Button, Text, Icon } from 'native-base';
 
 interface IImagesSelectProps  {
+  onChange: (value: string[]) => void,
+  value: string[],
 }
 
 var options = {
@@ -14,23 +16,22 @@ var options = {
   },
 };
 
-const ImagesSelect: React.FC<IImagesSelectProps> = () => {
-    const [resources, setResources] = useState<ImagePickerResponse[]>([]);
+const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
+    value = value ? value : [];
 
-    function addResource(resource: ImagePickerResponse) {
-      setResources([...resources, resource]);
+    function addResource(uri: string) {
+      onChange([...value, uri]);
     }
 
     function removeResource(index: number) {
-      const items = [...resources];
-      items.splice(index, 1);
-      setResources(items);
+      value.splice(index, 1);
+      onChange(value);
     }
 
     function selectFile() {
-      ImagePicker.showImagePicker(options, (res: ImagePickerResponse) => {
-        if (res.uri) {
-          addResource(res);
+      ImagePicker.showImagePicker(options, ({data}: ImagePickerResponse) => {
+        if (data) {
+          addResource('data:image/jpeg;base64,' + data);
         }
       });
     };
@@ -38,7 +39,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = () => {
     return (
         <View>
           <View style={styles.Images}>
-            {( resources.map(({ uri }, key) => {
+            {( value.map((uri, key) => {
                 return <View key={key}>
                   <Icon active name='close' onPress={() => removeResource(key)} style={styles.IconImg} />
                   <Image source={{ uri }} style={styles.Img} />

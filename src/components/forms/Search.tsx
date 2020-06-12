@@ -61,6 +61,7 @@ const Search: React.FC<IProps> = ({
           <SterilizationCastrationSelectWidget
             value={sterilization}
             onChange={setSterilization}
+            gender={gender}
           />
         </View>
         <View style={styles.Item}>

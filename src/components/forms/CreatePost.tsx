@@ -29,13 +29,14 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
     const [description, setDescription] = useState('');
     const [gender, setGender] = useState<Gender>(Gender.none);
     const [sterilization, setSterilization] = useState<YesNo>(YesNo.none);
+    const [images, setImages] = useState<string[]>([]);
 
     useEffect(() => {
       setBreed(0);
     }, [animal])
 
-    function createPost() {
-
+    function onSave() {
+      console.log(images)
     }
 
     return (
@@ -133,10 +134,10 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
           />
         </View>
         <View style={styles.ViewItem}>
-          <ImageSelect />
+          <ImageSelect value={images} onChange={setImages} />
         </View>
         <View style={styles.ViewItem}>
-          <Button block primary onPress={() => {}}>
+          <Button block primary onPress={onSave}>
             <Text>Создать Пост</Text>
           </Button>
         </View>
