@@ -24,8 +24,9 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
     }
 
     function removeResource(index: number) {
-      value.splice(index, 1);
-      onChange(value);
+      let images = [...value];
+      images.splice(index, 1);
+      onChange(images);
     }
 
     function selectFile() {
@@ -41,7 +42,13 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
           <View style={styles.Images}>
             {( value.map((uri, key) => {
                 return <View key={key}>
-                  <Icon active name='close' onPress={() => removeResource(key)} style={styles.IconImg} />
+                  <Icon
+                    active
+                    name='close'
+                    color={'white'}
+                    onPress={() => removeResource(key)}
+                    style={styles.IconImg}
+                  />
                   <Image source={{ uri }} style={styles.Img} />
                 </View>
               }) )}
@@ -55,7 +62,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
 
 const styles = StyleSheet.create({
   AddBtn: {
-    width: 180
+    width: 220
   },
   Img: {
     width: 80,
@@ -73,7 +80,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     right: 15,
-    top: 5
+    top: 0
   }
 });
 
