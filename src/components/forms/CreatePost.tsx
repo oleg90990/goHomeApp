@@ -41,7 +41,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
 
     return (
       <Form>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Заголовок
           </Label>
@@ -50,11 +50,13 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             onChangeText={setTitle}
           />
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Животное
           </Label>
-          <Picker mode="dropdown"
+          <Picker
+            style={{width: '100%'}}
+            mode="dropdown"
             onValueChange={setAnimal}
             selectedValue={animal}
           >
@@ -63,17 +65,17 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             }) )}
           </Picker>
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Порода
           </Label>
-          <Picker onValueChange={setBreed} selectedValue={breed} >
-            { getBreedsByAnimal(animal).map((breed, index) => {
-              return <Picker.Item key={index} label={breed.title.toString()} value={breed.id} />
+          <Picker style={{width: '100%'}} onValueChange={setBreed} selectedValue={breed} >
+            { getBreedsByAnimal(animal).map(({title, id}, index) => {
+              return <Picker.Item key={index} label={title.toString()} value={id} />
             })}
           </Picker>
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Пол
           </Label>
@@ -83,7 +85,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             animal={animal}
           />
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             {(gender === Gender.male ? 'Кастрация' : '')}
             {(gender === Gender.female ? 'Стирилизация' : '')}
@@ -94,7 +96,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             onChange={setSterilization}
           />
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Цвет
           </Label>
@@ -105,16 +107,17 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             />
           </View>
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Возраст
           </Label>
           <AgeSelect
+            style={{width: '100%'}}
             value={age}
             onChange={setAge}
           />
         </Item>
-        <Item style={styles.Item}>
+        <Item stackedLabel style={styles.Item}>
           <Label>
             Телефон
           </Label>
@@ -123,16 +126,17 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             onChangeText={setPhone}
           />
         </Item>
-        <View style={styles.ViewItem}>
+        <Item style={[styles.Item, styles.ViewItem]}>
           <Textarea
             underline
             bordered={false}
             rowSpan={8}
             value={description}
             onChangeText={setDescription}
+            style={{width: '100%'}}
             placeholder="Описание"
           />
-        </View>
+        </Item>
         <View style={styles.ViewItem}>
           <ImageSelect value={images} onChange={setImages} />
         </View>
@@ -151,7 +155,10 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   ColorsSelect: {
-    margin: 10,
+    margin: 15,
+    paddingLeft: 10,
+    display: 'flex',
+    width: '100%'
   },
   Item: {
     marginLeft: 0

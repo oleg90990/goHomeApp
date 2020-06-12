@@ -8,7 +8,7 @@ interface ISterilizationCastrationSelectProps  {
 }
 
 const SterilizationCastrationSelect: React.FC<ISterilizationCastrationSelectProps> = ({ onChange, value }) => {
-    return (<Picker note mode="dropdown" selectedValue={value} onValueChange={(onChange)} >
+    return (<Picker style={{width: '100%'}} mode="dropdown" selectedValue={value} onValueChange={(onChange)} >
             <Picker.Item key={YesNo.yes} label={'Да'} value={YesNo.yes} />
             <Picker.Item key={YesNo.no} label={'Нет'} value={YesNo.no} />
             <Picker.Item key={YesNo.none} label={'Не выбрано'} value={YesNo.none} />

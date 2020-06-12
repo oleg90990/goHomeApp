@@ -19,7 +19,7 @@ const GenderSelect: React.FC<IGenderSelectProps> = ({ onChange, value, animal, g
     const genders = animalSelected ? animalSelected.genders : undefined;
 
     return (genders ? 
-        <Picker note mode="dropdown" selectedValue={value} onValueChange={onChange} >
+        <Picker style={{width: '100%'}} mode="dropdown" selectedValue={value} onValueChange={onChange} >
             <Picker.Item key={Gender.male} label={genders[Gender.male]} value={Gender.male} />
             <Picker.Item key={Gender.female} label={genders[Gender.female]} value={Gender.female} />
             <Picker.Item key={Gender.none} label={genders[Gender.none]} value={Gender.none} />

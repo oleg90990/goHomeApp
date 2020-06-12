@@ -38,26 +38,26 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
     };
 
     return (
-        <View>
-          <View style={styles.Images}>
-            {( value.map((uri, key) => {
-                return <View key={key}>
-                  <Icon
-                    active
-                    name='close'
-                    color={'white'}
-                    onPress={() => removeResource(key)}
-                    style={styles.IconImg}
-                  />
-                  <Image source={{ uri }} style={styles.Img} />
-                </View>
-              }) )}
-          </View> 
-          <Button block  onPress={selectFile} style={styles.AddBtn}  >
-              <Text>Добавить файл</Text>
-          </Button>       
-        </View>
-      );
+      <View>
+        <View style={styles.Images}>
+          {( value.map((uri, key) => {
+              return <View key={key}>
+                <Icon
+                  active
+                  name='close'
+                  color={'white'}
+                  onPress={() => removeResource(key)}
+                  style={styles.IconImg}
+                />
+                <Image source={{ uri }} style={styles.Img} />
+              </View>
+            }) )}
+        </View> 
+        <Button block  onPress={selectFile} style={styles.AddBtn}  >
+            <Text>Добавить файл</Text>
+        </Button>       
+      </View>
+    );
 };
 
 const styles = StyleSheet.create({

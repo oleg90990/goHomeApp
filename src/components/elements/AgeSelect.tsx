@@ -6,10 +6,11 @@ interface IAgeSelectProps  {
   onChange: (value: number) => void,
   value: number,
   from?: number,
-  to?: number
+  to?: number,
+  style?: any
 }
 
-const AgeSelect: React.FC<IAgeSelectProps> = ({ onChange, value, from, to }) => {
+const AgeSelect: React.FC<IAgeSelectProps> = ({ onChange, value, from, to, style }) => {
     function getOtions() {
         let options = [];
 
@@ -21,7 +22,7 @@ const AgeSelect: React.FC<IAgeSelectProps> = ({ onChange, value, from, to }) => 
     }
 
     return (
-        <Picker note mode="dropdown" selectedValue={value} onValueChange={(onChange)} >
+        <Picker style={style ? style : {}} mode="dropdown" selectedValue={value} onValueChange={(onChange)} >
             { getOtions() }
         </Picker>
     );
