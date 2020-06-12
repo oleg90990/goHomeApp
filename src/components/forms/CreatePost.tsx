@@ -6,6 +6,7 @@ import ColorsSelect from '../../components/elements/ColorsSelect';
 import AgeSelect from '../../components/elements/AgeSelect';
 import GenderSelect from '../../components/elements/GenderSelect';
 import SterilizationCastrationSelect from '../elements/SterilizationCastrationSelect';
+import ImageSelect from '../elements/ImagesSelect';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
@@ -83,7 +84,9 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
         </Item>
         <Item style={styles.Item}>
           <Label>
-            Стирилизация/Кастрация
+            {(gender === Gender.male ? 'Кастрация' : '')}
+            {(gender === Gender.female ? 'Стирилизация' : '')}
+            {(gender == Gender.none ? ' Стирилизация/Кастрация' : '')}
           </Label>
           <SterilizationCastrationSelect
             value={sterilization}
@@ -119,17 +122,20 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
             onChangeText={setPhone}
           />
         </Item>
-        <View>
+        <View style={styles.ViewItem}>
           <Textarea
             underline
             bordered={false}
-            rowSpan={5}
+            rowSpan={8}
             value={description}
             onChangeText={setDescription}
             placeholder="Описание"
           />
         </View>
-        <View>
+        <View style={styles.ViewItem}>
+          <ImageSelect />
+        </View>
+        <View style={styles.ViewItem}>
           <Button block primary onPress={() => {}}>
             <Text>Создать Пост</Text>
           </Button>
@@ -148,6 +154,9 @@ const styles = StyleSheet.create({
   },
   Item: {
     marginLeft: 0
+  },
+  ViewItem: {
+    marginBottom: 20
   }
 });
 
