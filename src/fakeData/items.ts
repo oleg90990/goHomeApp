@@ -10,6 +10,8 @@ export default [
         phone: '123456789',
         active: true,
         user_id: 4,
+        gender: 'female',
+        sterilization: '1',
         images: [
             'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
             'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
@@ -27,6 +29,8 @@ export default [
         active: true,
         colors: [1,3,5],
         user_id: 1,
+        gender: 'female',
+        sterilization: '1',
         images: [
             'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
             'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
@@ -43,7 +47,9 @@ export default [
         colors: [2,4],
         phone: '123456789',
         active: false,
+        gender: 'male',
         user_id: 2,
+        sterilization: '0',
         images: [
             'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
             'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
@@ -61,6 +67,8 @@ export default [
         phone: '123456789',
         active: false,
         user_id: 2,
+        gender: '_none',
+        sterilization: '1',
         images: [
             'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
             'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',
@@ -78,6 +86,8 @@ export default [
         phone: '123456789',
         active: false,
         user_id: 2,
+        gender: '_none',
+        sterilization: '_none',
         images: [
             'https://i.ytimg.com/vi/GUt0sQQR-T8/maxresdefault.jpg',
             'https://img-fotki.yandex.ru/get/6205/87597588.a/0_95cc9_e4c92704_L.jpg',

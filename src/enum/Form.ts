@@ -9,9 +9,8 @@ export enum Gender {
     none = '_none'
 }
 
-
 export enum YesNo {
-    yes = 'yes',
-    no = 'no',
+    yes = '1',
+    no = '0',
     none = '_none'
 }

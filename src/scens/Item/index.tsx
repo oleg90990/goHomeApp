@@ -1,13 +1,15 @@
 import React from 'react';
-import { Container, Content, View, List, ListItem, Button, Icon } from 'native-base';
+import { Left, Body, Content, View, List, ListItem, Button, Icon } from 'native-base';
 import { SliderBox } from "react-native-image-slider-box";
-import { StyleSheet, Text, Linking} from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { IItemProps } from "./types";
-import { getColorsByIds, getBreedById } from "../../store/dictionaries/getters";
+import { getColorsByIds, getBreedById, getAnimalById } from "../../store/dictionaries/getters";
+import Actions from './components/Actions';
+import { getLabelSterilization, getLabelYesNo } from '../../helpers/Labels';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { act } from 'react-test-renderer';
+import { YesNo } from 'src/enum/Form';
 
 const Item: React.FC<IItemProps> = ({
         animal,
@@ -17,113 +19,113 @@ const Item: React.FC<IItemProps> = ({
         colors,
         breed,
         content,
-        phone,
-        user,
         user_id,
+        phone,
         active,
+        gender,
+        sterilization,
         getColorsByIds,
-        getBreedById
+        getBreedById,
+        getAnimalById
     }) => {
         const useColors = getColorsByIds(colors);
         const useBreed = getBreedById(breed, animal);
-        const isEdit = user.id === user_id;
-
-        function toCall() {
-            Linking.openURL(`tel:${phone}`);
-        }
-
-        function toEdit() {
-            
-        }
-
-        function toDisPublish() {
-            
-        }
-
-        function toEnPublish() {
-            
-        }
+        const useAnimal = getAnimalById(animal);
 
         return (
-            <Container>
-                <Content>
-                    <SliderBox sliderBoxHeight={300} images={images} />
-                    <View style={[styles.ViewTitle, styles.View]}>
-                        <Text style={styles.Title}>
-                            { title }
-                        </Text>
-                    </View>
-                    <Button primary block onPress={toCall} style={styles.BtnCall}>
-                        <Text style={styles.Button}>
-                            Позвонить
-                        </Text>
-                    </Button>
-                    {(isEdit ? <Button warning block onPress={toEdit} style={styles.BtnEdit}>
-                        <Text style={styles.Button}>
-                            Редактировать
-                        </Text>
-                    </Button> : null )}
-                    {(isEdit ? 
-                    ( active ?  
-                        <Button warning block onPress={toDisPublish} style={styles.BtnEdit}>
-                            <Text style={styles.Button}>
-                                Снять с публикации
-                            </Text>
-                        </Button> : 
-                        <Button warning block onPress={toEnPublish} style={styles.BtnEdit}>
-                            <Text style={styles.Button}>
-                                Опубликовать
-                            </Text>
-                        </Button>)
-                    : null )}
-                    <List style={{ paddingRight: 20 }}>
+            <Content>
+                <SliderBox sliderBoxHeight={300} images={images} />
+                <View padder>
+                    <Actions phone={ phone } user_id={user_id} active={active} />
+
+                    <Text style={styles.Title}>
+                        { title }
+                    </Text>
+
+                    <List style={{ marginLeft: -20 }}>
                         {( useBreed ? 
                         <ListItem>
-                            <Text style={[styles.Text, styles.Label]}>
-                                { `Порода:` }
-                            </Text>
-                            <Text style={styles.Text}>
-                                { useBreed.title }
-                            </Text>
+                            <Left>
+                                <Text style={styles.Text}>
+                                    Порода:
+                                </Text>
+                            </Left>
+                            <Body>
+                                <Text style={styles.Text}>
+                                    { useBreed.title }
+                                </Text>
+                            </Body>
                         </ListItem> : null)}
                         <ListItem>
-                            <Text style={[styles.Text, styles.Label]}>
-                                { `Возраст:` }
-                            </Text>
-                            <Text style={styles.Text}>
-                                { age }
-                            </Text>
+                            <Left>
+                                <Text style={styles.Text}>
+                                    Возраст:
+                                </Text>
+                            </Left>
+                            <Body>
+                                <Text style={styles.Text}>
+                                    { age }
+                                </Text>
+                            </Body>
                         </ListItem>
                         <ListItem>
-                            <Text style={[styles.Text, styles.Label]}>
-                                { `Цвет:` }
-                            </Text>
-                            { useColors.map((color, key) => {
-                                return <View key={key} style={[styles.Color, { backgroundColor: color.value }]} />
-                            })}
+                            <Left>
+                                <Text style={styles.Text}>
+                                    Пол:
+                                </Text>
+                            </Left>
+                            <Body>
+                                <Text style={styles.Text}>
+                                    { useAnimal ? useAnimal.genders[gender] : 'Неизвестно' }
+                                </Text>
+                            </Body>
+                        </ListItem>
+                        <ListItem>
+                            <Left>
+                                <Text style={styles.Text}>
+                                    { getLabelSterilization(gender) }
+                                </Text>
+                            </Left>
+                            <Body>
+                                <Text style={styles.Text}>
+                                    { getLabelYesNo(sterilization) }
+                                </Text>
+                            </Body>
+                        </ListItem>
+                        <ListItem>
+                            <Left>
+                                <Text style={styles.Text}>
+                                    Цвет:
+                                </Text>
+                            </Left>
+                            <Body>
+                                <View style={styles.Colors}>
+                                    { useColors.map((color, key) => {
+                                        return <View key={key} style={[styles.Color, { backgroundColor: color.value }]} />
+                                    })}
+                                </View>
+                            </Body>
+                        </ListItem>
+                        <ListItem>
+                            <Body>
+                                <Text style={styles.Text}>
+                                    { content }
+                                </Text>
+                            </Body>
                         </ListItem>
                     </List>
-
-                    <View style={[styles.View, styles.Footer]}>
-                        <Text style={[styles.Text, styles.Content]}>
-                        { content }
-                        </Text>
-                    </View>
-                </Content>
-            </Container>
+                </View>
+            </Content>
         );
 };
 
 const styles = StyleSheet.create({
-    Button: {
-        color: 'white'
+    Title: {
+        fontSize: 24
     },
-    ViewTitle: {
-        marginBottom: -10
-    },
-    View: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
+    Colors: {
+        display: 'flex',
+        flexDirection: 'row'
     },
     Color: {
         width: 25,
@@ -132,31 +134,6 @@ const styles = StyleSheet.create({
     },
     Text: {
         fontSize: 18
-    },
-    Label: {
-        marginRight: 10
-    },
-    Title: {
-        fontSize: 24,
-        marginBottom: 0
-    },
-    ListItem: {
-        padding: 0
-    },
-    Content: {
-        marginBottom: 20
-    },
-    Footer: {
-        marginBottom: 15
-    },
-    BtnCall: {
-        margin: 20,
-        marginBottom: 10
-    },
-    BtnEdit: {
-        margin: 20,
-        marginTop: 0,
-        marginBottom: 10
     }
 });
 
@@ -164,7 +141,7 @@ const mapStateToProps = (state: IState) => {
     return {
         getColorsByIds: getColorsByIds(state),
         getBreedById: getBreedById(state),
-        user: state.user
+        getAnimalById: getAnimalById(state)
     };
 };
 

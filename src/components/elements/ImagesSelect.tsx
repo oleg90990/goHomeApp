@@ -46,14 +46,14 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
                   active
                   name='close'
                   color={'white'}
+                  style={styles.Icon}
                   onPress={() => removeResource(key)}
-                  style={styles.IconImg}
                 />
                 <Image source={{ uri }} style={styles.Img} />
               </View>
             }) )}
         </View> 
-        <Button block  onPress={selectFile} style={styles.AddBtn}  >
+        <Button block onPress={selectFile} style={styles.AddBtn}  >
             <Text>Добавить файл</Text>
         </Button>       
       </View>
@@ -62,7 +62,8 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
 
 const styles = StyleSheet.create({
   AddBtn: {
-    width: 220
+    width: 220,
+    marginTop: 10
   },
   Img: {
     width: 80,
@@ -76,11 +77,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  IconImg: {
+  Icon: {
+    color: 'white',
+    fontSize: 20,
+    backgroundColor: '#3FB56F',
     position: 'absolute',
     zIndex: 1,
     right: 15,
-    top: 0
+    top: 5,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    paddingHorizontal: 6,
+    paddingVertical: 2
   }
 });
 

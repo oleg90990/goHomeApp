@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Label, Card, CardItem, Body, View } from 'native-base';
 import { YesNo, Gender } from '../../enum/Form';
 import SterilizationCastrationSelect from '../../components/elements/SterilizationCastrationSelect';
+import { getLabelSterilization } from '../../helpers/Labels';
 
 interface ISterilizationCastrationSelectWidgetProps {
     value: YesNo,
@@ -14,9 +15,7 @@ const GenderSelectWidget: React.FC<ISterilizationCastrationSelectWidgetProps> = 
     return (<Card>
             <CardItem header>
                 <Label style={styles.Title}>
-                    {(gender === Gender.male ? 'Кастрация' : '')}
-                    {(gender === Gender.female ? 'Стирилизация' : '')}
-                    {(!gender || gender == Gender.none ? ' Стирилизация/Кастрация' : '')}
+                    { getLabelSterilization(gender) }
                 </Label>
             </CardItem>
             <CardItem>

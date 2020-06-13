@@ -14,6 +14,7 @@ import { IStateDictionariesReducer, IDictionaryItem } from '../../store/dictiona
 import { IStateUserReducer } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
 import { Gender, YesNo } from '../../enum/Form';
+import { getLabelSterilization } from '../../helpers/Labels';
 
 interface IProps extends IStateDictionariesReducer, IStateUserReducer {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[]
@@ -87,9 +88,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }
         </Item>
         <Item stackedLabel style={styles.Item}>
           <Label>
-            {(gender === Gender.male ? 'Кастрация' : '')}
-            {(gender === Gender.female ? 'Стирилизация' : '')}
-            {(gender == Gender.none ? ' Стирилизация/Кастрация' : '')}
+             { getLabelSterilization(gender) }
           </Label>
           <SterilizationCastrationSelect
             value={sterilization}

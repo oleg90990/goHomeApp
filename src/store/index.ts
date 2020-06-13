@@ -1,10 +1,14 @@
-import { combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import searchForm from './searchForm';
 import dictionaries from './dictionaries';
 import user from './user';
 
-export default combineReducers({
+const rootReducer = combineReducers({
     searchForm,
     dictionaries,
     user
 });
+
+export const store = createStore(rootReducer);
+
+export default rootReducer;

@@ -1,5 +1,6 @@
-import { IStateDictionariesReducer, IDictionaryColorItem, IDictionaryItem } from '../../store/dictionaries';
+import { IDictionaryColorItem, IDictionaryItem, IDictionaryAnimalType } from '../../store/dictionaries';
 import { IStateUserReducer } from '../../store/user';
+import { Gender, YesNo } from '../../enum/Form';
 
 export interface IItem {
     id: number,
@@ -13,10 +14,13 @@ export interface IItem {
     phone: string,
     active: boolean,
     user_id: number,
-    getColorsByIds: (colors: number[]) => IDictionaryColorItem[],
-    getBreedById: (breedId: number, animal: number) => IDictionaryItem | undefined 
+    gender: Gender,
+    sterilization: YesNo
 }
 
 export interface IItemProps extends IItem {
-    user: IStateUserReducer
+    user: IStateUserReducer,
+    getColorsByIds: (colors: number[]) => IDictionaryColorItem[],
+    getBreedById: (breedId: number, animal: number) => IDictionaryItem | undefined,
+    getAnimalById: (animalId: number) => IDictionaryAnimalType | undefined
 }
