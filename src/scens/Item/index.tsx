@@ -83,7 +83,7 @@ const Item: React.FC<IItemProps> = ({
                         <ListItem>
                             <Left>
                                 <Text style={styles.Text}>
-                                    { getLabelSterilization(gender) }
+                                    { getLabelSterilization(gender) }:
                                 </Text>
                             </Left>
                             <Body>

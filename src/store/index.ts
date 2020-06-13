@@ -3,12 +3,8 @@ import searchForm from './searchForm';
 import dictionaries from './dictionaries';
 import user from './user';
 
-const rootReducer = combineReducers({
+export default combineReducers({
     searchForm,
     dictionaries,
     user
 });
-
-export const store = createStore(rootReducer);
-
-export default rootReducer;
