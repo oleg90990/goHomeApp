@@ -121,7 +121,7 @@ const Item: React.FC<IItemProps> = ({
 
 const styles = StyleSheet.create({
     Title: {
-        fontSize: 24
+        fontSize: 22
     },
     Colors: {
         display: 'flex',
