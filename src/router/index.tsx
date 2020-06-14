@@ -11,6 +11,7 @@ import Loading from '../scens/Loading';
 import Profile from '../scens/Profile';
 import MyAds from '../scens/MyAds';
 import CeratePost from '../scens/CreatePost';
+import Register from '../scens/Register';
 
 import Layout from "../components/layout/Index";
 
@@ -40,6 +41,7 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
               <Scene key={Scens.profile} component={Profile} title="Профиль" />
               <Scene key={Scens.myAds} component={MyAds} title="Мои объявления" />
               <Scene key={Scens.createPost} component={CeratePost} title="Новый пост" />
+              <Scene key={Scens.register} component={Register} title="Регистрация" />
           </Scene>
       </Router>
     </Layout>

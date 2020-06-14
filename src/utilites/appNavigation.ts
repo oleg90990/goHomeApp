@@ -62,3 +62,7 @@ export const toMyAds = () => {
 export const toCreatePost = () => {
     middlewareAuth(Scens.createPost);
 }
+
+export const toRegister = () => {
+    middlewareAuth(Scens.register);
+}

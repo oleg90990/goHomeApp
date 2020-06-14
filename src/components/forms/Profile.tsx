@@ -13,14 +13,15 @@ interface IProps {
 }
 
 const Profile: React.FC<IProps> = ({ user, saveUserData }) => {
-  const [nameInput, setName] = useState(user.name);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [reply_password, setReplyPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   function onSave() {
     setLoading(true);
-    saveUserData(nameInput, password, reply_password)
+    saveUserData(name, password, reply_password)
       .then(() => {
         toAccounnt();
         setLoading(false);
@@ -32,7 +33,15 @@ const Profile: React.FC<IProps> = ({ user, saveUserData }) => {
       <Item stackedLabel style={styles.Item}>
         <Label>Имя</Label>
         <Input
-          value={nameInput}
+          value={name}
+          onChangeText={setName}
+          disabled={loading}
+        />
+      </Item>
+      <Item stackedLabel style={styles.Item}>
+        <Label>Email</Label>
+        <Input
+          value={email}
           onChangeText={setName}
           disabled={loading}
         />

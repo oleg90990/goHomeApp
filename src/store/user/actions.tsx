@@ -6,7 +6,7 @@ import Auth from '../../utilites/auth';
 export const login = (email: string, password: string) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { access_token, user } = await API.login(email, password);
+      const { data: { user, access_token } } = await API.login(email, password);
       await Auth.setUser(user);
       await Auth.setToken(access_token);
       dispatch({type: SET_TOKEN, payload: access_token });

@@ -7,7 +7,8 @@ export enum Scens {
     loading = 'loading',
     profile = 'profile',
     myAds = 'myAds',
-    createPost = 'createPost'
+    createPost = 'createPost',
+    register = 'register'
 }
 
 export default Scens;
