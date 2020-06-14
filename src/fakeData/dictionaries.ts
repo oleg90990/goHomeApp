@@ -12,7 +12,7 @@ const val: IStateDictionaries = {
             genders: {
                 male: 'Кот',
                 female: 'Кошка',
-                _none: 'Не выбрано',
+                _none: 'Неизвестно',
             }
         },
         {
@@ -23,7 +23,7 @@ const val: IStateDictionaries = {
             genders: {
                 male: 'Кабель',
                 female: 'Сука',
-                _none: 'Не выбрано',
+                _none: 'Неизвестно',
             }
         }
     ],

@@ -28,7 +28,7 @@ const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
 
   return (
     <Form>
-      <Item style={styles.Item}>
+      <Item stackedLabel style={styles.Item}>
         <Label>Номер телефона</Label>
         <Input
           value={phoneInput}
@@ -36,7 +36,7 @@ const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
           disabled={loading}
         />
       </Item>
-      <Item style={styles.Item}>
+      <Item stackedLabel style={styles.Item}>
         <Label>Новый пароль</Label>
         <Input
           secureTextEntry={true}
@@ -44,7 +44,7 @@ const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
           disabled={loading}
         />
       </Item>
-      <Item style={styles.Item}>
+      <Item stackedLabel style={styles.Item}>
         <Label>Повторите пароль</Label>
         <Input
           secureTextEntry={true}

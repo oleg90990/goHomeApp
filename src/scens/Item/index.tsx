@@ -5,7 +5,7 @@ import { StyleSheet, Text } from "react-native";
 import { IItemProps } from "./types";
 import { getColorsByIds, getBreedById, getAnimalById } from "../../store/dictionaries/getters";
 import Actions from './components/Actions';
-import { getLabelSterilization, getLabelYesNo } from '../../helpers/Labels';
+import { getLabelSterilization, getLabelYesNo, getLabelAge } from '../../helpers/Labels';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
@@ -64,7 +64,7 @@ const Item: React.FC<IItemProps> = ({
                             </Left>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { age }
+                                    { age } { getLabelAge(age) }
                                 </Text>
                             </Body>
                         </ListItem>
