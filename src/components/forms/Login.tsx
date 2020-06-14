@@ -4,6 +4,7 @@ import { Form, Item, Label, Input, Button, Text, Spinner, View } from 'native-ba
 import { connect } from 'react-redux';
 import { login  } from '../../store/user/actions';
 import { toAccounnt, toRegister } from '../../utilites/appNavigation';
+import Toast from '../../utilites/toastr';
 
 interface ILoginProps {
   login: (email: string, password: string) => Promise<any>
@@ -18,6 +19,7 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
     setLoading(true);
     login(email, password)
       .then(() => {
+        Toast.success('Добро пожаловать!');
         toAccounnt();
         setLoading(false);
       })
@@ -29,7 +31,7 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
   return (
     <Form >
         <Item inlineLabel style={styles.Item}>
-            <Label>Имя</Label>
+            <Label>Email</Label>
             <Input
               value={email}
               onChangeText={setEmail}
@@ -47,7 +49,7 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
         </Item>
         <View style={styles.Actions}>
           <Button style={styles.BtnLogin} block onPress={toLogin} disabled={loading}>
-              {( loading ? <Spinner color={'white'} /> :  <Text>Вход</Text> )}
+              {( loading ? <Spinner color={'white'} /> : <Text>Вход</Text> )}
           </Button>
           <Text style={styles.BtnRegister} onPress={toRegister}>
              Регистрация

@@ -4,24 +4,20 @@ import { AxiosResponse } from 'axios';
 
 export default class ApiUser {
     public static async login(email: string, password: string): Promise<AxiosResponse<IStateUserReducer>> {
-        return Axios.post('login', {
+        return Axios.post('user/login', {
             email, password
         });
     }
 
-    public static async saveUserData(phone?: string, password?: string, replyPassword?: string): Promise<IUser> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                const d: IUser = {
-                    "id": 2,
-                    "name": "Вася петров",
-                    "email": "qwd2@wqdq.com",
-                    "email_verified_at": null,
-                    "created_at": "2020-06-14T11:18:40.000000Z",
-                    "updated_at": "2020-06-14T11:18:40.000000Z"
-                };
-                resolve(d);
-            }, 500)
+    public static async register(email: string, name: string, password: string, c_password: string): Promise<AxiosResponse<IStateUserReducer>> {
+        return Axios.post('user/register', {
+            email, name, password, c_password
+        });
+    }
+
+    public static async update(email: string, name: string, password?: string, c_password?: string): Promise<AxiosResponse<IUser>> {
+        return Axios.post('user/update', {
+            email, name, password, c_password
         });
     }
 }

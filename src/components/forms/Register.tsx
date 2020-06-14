@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Form, Item, Label, Input, Button, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
-import { login  } from '../../store/user/actions';
+import { register } from '../../store/user/actions';
 import { toAccounnt } from '../../utilites/appNavigation';
+import Toast from '../../utilites/toastr';
 
 interface IRegisterProps {
-  login: (email: string, password: string) => Promise<any>
+  register: (email: string, name: string, password: string, c_password: string) => Promise<any>
 }
 
-const Register: React.FC<IRegisterProps> = ({ login }) => {
+const Register: React.FC<IRegisterProps> = ({ register }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,14 +19,15 @@ const Register: React.FC<IRegisterProps> = ({ login }) => {
 
   function toRegister() {
     setLoading(true);
-    // login(email, password)
-    //   .then(() => {
-    //     toAccounnt();
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
+    register(email, name, password, c_password)
+      .then(() => {
+        Toast.success('Добро пожаловать!');
+        toAccounnt();
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }
 
   return (
@@ -84,5 +86,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(null, {
-  login
+  register
 })(Register);

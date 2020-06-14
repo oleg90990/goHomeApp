@@ -1,38 +1,37 @@
 import axios from 'axios';
 import Toast from './toastr'
+import Auth from '../utilites/auth'
 
 let axiosBase = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/v1/',
+  baseURL: 'https://friendshome.ru/api/v1/',
 });
 
 axiosBase.interceptors.request.use(
-  config => {
-    // console.log(config)
-    // config.headers['Accept'] = 'application/json';
-    // config.headers.Authorization = `Bearer ${Vue.cookie.get('Bearer')}`;
+  async config => {
+    config.headers.Authorization = `Bearer ${await Auth.getToken()}`;
     return config;
   },
   error => {
-    console.log(122112)
     return error;
   },
 );
 
 axiosBase.interceptors.response.use(
   config => {
-    // console.log(config)
-    // config.headers['Accept'] = 'application/json';
-    // config.headers.Authorization = `Bearer ${Vue.cookie.get('Bearer')}`;
     return config;
   },
   (error) => {
+    console.log(error.response.data)
     const { response } = error;
     const { data } = response;
 
     if (data.errors) {
-      Object.keys(data.errors).map(error => {
-        Toast.error(data.errors[error]);
-      });
+      const messages: string = Object.keys(data.errors)
+        .map(key => data.errors[key]).join('\n');
+
+      Toast.error(messages);
+    } else if (data.message) {
+      Toast.error(data.message);
     }
 
     return error;

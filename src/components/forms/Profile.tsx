@@ -4,28 +4,37 @@ import { Form, Item, Label, Input, Button, Spinner, Text } from 'native-base';
 import { toAccounnt } from '../../utilites/appNavigation'
 import { connect } from 'react-redux';
 import { IUser } from '../../store/user';
-import { saveUserData } from '../../store/user/actions';
+import { update } from '../../store/user/actions';
 import { IState } from '../../store/types';
+import Toast from '../../utilites/toastr';
 
 interface IProps {
   user: IUser,
-  saveUserData: (phone: string, newPassword?: string, replyPassword?: string ) => Promise<any>
+  update: (email: string, name: string, password?: string, c_password?: string) => Promise<any>
 }
 
-const Profile: React.FC<IProps> = ({ user, saveUserData }) => {
+const Profile: React.FC<IProps> = ({ user, update }) => {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
-  const [reply_password, setReplyPassword] = useState('');
+  const [c_password, setCPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   function onSave() {
     setLoading(true);
-    saveUserData(name, password, reply_password)
-      .then(() => {
-        toAccounnt();
-        setLoading(false);
-      });
+    update(
+      email,
+      name,
+      password,
+      c_password
+    ).then(() => {
+      Toast.success('Успешно обновлено');
+      toAccounnt();
+      setLoading(false);
+    })
+    .catch(() => {
+      setLoading(false);
+    });
   }
 
   return (
@@ -42,13 +51,14 @@ const Profile: React.FC<IProps> = ({ user, saveUserData }) => {
         <Label>Email</Label>
         <Input
           value={email}
-          onChangeText={setName}
+          onChangeText={setEmail}
           disabled={loading}
         />
       </Item>
       <Item stackedLabel style={styles.Item}>
         <Label>Новый пароль</Label>
         <Input
+          value={password}
           secureTextEntry={true}
           onChangeText={setPassword}
           disabled={loading}
@@ -57,8 +67,9 @@ const Profile: React.FC<IProps> = ({ user, saveUserData }) => {
       <Item stackedLabel style={styles.Item}>
         <Label>Повторите пароль</Label>
         <Input
+          value={c_password}
           secureTextEntry={true}
-          onChangeText={setReplyPassword}
+          onChangeText={setCPassword}
           disabled={loading}
         />
       </Item>
@@ -85,5 +96,5 @@ const mapStateToProps = ({ user: { user }}: IState) => {
 };
 
 export default connect(mapStateToProps, {
-  saveUserData
+  update
 })(Profile);

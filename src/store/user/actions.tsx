@@ -18,11 +18,31 @@ export const login = (email: string, password: string) => {
   };
 };
 
-export const saveUserData = (phone: string, newPassword?: string, replyPassword?: string ) => {
+export const register = (email: string, name: string, password: string, c_password: string) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const user = await API.saveUserData(phone, newPassword, replyPassword)
+      const { data: { user, access_token } } = await API.register(
+        email, name, password, c_password
+      );
+
+      await Auth.setUser(user);
+      await Auth.setToken(access_token);
+      dispatch({type: SET_TOKEN, payload: access_token });
       dispatch({type: SET_USER, payload: user });
+    }
+    catch (e) {
+      throw e;
+    }
+  };
+};
+
+
+export const update = (email: string, name: string, password?: string, c_password?: string) => {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const { data } = await API.update(email, name, password, c_password);
+      await Auth.setUser(data);
+      dispatch({type: SET_USER, payload: data });
     }
     catch (e) {
       throw e;
