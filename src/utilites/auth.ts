@@ -1,23 +1,23 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { IStateUserReducer } from '../store/user';
+import { IUser } from '../store/user';
 
 export default {
-    setJwt: async (jwt: string) => {
-        await AsyncStorage.setItem('jwt', jwt);
+    setToken: async (token: string) => {
+        await AsyncStorage.setItem('token', token);
     },
-    getJwt: async (): Promise<string | null> => {
-        return await AsyncStorage.getItem('jwt');
+    getToken: async (): Promise<string | null> => {
+        return await AsyncStorage.getItem('token');
     },
-    removeJwt: async () => {
-        await AsyncStorage.removeItem('jwt');
+    removeToken: async () => {
+        await AsyncStorage.removeItem('token');
     },
     isAuth: async () => {
-        return await AsyncStorage.getItem('jwt') !== null;
+        return await AsyncStorage.getItem('token') !== null;
     },
-    setUser: async(user: IStateUserReducer) => {
+    setUser: async(user: IUser) => {
         await AsyncStorage.setItem('user', JSON.stringify(user));
     },
-    getUser: async(): Promise<IStateUserReducer | null> => {
+    getUser: async(): Promise<IUser | null> => {
         const json = await AsyncStorage.getItem('user');
 
         if (!json) {

@@ -9,7 +9,7 @@ export default [
         breed: 3,
         phone: '123456789',
         active: true,
-        user_id: 4,
+        user_id: 2,
         gender: 'female',
         sterilization: '1',
         images: [

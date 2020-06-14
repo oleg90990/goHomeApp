@@ -6,17 +6,17 @@ import { login  } from '../../store/user/actions';
 import { toAccounnt } from '../../utilites/appNavigation';
 
 interface ILoginProps {
-  login: (username: string, password: string) => Promise<any>
+  login: (email: string, password: string) => Promise<any>
 }
 
 const Login: React.FC<ILoginProps> = ({ login }) => {
-  const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   function toLogin() {
     setLoading(true);
-    login(username, password)
+    login(email, password)
       .then(() => {
         toAccounnt();
         setLoading(false);
@@ -31,8 +31,8 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
         <Item inlineLabel style={styles.Item}>
             <Label>Имя</Label>
             <Input
-              value={username}
-              onChangeText={setUserName}
+              value={email}
+              onChangeText={setEmail}
               disabled={loading}
             />
         </Item>

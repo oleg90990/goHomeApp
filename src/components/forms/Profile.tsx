@@ -3,23 +3,24 @@ import { StyleSheet } from "react-native";
 import { Form, Item, Label, Input, Button, Spinner, Text } from 'native-base';
 import { toAccounnt } from '../../utilites/appNavigation'
 import { connect } from 'react-redux';
-import { IStateUserReducer } from '../../store/user';
+import { IUser } from '../../store/user';
 import { saveUserData } from '../../store/user/actions';
 import { IState } from '../../store/types';
 
-interface IProps extends IStateUserReducer {
+interface IProps {
+  user: IUser,
   saveUserData: (phone: string, newPassword?: string, replyPassword?: string ) => Promise<any>
 }
 
-const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
-  const [phoneInput, setPhone] = useState(phone);
+const Profile: React.FC<IProps> = ({ user, saveUserData }) => {
+  const [nameInput, setName] = useState(user.name);
   const [password, setPassword] = useState('');
   const [reply_password, setReplyPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   function onSave() {
     setLoading(true);
-    saveUserData(phoneInput, password, reply_password)
+    saveUserData(nameInput, password, reply_password)
       .then(() => {
         toAccounnt();
         setLoading(false);
@@ -29,10 +30,10 @@ const Profile: React.FC<IProps> = ({ phone, saveUserData }) => {
   return (
     <Form>
       <Item stackedLabel style={styles.Item}>
-        <Label>Номер телефона</Label>
+        <Label>Имя</Label>
         <Input
-          value={phoneInput}
-          onChangeText={setPhone}
+          value={nameInput}
+          onChangeText={setName}
           disabled={loading}
         />
       </Item>
@@ -70,8 +71,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ user }: IState) => {
-  return user;
+const mapStateToProps = ({ user: { user }}: IState) => {
+  return { user };
 };
 
 export default connect(mapStateToProps, {

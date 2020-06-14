@@ -1,5 +1,5 @@
 import { IDictionaryColorItem, IDictionaryItem, IDictionaryAnimalType } from '../../store/dictionaries';
-import { IStateUserReducer } from '../../store/user';
+import { IUser } from '../../store/user';
 import { Gender, YesNo } from '../../enum/Form';
 
 export interface IItem {
@@ -19,7 +19,7 @@ export interface IItem {
 }
 
 export interface IItemProps extends IItem {
-    user: IStateUserReducer,
+    user: IUser,
     getColorsByIds: (colors: number[]) => IDictionaryColorItem[],
     getBreedById: (breedId: number, animal: number) => IDictionaryItem | undefined,
     getAnimalById: (animalId: number) => IDictionaryAnimalType | undefined

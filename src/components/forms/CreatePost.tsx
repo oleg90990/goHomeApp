@@ -11,22 +11,22 @@ import ImageSelect from '../elements/ImagesSelect';
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 import { IStateDictionariesReducer, IDictionaryItem } from '../../store/dictionaries';
-import { IStateUserReducer } from '../../store/user';
+import { IUser } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
 import { Gender, YesNo } from '../../enum/Form';
 import { getLabelSterilization } from '../../helpers/Labels';
 
-interface IProps extends IStateDictionariesReducer, IStateUserReducer {
+interface IProps extends IStateDictionariesReducer, IUser {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[]
 }
 
-const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries, phone }) => {
+const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
     const [title, setTitle] = useState('');
     const [animal, setAnimal] = useState(1);
     const [colors, setColors] = useState<number[]>([]);
     const [age, setAge] = useState<number>(1);
     const [breed, setBreed] = useState(0);
-    const [phoneinput, setPhone] = useState(phone);
+    const [phoneinput, setPhone] = useState('');
     const [description, setDescription] = useState('');
     const [gender, setGender] = useState<Gender>(Gender.none);
     const [sterilization, setSterilization] = useState<YesNo>(YesNo.none);
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: IState) => {
   const dictionaries = state.dictionaries;
-  const user = state.user;
+  const user = state.user.user;
   return {
     ...dictionaries,
     ...user,

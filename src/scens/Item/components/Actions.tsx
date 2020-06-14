@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Button } from 'native-base';
 import { StyleSheet, Text, Linking } from "react-native";
 
-import { IStateUserReducer } from "../../../store/user";
+import { IUser } from "../../../store/user";
 
 import { connect } from 'react-redux';
 import { IItem } from "../types";
@@ -12,7 +12,7 @@ interface IActionsProps {
     phone: string,
     user_id: number,
     active: boolean,
-    user: IStateUserReducer
+    user: IUser
 }
 
 const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id }) => {
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({ user }: IState) => {
+const mapStateToProps = ({ user: { user }}: IState) => {
     return { user };
-};
+  };
 
 export default connect(mapStateToProps, {})(Actions);

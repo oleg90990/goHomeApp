@@ -1,15 +1,16 @@
-import Auth from '../../utilites/auth';
 import { Dispatch } from 'redux';
-import { SET_USER, LOGOUT } from './types';
+import { SET_USER, SET_TOKEN, LOGOUT } from './types';
 import API from '../../api/apiUser';
+import Auth from '../../utilites/auth';
 
-export const login = (username: string, password: string) => {
+export const login = (email: string, password: string) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const payload = await API.login(username, password);
-      await Auth.setJwt(payload.jwt);
-      await Auth.setUser(payload);
-      dispatch({type: SET_USER, payload });
+      const { access_token, user } = await API.login(email, password);
+      await Auth.setUser(user);
+      await Auth.setToken(access_token);
+      dispatch({type: SET_TOKEN, payload: access_token });
+      dispatch({type: SET_USER, payload: user });
     }
     catch (e) {
       throw e;
@@ -20,10 +21,8 @@ export const login = (username: string, password: string) => {
 export const saveUserData = (phone: string, newPassword?: string, replyPassword?: string ) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const payload = await API.saveUserData(phone, newPassword, replyPassword)
-      await Auth.setJwt(payload.jwt);
-      await Auth.setUser(payload);
-      dispatch({type: SET_USER, payload });
+      const user = await API.saveUserData(phone, newPassword, replyPassword)
+      dispatch({type: SET_USER, payload: user });
     }
     catch (e) {
       throw e;
@@ -33,7 +32,7 @@ export const saveUserData = (phone: string, newPassword?: string, replyPassword?
 
 export const logout = () => {
   return async (dispatch: Dispatch<any>) => {
-    await Auth.removeJwt();
+    await Auth.removeToken();
     await Auth.removeUser();
     dispatch({ type: LOGOUT });
   };
@@ -41,10 +40,11 @@ export const logout = () => {
 
 export const loadUserFromStorage = () => {
   return async (dispatch: Dispatch<any>) => {
-    const payload = await Auth.getUser();
-
-    if (payload) {
-      dispatch({type: SET_USER, payload });
+    const user = await Auth.getUser();
+    const access_token = await Auth.getToken();
+    if (user && access_token) {
+      dispatch({type: SET_TOKEN, payload: access_token });
+      dispatch({type: SET_USER, payload: user });
     }
   };
 };

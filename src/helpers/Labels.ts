@@ -3,11 +3,9 @@ import { Gender, YesNo } from '../enum/Form';
 export const getLabelSterilization = (gender: Gender | undefined) => {
   switch (gender) {
     case Gender.male:
-        return 'Кастрация';
-      break;
+      return 'Кастрация';
     case Gender.female:
-        return 'Стирилизация';
-      break;
+      return 'Стирилизация';
   }
   return 'Стирилизация/Кастрация';
 }
@@ -15,11 +13,9 @@ export const getLabelSterilization = (gender: Gender | undefined) => {
 export const getLabelYesNo = (value: YesNo) => {
   switch (value) {
     case YesNo.yes:
-        return 'Да';
-      break;
+      return 'Да';
     case YesNo.no:
-        return 'Нет';
-      break;
+      return 'Нет';
   }
   return 'Неизвестно';
 }
@@ -34,14 +30,12 @@ export const getLabelAge = (age: number) => {
     switch (i) {
       case (1):
         return  'год';
-      case (2):
-      case (3):
       case (4):
         return 'года';
-      default:
-        return 'лет';
     }
   }
+
+  return 'лет';
 }
 
 export const getLabelGender = (gender: Gender | undefined, animal: number) => {
