@@ -20,4 +20,8 @@ export default class ApiUser {
             email, name, password, c_password
         });
     }
+
+    public static async me(): Promise<AxiosResponse<IUser>> {
+        return Axios.get('user/me');
+    }
 }

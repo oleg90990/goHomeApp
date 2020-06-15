@@ -14,19 +14,4 @@ export default {
     isAuth: async () => {
         return await AsyncStorage.getItem('token') !== null;
     },
-    setUser: async(user: IUser) => {
-        await AsyncStorage.setItem('user', JSON.stringify(user));
-    },
-    getUser: async(): Promise<IUser | null> => {
-        const json = await AsyncStorage.getItem('user');
-
-        if (!json) {
-            return null;
-        }
-
-        return JSON.parse(json);
-    },
-    removeUser: async() => {
-        await AsyncStorage.removeItem('user');
-    }
 }

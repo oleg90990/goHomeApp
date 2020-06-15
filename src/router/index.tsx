@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import { Scens } from '../enum/Scens'
 
@@ -18,18 +18,26 @@ import Layout from "../components/layout/Index";
 import { connect } from 'react-redux';
 import { IState } from '../store/types';
 import { loadDictionaries  } from '../store/dictionaries/actions';
-import { loadUserFromStorage  } from '../store/user/actions';
-import { IStateDictionariesReducer } from '../store/dictionaries';
+import { loadData as loadUserData  } from '../store/user/actions';
 
-interface IRouterProps extends IStateDictionariesReducer {
+interface IRouterProps {
     loadDictionaries(): any,
-    loadUserFromStorage(): any
+    loadUserData(): any
 }
 
 const RouterApp: React.FC<IRouterProps> = (props) => {
-  props.loadDictionaries();
-  props.loadUserFromStorage();
-  return ( props.loading ? <Loading /> : 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      props.loadDictionaries(),
+      props.loadUserData()
+    ]).then(() => {
+      setLoading(false);
+    })
+  }, []);
+  
+  return ( loading ? <Loading /> : 
     <Layout>
       <Router>
           <Scene key="root">
@@ -48,11 +56,7 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
   )
 };
 
-const mapStateToProps = ({ dictionaries }: IState) => {
-  return dictionaries;
-};
-
-export default connect(mapStateToProps, {
+export default connect(null, {
     loadDictionaries,
-    loadUserFromStorage
+    loadUserData
 })(RouterApp);

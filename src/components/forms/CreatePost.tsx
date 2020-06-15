@@ -37,7 +37,6 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
     }, [animal])
 
     function onSave() {
-      // console.log(images)
     }
 
     return (

@@ -1,4 +1,4 @@
-import { SET_ALL, SET_LOADING } from './types';
+import { SET_ALL } from './types';
 import { IAction } from '../types';
 import { Gender } from '../../enum/Form';
 
@@ -29,12 +29,10 @@ export interface IStateDictionaries {
 }
 
 export interface IStateDictionariesReducer {
-    loading: boolean,
     dictionaries: IStateDictionaries
 }
 
 const INITIAL_STATE: IStateDictionariesReducer = {
-    loading: true,
     dictionaries: {
         animals: [],
         colors: []
@@ -48,12 +46,6 @@ export default (state = INITIAL_STATE, action: IAction<IStateDictionaries | bool
         return {
             ...state,
             dictionaries
-        };
-    case SET_LOADING:;
-        const loading = action.payload;
-        return {
-            ...state,
-            loading
         };
     default:
       return state;
