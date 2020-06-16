@@ -10,7 +10,7 @@ interface IColorsSelectProps extends IStateDictionariesReducer {
   value: number[]
 }
 
-const ColorsSelect: React.FC<IColorsSelectProps> = ({ dictionaries, onChange, value }) => {
+const ColorsSelect: React.FC<IColorsSelectProps> = ({ colors, onChange, value }) => {
     function fetchValue(id: number) {
         const index = value.indexOf(id);
 
@@ -33,7 +33,7 @@ const ColorsSelect: React.FC<IColorsSelectProps> = ({ dictionaries, onChange, va
 
     return (
         <View style={styles.Colors}>
-            {( dictionaries.colors.map(({ id, value }) => {
+            {( colors.map(({ id, value }) => {
                 return <TouchableNativeFeedback key={id} onPress={() => fetchValue(id)}>
                     <View style={[styles.ColorContainer, getSelectedStyle(id)]}>
                         <View style={[styles.Color, { backgroundColor: value }]}>

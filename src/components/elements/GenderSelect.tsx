@@ -16,13 +16,12 @@ interface IGenderSelectProps  {
 
 const GenderSelect: React.FC<IGenderSelectProps> = ({ onChange, value, animal, getAnimalById }) => {
     const animalSelected = animal ? getAnimalById(animal) : undefined;
-    const genders = animalSelected ? animalSelected.genders : undefined;
 
-    return (genders ? 
+    return (animalSelected ? 
         <Picker style={{width: '100%'}} mode="dropdown" selectedValue={value} onValueChange={onChange} >
-            <Picker.Item key={Gender.male} label={genders[Gender.male]} value={Gender.male} />
-            <Picker.Item key={Gender.female} label={genders[Gender.female]} value={Gender.female} />
-            <Picker.Item key={Gender.none} label={genders[Gender.none]} value={Gender.none} />
+            <Picker.Item key={Gender.male} label={animalSelected[Gender.male]} value={Gender.male} />
+            <Picker.Item key={Gender.female} label={animalSelected[Gender.female]} value={Gender.female} />
+            <Picker.Item key={Gender.none} label={animalSelected[Gender.none]} value={Gender.none} />
         </Picker> : null
     );
 };

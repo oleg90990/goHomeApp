@@ -10,7 +10,7 @@ import Toast from '../../utilites/toastr';
 
 interface IProps {
   user: IUser,
-  update: (email: string, name: string, password?: string, c_password?: string) => Promise<any>
+  update: (email: string, name: string, password: string, c_password: string) => Promise<any>
 }
 
 const Profile: React.FC<IProps> = ({ user, update }) => {
@@ -22,19 +22,15 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
 
   function onSave() {
     setLoading(true);
-    update(
-      email,
-      name,
-      password,
-      c_password
-    ).then(() => {
-      Toast.success('Успешно обновлено');
-      toAccounnt();
-      setLoading(false);
-    })
-    .catch(() => {
-      setLoading(false);
-    });
+    update(email, name, password, c_password)
+      .then(() => {
+        Toast.success('Успешно обновлено');
+        toAccounnt();
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }
 
   return (

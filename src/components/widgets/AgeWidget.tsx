@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet } from "react-native";
-import { Picker, Label, View, Card, CardItem, Body, Text } from 'native-base';
+import { Label, View, Card, CardItem, Body, Text } from 'native-base';
 import { AgeState } from '../../store/searchForm';
 import AgeSelect from '../../components/elements/AgeSelect';
-import val from 'src/fakeData/dictionaries';
 
 interface IAgesWidgetsProps {
     value: AgeState,

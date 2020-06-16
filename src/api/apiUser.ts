@@ -15,7 +15,7 @@ export default class ApiUser {
         });
     }
 
-    public static async update(email: string, name: string, password?: string, c_password?: string): Promise<AxiosResponse<IUser>> {
+    public static async update(email: string, name: string, password: string, c_password: string): Promise<AxiosResponse<IUser>> {
         return Axios.post('user/update', {
             email, name, password, c_password
         });

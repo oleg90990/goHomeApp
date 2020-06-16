@@ -4,48 +4,45 @@ import { Gender } from '../../enum/Form';
 
 export interface IDictionaryItem {
     id: number,
-    title: string,
+    name: string,
     img: string
 }
 
 export interface IDictionaryColorItem {
     id: number,
-    title: string,
+    name: string,
     value: string
 }
 
-export interface IDictionaryAnimalType extends IDictionaryItem {
+export interface IDictionaryAnimalType {
     breeds: IDictionaryItem[],
-    genders: {
-        [Gender.male]: string,
-        [Gender.female]: string,
-        [Gender.none]: string,
-    }
+    id: number,
+    name: string,
+    img: string
+    [Gender.male]: string,
+    [Gender.female]: string,
+    [Gender.none]: string,
 }
 
-export interface IStateDictionaries {
+export interface IStateDictionariesReducer {
     animals: IDictionaryAnimalType[],
     colors: IDictionaryColorItem[]
 }
 
-export interface IStateDictionariesReducer {
-    dictionaries: IStateDictionaries
-}
-
 const INITIAL_STATE: IStateDictionariesReducer = {
-    dictionaries: {
-        animals: [],
-        colors: []
-    }
+    animals: [],
+    colors: []
 };
 
-export default (state = INITIAL_STATE, action: IAction<IStateDictionaries | boolean>) => {
+export default (state = INITIAL_STATE, action: IAction<IStateDictionariesReducer>) => {
   switch (action.type) {
     case SET_ALL:;
-        const dictionaries = action.payload;
+        const { animals, colors } = action.payload;
+
         return {
             ...state,
-            dictionaries
+            animals,
+            colors
         };
     default:
       return state;

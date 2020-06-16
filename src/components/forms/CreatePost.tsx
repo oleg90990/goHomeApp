@@ -20,7 +20,7 @@ interface IProps extends IStateDictionariesReducer, IUser {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[]
 }
 
-const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
+const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
     const [title, setTitle] = useState('');
     const [animal, setAnimal] = useState(1);
     const [colors, setColors] = useState<number[]>([]);
@@ -60,8 +60,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
             onValueChange={setAnimal}
             selectedValue={animal}
           >
-            {( dictionaries.animals.map(({ id, title }, index) => {
-              return <Picker.Item label={title} value={id} key={index} />;
+            {( animals.map(({ id, name }, index) => {
+              return <Picker.Item label={name} value={id} key={index} />;
             }) )}
           </Picker>
         </Item>
@@ -70,8 +70,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, dictionaries }) => {
             Порода
           </Label>
           <Picker style={{width: '100%'}} onValueChange={setBreed} selectedValue={breed} >
-            { getBreedsByAnimal(animal).map(({title, id}, index) => {
-              return <Picker.Item key={index} label={title.toString()} value={id} />
+            { getBreedsByAnimal(animal).map(({name, id}, index) => {
+              return <Picker.Item key={index} label={name} value={id} />
             })}
           </Picker>
         </Item>

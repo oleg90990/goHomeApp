@@ -11,7 +11,7 @@ interface IBreedsWidgetProps extends IStateDictionariesReducer {
   animal: number | undefined
 }
 
-const BreedSelect: React.FC<IBreedsWidgetProps> = ({ dictionaries, onSelected, animal }) => {
+const BreedSelect: React.FC<IBreedsWidgetProps> = ({ animals, onSelected, animal }) => {
     const [visible, setVisible] = useState(false);
     const [input, setInput] = useState('');
     
@@ -20,12 +20,11 @@ const BreedSelect: React.FC<IBreedsWidgetProps> = ({ dictionaries, onSelected, a
             return [];
         }
 
-        const selectedAnimal = dictionaries
-            .animals
+        const selectedAnimal = animals
             .find(({ id }) => id === animal);
 
-        return selectedAnimal ? selectedAnimal.breeds.filter(item => {
-            return item.title.toString().search(input) !== -1;
+        return selectedAnimal ? selectedAnimal.breeds.filter(({ name }) => {
+            return name.toString().search(input) !== -1;
         }) : [];
     }
 
@@ -48,13 +47,13 @@ const BreedSelect: React.FC<IBreedsWidgetProps> = ({ dictionaries, onSelected, a
                 </View>
                 <ScrollView>
                     <List style={styles.List}>
-                        {(onFiltered().map(({ id, title, img }, key) => {
+                        {(onFiltered().map(({ id, name, img }, key) => {
                             return <ListItem key={key} thumbnail onPress={() => onItemSelected(id)}>
                                 <Left>
                                     <Thumbnail square source={{ uri: img }} />
                                 </Left>
                                 <Body>
-                                    <Text>{ title }</Text>
+                                    <Text>{ name }</Text>
                                 </Body>
                             </ListItem>
                         }))}

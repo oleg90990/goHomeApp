@@ -9,7 +9,6 @@ import { getLabelSterilization, getLabelYesNo, getLabelAge } from '../../helpers
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { YesNo } from 'src/enum/Form';
 
 const Item: React.FC<IItemProps> = ({
         animal,
@@ -76,7 +75,7 @@ const Item: React.FC<IItemProps> = ({
                             </Left>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { useAnimal ? useAnimal.genders[gender] : 'Неизвестно' }
+                                    { useAnimal ? useAnimal[gender] : 'Неизвестно' }
                                 </Text>
                             </Body>
                         </ListItem>

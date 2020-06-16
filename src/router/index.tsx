@@ -16,7 +16,6 @@ import Register from '../scens/Register';
 import Layout from "../components/layout/Index";
 
 import { connect } from 'react-redux';
-import { IState } from '../store/types';
 import { loadDictionaries  } from '../store/dictionaries/actions';
 import { loadData as loadUserData  } from '../store/user/actions';
 
@@ -57,6 +56,6 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
 };
 
 export default connect(null, {
-    loadDictionaries,
-    loadUserData
+  loadDictionaries,
+  loadUserData
 })(RouterApp);

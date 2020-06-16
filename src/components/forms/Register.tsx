@@ -17,7 +17,7 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
   const [c_password, setСPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  function toRegister() {
+  function onRegister() {
     setLoading(true);
     register(email, name, password, c_password)
       .then(() => {
@@ -25,7 +25,7 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
         toAccounnt();
         setLoading(false);
       })
-      .catch(() => {
+      .catch((e) => {
         setLoading(false);
       });
   }
@@ -66,7 +66,7 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
           disabled={loading}
         />
       </Item>
-      <Button style={styles.Btn} onPress={toRegister} disabled={loading}>
+      <Button style={styles.Btn} onPress={onRegister} disabled={loading}>
         {( loading ? <Spinner color={'white'} /> : <Text>Регистрация</Text> )}
       </Button> 
     </Form>

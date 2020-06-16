@@ -14,10 +14,9 @@ interface IBreedsWidgetProps extends IStateDictionariesReducer {
   removeBreed: (value: number) => void
 }
 
-const BreedsWidget: React.FC<IBreedsWidgetProps> = ({ animal, value, addBreed, removeBreed, dictionaries }) => {   
+const BreedsWidget: React.FC<IBreedsWidgetProps> = ({ animal, value, addBreed, removeBreed, animals }) => {   
     function getSelectedBreeds() {
-        const selectedAnimal = dictionaries
-            .animals
+        const selectedAnimal = animals
             .find(({ id }) => id === animal);
         
         if (!selectedAnimal) {
@@ -42,7 +41,7 @@ const BreedsWidget: React.FC<IBreedsWidgetProps> = ({ animal, value, addBreed, r
                     </CardItem> : getSelectedBreeds().map((breed, key) => {
                         return breed ? <CardItem key={key} style={styles.CardItem}>
                             <Text style={styles.CardItemText}>
-                                { breed.title }
+                                { breed.name }
                             </Text>
                             <Icon style={styles.CardItemIcon}
                                 name="close"

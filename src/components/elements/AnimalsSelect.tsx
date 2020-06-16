@@ -21,9 +21,9 @@ const AnimalsSelect: React.FC<IAnimalState> = (props) => {
   return (
       <View style={styles.Options}>
         {(
-          props.dictionaries.animals.map(animal => {
-            return <TouchableNativeFeedback key={animal.title} onPress={() => props.onChange(animal.id)}>
-              <Image source={{ uri: animal.img }} style={[styles.Image, getImageStyle(animal.id)]} />
+          props.animals.map(({ name, id, img }) => {
+            return <TouchableNativeFeedback key={name} onPress={() => props.onChange(id)}>
+              <Image source={{ uri: img }} style={[styles.Image, getImageStyle(id)]} />
             </TouchableNativeFeedback>
           })
         )}
