@@ -22,15 +22,14 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
 
   function onSave() {
     setLoading(true);
-    update(email, name, password, c_password)
-      .then(() => {
-        Toast.success('Успешно обновлено');
-        toAccounnt();
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    update(email, name, password, c_password).then(() => {
+      Toast.success('Успешно обновлено');
+      toAccounnt();
+      setLoading(false);
+    })
+    .catch(() => {
+      setLoading(false);
+    });
   }
 
   return (

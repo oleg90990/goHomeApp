@@ -3,7 +3,7 @@ import Toast from './toastr'
 import Auth from '../utilites/auth'
 
 let axiosBase = axios.create({
-  baseURL: 'https://friendshome.ru/api/v1/',
+  baseURL: 'https://friendshome.ru/api/v1/'
   // baseURL: 'http://127.0.0.1:8000/api/v1/',
 });
 
@@ -13,7 +13,7 @@ axiosBase.interceptors.request.use(
     return config;
   },
   error => {
-    return error;
+    return Promise.reject(error);
   },
 );
 
@@ -34,7 +34,7 @@ axiosBase.interceptors.response.use(
       Toast.error(data.message);
     }
 
-    return error;
+   return Promise.reject(error);
   },
 );
 
