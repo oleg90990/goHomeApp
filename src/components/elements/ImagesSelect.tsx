@@ -16,7 +16,7 @@ var options = {
   },
 };
 
-const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
+const ImagesSelect: React.FC<IImagesSelectProps> = ({ value, onChange }) => {
     value = value ? value : [];
 
     function addResource(uri: string) {
@@ -35,7 +35,15 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
           addResource(data);
         }
       });
-    };
+    }
+
+    function getUri(uri: string) {
+      if (uri.indexOf("http") >= 0) {
+        return uri;
+      } else {
+        return 'data:image/jpeg;base64,' + uri;
+      }
+    }
 
     return (
       <View>
@@ -49,7 +57,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
                   style={styles.Icon}
                   onPress={() => removeResource(key)}
                 />
-                <Image source={{ uri: 'data:image/jpeg;base64,' + uri }} style={styles.Img} />
+                <Image source={{ uri: getUri(uri) }} style={styles.Img} />
               </View>
             }) )}
         </View> 

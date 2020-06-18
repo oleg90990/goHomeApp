@@ -1,45 +1,34 @@
 import React, { useState } from 'react';
 import { Left, Body, Content, View, List, ListItem, Spinner } from 'native-base';
 import { SliderBox } from "react-native-image-slider-box";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, Linking } from "react-native";
 import { IItemProps } from "./types";
 import { getColorsByIds, getBreedById, getAnimalById } from "../../store/dictionaries/getters";
 import Actions from './components/Actions';
 import { getLabelSterilization, getLabelYesNo, getLabelAge } from '../../helpers/Labels';
 import API from '../../api/apiAds';
-import { toItem } from '../../utilites/appNavigation';
+import { toEditPost } from '../../utilites/appNavigation';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
 const Item: React.FC<IItemProps> = ({
-        id,
-        animal_id,
-        images,
-        title,
-        age,
-        colors,
-        breed_id,
-        content,
-        user_id,
-        phone,
-        active,
-        gender,
-        sterilization,
+        item,
         getColorsByIds,
         getBreedById,
         getAnimalById
     }) => {
-        const useColors = getColorsByIds(colors);
-        const useBreed = getBreedById(breed_id, animal_id);
-        const useAnimal = getAnimalById(animal_id);
-        const [loading, setLoading] = useState(false); 
+        const useColors = getColorsByIds(item.colors);
+        const useBreed = getBreedById(item.breed_id, item.animal_id);
+        const useAnimal = getAnimalById(item.animal_id);
+        const [loading, setLoading] = useState(false);
+        const [activeItem, setActive] = useState(item.active); 
 
-        function toDisPublish(active: boolean) {
+        function toPublish(active: boolean) {
             setLoading(true);
-            API.publish(id, active)
+            API.publish(item.id, active)
                 .then(({ data }) => {
-                    toItem(data);
+                    setActive(data.active);
                     setLoading(false);
                 })
                 .catch(() => {
@@ -47,19 +36,28 @@ const Item: React.FC<IItemProps> = ({
                 })
         }
 
+        function toCall() {
+            Linking.openURL(`tel:${item.phone}`);
+        }
+
+        function toEdit() {
+            toEditPost({ item });
+        }
+
         return ( !loading ? 
             <Content>
-                <SliderBox sliderBoxHeight={300} images={images} />
+                <SliderBox sliderBoxHeight={300} images={item.images} />
                 <View padder>
                     <Actions
-                        phone={ phone }
-                        user_id={user_id}
-                        active={active}
-                        toDisPublish={toDisPublish}
+                        user_id={item.user_id}
+                        active={activeItem}
+                        toPublish={toPublish}
+                        toEdit={toEdit}
+                        toCall={toCall}
                     />
 
                     <Text style={styles.Title}>
-                        { title }
+                        { item.title }
                     </Text>
 
                     <List style={{ marginLeft: -20 }}>
@@ -84,7 +82,7 @@ const Item: React.FC<IItemProps> = ({
                             </Left>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { age } { getLabelAge(age) }
+                                    { item.age } { getLabelAge(item.age) }
                                 </Text>
                             </Body>
                         </ListItem>
@@ -96,19 +94,19 @@ const Item: React.FC<IItemProps> = ({
                             </Left>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { useAnimal ? useAnimal[gender] : 'Неизвестно' }
+                                    { useAnimal ? useAnimal[item.gender] : 'Неизвестно' }
                                 </Text>
                             </Body>
                         </ListItem>
                         <ListItem>
                             <Left>
                                 <Text style={styles.Text}>
-                                    { getLabelSterilization(gender) }:
+                                    { getLabelSterilization(item.gender) }:
                                 </Text>
                             </Left>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { getLabelYesNo(sterilization) }
+                                    { getLabelYesNo(item.sterilization) }
                                 </Text>
                             </Body>
                         </ListItem>
@@ -129,7 +127,7 @@ const Item: React.FC<IItemProps> = ({
                         <ListItem>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { content }
+                                    { item.content }
                                 </Text>
                             </Body>
                         </ListItem>

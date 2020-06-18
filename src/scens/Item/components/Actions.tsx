@@ -9,28 +9,16 @@ import { IItem } from "../types";
 import { IState } from '../../../store/types';
 
 interface IActionsProps {
-    phone: string,
-    user_id: number,
-    active: boolean,
-    user: IUser,
-    toDisPublish: (active: boolean) => void
-
+    user_id: number
+    active: boolean
+    user: IUser
+    toPublish: (active: boolean) => void
+    toEdit: () => void
+    toCall: () => void
 }
 
-const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id, toDisPublish }) => {
+const Actions: React.FC<IActionsProps> = ({ user, active, user_id, toPublish, toEdit, toCall }) => {
         const isEdit = user.id === user_id;
-
-        function toCall() {
-            Linking.openURL(`tel:${phone}`);
-        }
-
-        function toEdit() {
-            
-        }
-
-        function publish(active: boolean) {
-            toDisPublish(active);
-        }
 
         return (
             <View>
@@ -46,12 +34,12 @@ const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id, toDisP
                 </Button> : null )}
                 {(isEdit ? 
                 ( active ?  
-                    <Button warning block onPress={() => publish(false)} style={styles.BtnEdit}>
+                    <Button warning block onPress={() => toPublish(false)} style={styles.BtnEdit}>
                         <Text style={styles.Button}>
                             Снять с публикации
                         </Text>
                     </Button> : 
-                    <Button warning block onPress={() => publish(true)} style={styles.BtnEdit}>
+                    <Button warning block onPress={() => toPublish(true)} style={styles.BtnEdit}>
                         <Text style={styles.Button}>
                             Опубликовать
                         </Text>

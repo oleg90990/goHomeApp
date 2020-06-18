@@ -10,7 +10,7 @@ export interface IItemListInterface {
 
 const Item: React.FC<IItemListInterface> = ({ item }) => { 
     function toItem() {
-        toItemScen(item);
+        toItemScen({ item });
     }
 
     function setActiveStyle() {

@@ -16,34 +16,68 @@ import { getBreedsByAnimal } from '../../store/dictionaries/getters';
 import { Gender, YesNo } from '../../enum/Form';
 import { getLabelSterilization } from '../../helpers/Labels';
 import { toItem } from '../../utilites/appNavigation';
+import { IItem } from '../../scens/Item/types';
 
 import Api from '../../api/apiAds';
 
-interface IProps extends IStateDictionariesReducer, IUser {
-  getBreedsByAnimal: (animal: number) => IDictionaryItem[]
+interface IValues extends Omit<IItem, 'user_id' | 'active'> {
+
 }
 
-const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
-  const [loading, setLoading] = useState(false);
+interface IProps extends IStateDictionariesReducer, IUser {
+  getBreedsByAnimal: (animal: number) => IDictionaryItem[],
+  values?: IValues
+}
 
-    const [title, setTitle] = useState('');
-    const [animal_id, setAnimal] = useState(1);
-    const [colors, setColors] = useState<number[]>([]);
-    const [age, setAge] = useState<number>(1);
-    const [breed_id, setBreed] = useState(0);
-    const [phone, setPhone] = useState('');
-    const [content, setContent] = useState('');
-    const [gender, setGender] = useState<Gender>(Gender.none);
-    const [sterilization, setSterilization] = useState<YesNo>(YesNo.none);
-    const [images, setImages] = useState<string[]>([]);
-
-    useEffect(() => {
-      setBreed(0);
-    }, [animal_id])
+const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) => {
+    const defaultValues = Object.assign({
+      id: 0,
+      title: '',
+      images: [],
+      content: '',
+      age: 1,
+      colors: [],
+      animal_id: 1,
+      breed_id: 1,
+      phone: '',
+      gender: Gender.none,
+      sterilization: YesNo.none
+    }, values ? values : {});
+  
+    const [loading, setLoading] = useState(false);
+    const [title, setTitle] = useState(defaultValues.title);
+    const [animal_id, setAnimal] = useState(defaultValues.animal_id);
+    const [colors, setColors] = useState<number[]>(defaultValues.colors);
+    const [age, setAge] = useState<number>(defaultValues.age);
+    const [breed_id, setBreed] = useState(defaultValues.breed_id);
+    const [phone, setPhone] = useState(defaultValues.phone);
+    const [content, setContent] = useState(defaultValues.content);
+    const [gender, setGender] = useState<Gender>(defaultValues.gender);
+    const [sterilization, setSterilization] = useState<YesNo>(defaultValues.sterilization);
+    const [images, setImages] = useState<string[]>(defaultValues.images);
 
     function onSave() {
-      setLoading(true)
-      Api.createAd({
+      setLoading(true);
+      function callback(item?: IItem) {
+        setLoading(false)
+        if (item) {
+          toItem({ item });
+        }
+      }
+
+      const {
+        id
+      } = defaultValues;
+
+      if (id) {
+        update(id, callback);
+      } else {
+        create(callback);
+      }
+    }
+
+    function create(callback: (item?: IItem) => void) {
+      Api.create({
         title,
         images,
         content,
@@ -55,11 +89,30 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
         gender,
         sterilization
       }).then(({ data }) => {
-        toItem(data);
-        setLoading(false)
+        callback(data);
       }).catch(() => {
-        setLoading(false);
-      })
+        callback();
+      });
+    }
+
+    function update(id: number, callback: (item?: IItem) => void) {
+      Api.update({
+        id,
+        title,
+        images,
+        content,
+        age,
+        colors,
+        animal_id,
+        breed_id,
+        phone,
+        gender,
+        sterilization
+      }).then(({ data }) => {
+        callback(data);
+      }).catch(() => {
+        callback();
+      });
     }
 
     return ( !loading ? 
@@ -92,8 +145,12 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
           <Label>
             Порода
           </Label>
-          <Picker style={{width: '100%'}} onValueChange={setBreed} selectedValue={breed_id} >
-            { getBreedsByAnimal(animal_id).map(({name, id}, index) => {
+          <Picker
+            style={{width: '100%'}}
+            onValueChange={setBreed}
+            selectedValue={breed_id}
+          >
+            { getBreedsByAnimal(animal_id).map(({ name, id }, index) => {
               return <Picker.Item key={index} label={name} value={id} />
             })}
           </Picker>
@@ -163,7 +220,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
         </View>
         <View style={styles.ViewItem}>
           <Button block primary onPress={onSave}>
-            <Text>Создать Пост</Text>
+            <Text> { defaultValues.id ? 'Редактировать пост' : 'Создать Пост' }</Text>
           </Button>
         </View>
       </Form> : <Spinner />

@@ -8,6 +8,7 @@ export enum Scens {
     profile = 'profile',
     myAds = 'myAds',
     createPost = 'createPost',
+    editPost = 'editPost',
     register = 'register'
 }
 

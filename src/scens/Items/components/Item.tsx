@@ -10,11 +10,11 @@ export interface IItemListInterface {
 
 const Item: React.FC<IItemListInterface> = ({ item }) => {
     function toItem() {
-        toItemScen(item);
+        toItemScen({ item });
     }
 
     return (
-        <TouchableNativeFeedback onPress={toItem}>
+        <TouchableNativeFeedback onPress={(toItem)}>
             <Card>
                 {( item.images[0] ? <CardItem cardBody>
                     <Image source={{uri: item.images[0] }} style={styles.Image}/>

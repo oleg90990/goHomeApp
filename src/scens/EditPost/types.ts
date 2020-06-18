@@ -1,5 +1,5 @@
 import { IItem } from '../Item/types';
 
-export interface ICreatePostProps {
+export interface IEditPostProps {
     item: IItem
 }

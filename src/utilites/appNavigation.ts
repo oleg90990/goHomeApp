@@ -9,6 +9,7 @@ import { ILoginProps } from '../scens/Login/types';
 import { IAccountProps } from '../scens/Account/types';
 import { ILoadingProps } from '../scens/Loading/types';
 import { IProfileProps } from '../scens/Profile/types';
+import { IEditPostProps } from '../scens/EditPost/types';
 
 const scensAuth: Scens[] = [
     Scens.accounnt,
@@ -61,6 +62,10 @@ export const toMyAds = () => {
 
 export const toCreatePost = () => {
     middlewareAuth(Scens.createPost);
+}
+
+export const toEditPost = (props: IEditPostProps) => {
+    middlewareAuth(Scens.editPost, props);
 }
 
 export const toRegister = () => {

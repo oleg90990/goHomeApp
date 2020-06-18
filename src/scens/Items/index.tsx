@@ -21,10 +21,12 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     const [sortBy, setSortBy] = useState(Sortby.date);
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState<IItem[]>([]);
+    const [page, setPage] = useState(1);
     
     function loadItems() {
         setLoading(true);
-        ApiItems.find(searchForm, sortBy)
+
+        ApiItems.find(searchForm, sortBy, page)
             .then(({ data }) => {
                 setItems(data);
                 setLoading(false);

@@ -18,8 +18,8 @@ export interface IItem {
     sterilization: YesNo
 }
 
-export interface IItemProps extends IItem {
-    user: IUser,
+export interface IItemProps {
+    item: IItem,
     getColorsByIds: (colors: number[]) => IDictionaryColorItem[],
     getBreedById: (breedId: number, animal: number) => IDictionaryItem | undefined,
     getAnimalById: (animalId: number) => IDictionaryAnimalType | undefined
