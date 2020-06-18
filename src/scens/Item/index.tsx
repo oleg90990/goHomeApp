@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Left, Body, Content, View, List, ListItem, Button, Icon } from 'native-base';
+import { Left, Body, Content, View, List, ListItem, Spinner } from 'native-base';
 import { SliderBox } from "react-native-image-slider-box";
 import { StyleSheet, Text } from "react-native";
 import { IItemProps } from "./types";
