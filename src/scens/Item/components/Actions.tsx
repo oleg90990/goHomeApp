@@ -12,10 +12,12 @@ interface IActionsProps {
     phone: string,
     user_id: number,
     active: boolean,
-    user: IUser
+    user: IUser,
+    toDisPublish: (active: boolean) => void
+
 }
 
-const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id }) => {
+const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id, toDisPublish }) => {
         const isEdit = user.id === user_id;
 
         function toCall() {
@@ -26,12 +28,8 @@ const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id }) => {
             
         }
 
-        function toDisPublish() {
-            
-        }
-
-        function toEnPublish() {
-            
+        function publish(active: boolean) {
+            toDisPublish(active);
         }
 
         return (
@@ -48,12 +46,12 @@ const Actions: React.FC<IActionsProps> = ({ user, phone, active, user_id }) => {
                 </Button> : null )}
                 {(isEdit ? 
                 ( active ?  
-                    <Button warning block onPress={toDisPublish} style={styles.BtnEdit}>
+                    <Button warning block onPress={() => publish(false)} style={styles.BtnEdit}>
                         <Text style={styles.Button}>
                             Снять с публикации
                         </Text>
                     </Button> : 
-                    <Button warning block onPress={toEnPublish} style={styles.BtnEdit}>
+                    <Button warning block onPress={() => publish(true)} style={styles.BtnEdit}>
                         <Text style={styles.Button}>
                             Опубликовать
                         </Text>

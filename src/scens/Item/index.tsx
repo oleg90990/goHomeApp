@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Left, Body, Content, View, List, ListItem, Button, Icon } from 'native-base';
 import { SliderBox } from "react-native-image-slider-box";
 import { StyleSheet, Text } from "react-native";
@@ -6,17 +6,20 @@ import { IItemProps } from "./types";
 import { getColorsByIds, getBreedById, getAnimalById } from "../../store/dictionaries/getters";
 import Actions from './components/Actions';
 import { getLabelSterilization, getLabelYesNo, getLabelAge } from '../../helpers/Labels';
+import API from '../../api/apiAds';
+import { toItem } from '../../utilites/appNavigation';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
 const Item: React.FC<IItemProps> = ({
-        animal,
+        id,
+        animal_id,
         images,
         title,
         age,
         colors,
-        breed,
+        breed_id,
         content,
         user_id,
         phone,
@@ -28,14 +31,32 @@ const Item: React.FC<IItemProps> = ({
         getAnimalById
     }) => {
         const useColors = getColorsByIds(colors);
-        const useBreed = getBreedById(breed, animal);
-        const useAnimal = getAnimalById(animal);
+        const useBreed = getBreedById(breed_id, animal_id);
+        const useAnimal = getAnimalById(animal_id);
+        const [loading, setLoading] = useState(false); 
 
-        return (
+        function toDisPublish(active: boolean) {
+            setLoading(true);
+            API.publish(id, active)
+                .then(({ data }) => {
+                    toItem(data);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoading(false);
+                })
+        }
+
+        return ( !loading ? 
             <Content>
                 <SliderBox sliderBoxHeight={300} images={images} />
                 <View padder>
-                    <Actions phone={ phone } user_id={user_id} active={active} />
+                    <Actions
+                        phone={ phone }
+                        user_id={user_id}
+                        active={active}
+                        toDisPublish={toDisPublish}
+                    />
 
                     <Text style={styles.Title}>
                         { title }
@@ -51,7 +72,7 @@ const Item: React.FC<IItemProps> = ({
                             </Left>
                             <Body>
                                 <Text style={styles.Text}>
-                                    { useBreed.title }
+                                    { useBreed.name }
                                 </Text>
                             </Body>
                         </ListItem> : null)}
@@ -114,7 +135,7 @@ const Item: React.FC<IItemProps> = ({
                         </ListItem>
                     </List>
                 </View>
-            </Content>
+            </Content> : <Spinner />
         );
 };
 

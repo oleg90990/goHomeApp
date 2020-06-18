@@ -47,6 +47,7 @@ export const loadData = () => {
       const { data } = await API.me();
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
+      await Auth.removeToken();
       throw e;
     }
   };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native";
-import { Form, Item, Input, Picker, Label, Textarea, View, Button, Text } from 'native-base';
+import { Form, Item, Input, Picker, Label, Textarea, View, Button, Text, Spinner } from 'native-base';
 
 import ColorsSelect from '../../components/elements/ColorsSelect';
 import AgeSelect from '../../components/elements/AgeSelect';
@@ -15,31 +15,54 @@ import { IUser } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
 import { Gender, YesNo } from '../../enum/Form';
 import { getLabelSterilization } from '../../helpers/Labels';
+import { toItem } from '../../utilites/appNavigation';
+
+import Api from '../../api/apiAds';
 
 interface IProps extends IStateDictionariesReducer, IUser {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[]
 }
 
 const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
+  const [loading, setLoading] = useState(false);
+
     const [title, setTitle] = useState('');
-    const [animal, setAnimal] = useState(1);
+    const [animal_id, setAnimal] = useState(1);
     const [colors, setColors] = useState<number[]>([]);
     const [age, setAge] = useState<number>(1);
-    const [breed, setBreed] = useState(0);
-    const [phoneinput, setPhone] = useState('');
-    const [description, setDescription] = useState('');
+    const [breed_id, setBreed] = useState(0);
+    const [phone, setPhone] = useState('');
+    const [content, setContent] = useState('');
     const [gender, setGender] = useState<Gender>(Gender.none);
     const [sterilization, setSterilization] = useState<YesNo>(YesNo.none);
     const [images, setImages] = useState<string[]>([]);
 
     useEffect(() => {
       setBreed(0);
-    }, [animal])
+    }, [animal_id])
 
     function onSave() {
+      setLoading(true)
+      Api.createAd({
+        title,
+        images,
+        content,
+        age,
+        colors,
+        animal_id,
+        breed_id,
+        phone,
+        gender,
+        sterilization
+      }).then(({ data }) => {
+        toItem(data);
+        setLoading(false)
+      }).catch(() => {
+        setLoading(false);
+      })
     }
 
-    return (
+    return ( !loading ? 
       <Form>
         <Item stackedLabel style={styles.Item}>
           <Label>
@@ -58,7 +81,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
             style={{width: '100%'}}
             mode="dropdown"
             onValueChange={setAnimal}
-            selectedValue={animal}
+            selectedValue={animal_id}
           >
             {( animals.map(({ id, name }, index) => {
               return <Picker.Item label={name} value={id} key={index} />;
@@ -69,8 +92,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
           <Label>
             Порода
           </Label>
-          <Picker style={{width: '100%'}} onValueChange={setBreed} selectedValue={breed} >
-            { getBreedsByAnimal(animal).map(({name, id}, index) => {
+          <Picker style={{width: '100%'}} onValueChange={setBreed} selectedValue={breed_id} >
+            { getBreedsByAnimal(animal_id).map(({name, id}, index) => {
               return <Picker.Item key={index} label={name} value={id} />
             })}
           </Picker>
@@ -82,7 +105,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
           <GenderSelect
             value={gender}
             onChange={setGender}
-            animal={animal}
+            animal={animal_id}
           />
         </Item>
         <Item stackedLabel style={styles.Item}>
@@ -120,7 +143,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
             Телефон
           </Label>
           <Input
-            value={phoneinput}
+            value={phone}
             onChangeText={setPhone}
           />
         </Item>
@@ -129,8 +152,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
             underline
             bordered={false}
             rowSpan={8}
-            value={description}
-            onChangeText={setDescription}
+            value={content}
+            onChangeText={setContent}
             style={{width: '100%'}}
             placeholder="Описание"
           />
@@ -143,7 +166,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals }) => {
             <Text>Создать Пост</Text>
           </Button>
         </View>
-      </Form>
+      </Form> : <Spinner />
   );
 };
 

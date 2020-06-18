@@ -32,7 +32,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
     function selectFile() {
       ImagePicker.showImagePicker(options, ({data}: ImagePickerResponse) => {
         if (data) {
-          addResource('data:image/jpeg;base64,' + data);
+          addResource(data);
         }
       });
     };
@@ -49,7 +49,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({value, onChange}) => {
                   style={styles.Icon}
                   onPress={() => removeResource(key)}
                 />
-                <Image source={{ uri }} style={styles.Img} />
+                <Image source={{ uri: 'data:image/jpeg;base64,' + uri }} style={styles.Img} />
               </View>
             }) )}
         </View> 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { Container, Content, Spinner, View } from 'native-base';
+import { Content, Spinner, View } from 'native-base';
 import { ScrollView } from "react-native";
 import Item from './components/Item';
 import { IItemsProps } from "./types";
-import ApiItems from "../../api/apiItems";
+import ApiItems from "../../api/apiAds";
 import { Sortby } from '../../enum/Form';
 import { IItem } from '../Item/types';
 import RNPickerSelect from 'react-native-picker-select';
@@ -24,9 +24,9 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     
     function loadItems() {
         setLoading(true);
-        ApiItems.findItems(searchForm, sortBy)
-            .then(items => {
-                setItems(items);
+        ApiItems.find(searchForm, sortBy)
+            .then(({ data }) => {
+                setItems(data);
                 setLoading(false);
             });
     }
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: IState) => {
     return state;
-  };
-  
-  export default connect(mapStateToProps, {})(Items);
+};
+
+export default connect(mapStateToProps, {})(Items);

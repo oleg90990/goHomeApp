@@ -33,6 +33,8 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
       props.loadUserData()
     ]).then(() => {
       setLoading(false);
+    }).catch(() => {
+      setLoading(false);
     })
   }, []);
   

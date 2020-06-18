@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView } from "react-native";
 import { Button, Spinner, View, Text } from 'native-base';
 import { IMyAdsProps } from "./types";
-import ApiItems from '../../api/apiItems';
+import ApiItems from '../../api/apiAds';
 import Item from './components/Item';
 import { IItem } from '../Item/types';
 import { toCreatePost } from '../../utilites/appNavigation';
@@ -12,9 +12,9 @@ const MyAds: React.FC<IMyAdsProps> = () => {
     const [items, setItems] = useState<IItem[]>([]);
 
     useEffect(() => {
-        ApiItems.loadMyAds()
-            .then(items => {
-                setItems(items);
+        ApiItems.me()
+            .then(({ data }) => {
+                setItems(data);
                 setLoading(false);
             });
     }, []);
