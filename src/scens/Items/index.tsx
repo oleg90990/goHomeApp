@@ -12,17 +12,17 @@ import RNPickerSelect from 'react-native-picker-select';
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
-const sortByItems = [
-    { label: 'По возрасту', value: Sortby.age },
-    { label: 'По дате', value: Sortby.date },
-];
-
 const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     const [sortBy, setSortBy] = useState(Sortby.date);
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState<IItem[]>([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [lastPage, setLastPage] = useState(2);
+
+    const sortByItems = [
+      { label: 'По возрасту', value: Sortby.age },
+      { label: 'По дате', value: Sortby.date },
+    ];
 
     function loadNextItems() {
         setLoading(true);
@@ -36,7 +36,14 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
             });
     }
 
-    useEffect(loadNextItems, [sortBy]);
+    useEffect((loadNextItems), []);
+
+    useEffect(() => {
+      setCurrentPage(0);
+      setLastPage(2);
+      setItems([]);
+      loadNextItems();
+    }, [sortBy]);
 
     return (
       <View padder>
@@ -44,7 +51,16 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
           data={items}
           renderItem={({ item }) => <Item item={item} />}
           keyExtractor={(item, index) => index.toString()}
-          ListFooterComponent={(loading ? <Spinner/>: null)}
+          ListFooterComponent={
+            (loading ? <Spinner/>: null)
+          }
+          ListHeaderComponent={
+            <RNPickerSelect
+            onValueChange={setSortBy}
+            items={sortByItems}
+            value={sortBy}
+          />
+          }
           onEndReachedThreshold={0.4}
           onEndReached={() => {
             if (!loading && lastPage != currentPage) {
