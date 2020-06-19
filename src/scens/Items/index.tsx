@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { Content, Spinner, View } from 'native-base';
-import { ScrollView } from "react-native";
+import { ScrollView, FlatList, RefreshControl, Text } from "react-native";
 import Item from './components/Item';
 import { IItemsProps } from "./types";
 import ApiItems from "../../api/apiAds";
@@ -21,36 +21,38 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     const [sortBy, setSortBy] = useState(Sortby.date);
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState<IItem[]>([]);
-    const [page, setPage] = useState(1);
-    
-    function loadItems() {
+    const [currentPage, setCurrentPage] = useState(0);
+    const [lastPage, setLastPage] = useState(2);
+
+    function loadNextItems() {
         setLoading(true);
 
-        ApiItems.find(searchForm, sortBy, page)
+        ApiItems.find(searchForm, sortBy, currentPage + 1)
             .then(({ data }) => {
-                setItems(data);
-                setLoading(false);
+              setItems([...items, ...data.items]);
+              setCurrentPage(data.currentPage);
+              setLastPage(data.lastPage);
+              setLoading(false);
             });
     }
 
-    useEffect(loadItems, [sortBy]);
+    useEffect(loadNextItems, [sortBy]);
 
     return (
-        <Content padder>
-            <View>
-                <RNPickerSelect
-                    onValueChange={setSortBy}
-                    items={sortByItems}
-                    value={sortBy}
-                />
-            </View>
-            {( loading ? ( <View style={styles.Spinner}><Spinner/></View> ): 
-                <ScrollView>
-                    {( items.map((item: any, index) => {
-                        return <Item key={index} item={item} />
-                    }))}
-                </ScrollView> )}
-        </Content>
+      <View padder>
+        <FlatList
+          data={items}
+          renderItem={({ item }) => <Item item={item} />}
+          keyExtractor={(item, index) => index.toString()}
+          ListFooterComponent={(loading ? <Spinner/>: null)}
+          onEndReachedThreshold={0.4}
+          onEndReached={() => {
+            if (!loading && lastPage != currentPage) {
+              loadNextItems();
+            }
+          }}
+        />
+      </View>
     );
 };
 

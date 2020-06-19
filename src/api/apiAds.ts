@@ -6,6 +6,11 @@ import { AxiosResponse } from 'axios';
 
 type IPostCreatedBody = Omit<IItem, 'id' | 'user_id' | 'active'>;
 type IPostUpdateBody = Omit<IItem, 'user_id' | 'active'>;
+type IFindBody = {
+    items: IItem[],
+    lastPage: number,
+    currentPage: number
+}
 
 export default class ApiItems {
     public static create(params: IPostCreatedBody): Promise<AxiosResponse<IItem>> {
@@ -16,7 +21,7 @@ export default class ApiItems {
         return Axios.post('ads/update', params);
     }
     
-    public static find(params: IStateSearchFormReducer, sortBy: Sortby, page: number): Promise<AxiosResponse<IItem[]>> {
+    public static find(params: IStateSearchFormReducer, sortBy: Sortby, page: number): Promise<AxiosResponse<IFindBody>> {
         return Axios.post('ads/find', { ...params, sortBy, page });
     }
 

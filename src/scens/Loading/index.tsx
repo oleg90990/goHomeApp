@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Spinner } from 'native-base';
+import { View, Spinner, Text } from 'native-base';
 import { StyleSheet } from "react-native";
 import { ILoadingProps } from "./types";
 
 const Loading: React.FC<ILoadingProps> = (props) => { 
   return (
     <View style={styles.Spinner}>
+      <Text>Настя обещала тут сделать картинку</Text>
       <Spinner />
     </View>
   );
