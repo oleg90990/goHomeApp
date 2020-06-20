@@ -214,6 +214,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
             Телефон
           </Label>
           <Input
+            keyboardType='numeric'
             value={phone}
             onChangeText={setPhone}
           />

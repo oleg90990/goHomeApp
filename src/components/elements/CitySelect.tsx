@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     },
     Value: {
         marginTop: 10,
+        marginBottom: 10,
         color: 'blue',
         textDecorationStyle: 'solid'
     },
