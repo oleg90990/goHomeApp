@@ -4,10 +4,13 @@ import { Form, Item, Label, Input, Button, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { register } from '../../store/user/actions';
 import { toAccounnt } from '../../utilites/appNavigation';
+import CitySelect from '../elements/CitySelect';
 import Toast from '../../utilites/toastr';
+import { IUserUpdateData } from '../../api/apiUser';
+import { ICityItem } from '../../api/apiDictionaries';
 
 interface IRegisterProps {
-  register: (email: string, name: string, password: string, c_password: string) => Promise<any>
+  register: (data: IUserUpdateData) => Promise<any>
 }
 
 const Register: React.FC<IRegisterProps> = ({ register }) => {
@@ -16,22 +19,36 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
   const [password, setPassword] = useState('');
   const [c_password, setСPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState<ICityItem | undefined>();
 
   function onRegister() {
     setLoading(true);
-    register(email, name, password, c_password)
-      .then(() => {
-        Toast.success('Добро пожаловать!');
-        toAccounnt();
-        setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(false);
-      });
+    register({
+      email,
+      name,
+      password,
+      c_password,
+      city_id: city ? city.id : undefined
+    }).then(() => {
+      Toast.success('Добро пожаловать!');
+      toAccounnt();
+      setLoading(false);
+    })
+    .catch((e) => {
+      setLoading(false);
+    });
   }
 
   return (
     <Form>
+      <Item stackedLabel style={styles.Item}>
+        <Label>Город</Label>
+        <CitySelect
+          onSelected={setCity}
+          includedRegins={false}
+          value={city}
+        />
+      </Item>
       <Item stackedLabel style={styles.Item}>
         <Label>Имя</Label>
         <Input

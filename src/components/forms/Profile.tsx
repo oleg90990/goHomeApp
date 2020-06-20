@@ -7,10 +7,13 @@ import { IUser } from '../../store/user';
 import { update } from '../../store/user/actions';
 import { IState } from '../../store/types';
 import Toast from '../../utilites/toastr';
+import CitySelect from '../elements/CitySelect';
+import { IUserUpdateData } from '../../api/apiUser';
+import { ICityItem } from '../../api/apiDictionaries';
 
 interface IProps {
   user: IUser,
-  update: (email: string, name: string, password: string, c_password: string) => Promise<any>
+  update: (data: IUserUpdateData) => Promise<any>
 }
 
 const Profile: React.FC<IProps> = ({ user, update }) => {
@@ -19,10 +22,17 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
   const [password, setPassword] = useState('');
   const [c_password, setCPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState<ICityItem | undefined>(user.city);
 
   function onSave() {
     setLoading(true);
-    update(email, name, password, c_password).then(() => {
+    update({ 
+      email,
+      name,
+      password,
+      c_password,
+      city_id: city ? city.id : undefined
+    }).then(() => {
       Toast.success('Успешно обновлено');
       toAccounnt();
       setLoading(false);
@@ -34,6 +44,14 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
 
   return (
     <Form>
+      <Item stackedLabel style={styles.Item}>
+        <Label>Город</Label>
+        <CitySelect
+          onSelected={setCity}
+          includedRegins={false}
+          value={city}
+        />
+      </Item>
       <Item stackedLabel style={styles.Item}>
         <Label>Имя</Label>
         <Input

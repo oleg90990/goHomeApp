@@ -1,7 +1,23 @@
 import { Dispatch } from 'redux';
-import { SET_AGES, SET_ANIMAL, SET_COLORS, ADD_BREED, REMOVE_BREED, SET_GENDER, SET_STERILIZATION } from './types';
+import {
+  SET_AGES,
+  SET_ANIMAL,
+  SET_COLORS,
+  ADD_BREED,
+  REMOVE_BREED,
+  SET_GENDER,
+  SET_STERILIZATION,
+  SET_CITY
+} from './types';
 import { AgeState} from './index';
 import { Gender, YesNo } from '../../enum/Form';
+import { ICityItem } from '../../api/apiDictionaries';
+
+export const setCity = (payload: ICityItem) => {
+  return (dispatch: Dispatch<any>) => {
+    dispatch({type: SET_CITY, payload});
+  };
+};
 
 export const setAnimal = (payload: number) => {
   return (dispatch: Dispatch<any>) => {

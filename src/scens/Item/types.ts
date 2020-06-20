@@ -1,6 +1,6 @@
 import { IDictionaryColorItem, IDictionaryItem, IDictionaryAnimalType } from '../../store/dictionaries';
-import { IUser } from '../../store/user';
 import { Gender, YesNo } from '../../enum/Form';
+import { ICityItem } from '../../api/apiDictionaries';
 
 export interface IItem {
     id: number,
@@ -16,6 +16,8 @@ export interface IItem {
     user_id: number,
     gender: Gender,
     sterilization: YesNo
+    city?: ICityItem,
+    city_id?: number
 }
 
 export interface IItemProps {

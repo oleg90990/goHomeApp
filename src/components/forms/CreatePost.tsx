@@ -17,19 +17,21 @@ import { Gender, YesNo } from '../../enum/Form';
 import { getLabelSterilization } from '../../helpers/Labels';
 import { toItem } from '../../utilites/appNavigation';
 import { IItem } from '../../scens/Item/types';
-
+import { ICityItem } from '../../api/apiDictionaries';
+import CitySelect from '../elements/CitySelect';
 import Api from '../../api/apiAds';
 
 interface IValues extends Omit<IItem, 'user_id' | 'active'> {
 
 }
 
-interface IProps extends IStateDictionariesReducer, IUser {
+interface IProps extends IStateDictionariesReducer {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[],
-  values?: IValues
+  values?: IValues,
+  user: IUser
 }
 
-const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) => {
+const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }) => {
     const defaultValues = Object.assign({
       id: 0,
       title: '',
@@ -41,7 +43,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) =>
       breed_id: 1,
       phone: '',
       gender: Gender.none,
-      sterilization: YesNo.none
+      sterilization: YesNo.none,
+      city: user.city
     }, values ? values : {});
   
     const [loading, setLoading] = useState(false);
@@ -55,6 +58,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) =>
     const [gender, setGender] = useState<Gender>(defaultValues.gender);
     const [sterilization, setSterilization] = useState<YesNo>(defaultValues.sterilization);
     const [images, setImages] = useState<string[]>(defaultValues.images);
+    const [city, setCity] = useState<ICityItem | undefined>(defaultValues.city);
 
     function onSave() {
       setLoading(true);
@@ -87,7 +91,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) =>
         breed_id,
         phone,
         gender,
-        sterilization
+        sterilization,
+        city_id: city ? city.id : undefined
       }).then(({ data }) => {
         callback(data);
       }).catch(() => {
@@ -107,7 +112,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) =>
         breed_id,
         phone,
         gender,
-        sterilization
+        sterilization,
+        city_id: city ? city.id : undefined
       }).then(({ data }) => {
         callback(data);
       }).catch(() => {
@@ -117,6 +123,14 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values }) =>
 
     return ( !loading ? 
       <Form>
+        <Item stackedLabel style={styles.Item}>
+          <Label>Город</Label>
+          <CitySelect
+            onSelected={setCity}
+            includedRegins={false}
+            value={city}
+          />
+        </Item>
         <Item stackedLabel style={styles.Item}>
           <Label>
             Заголовок
@@ -251,7 +265,7 @@ const mapStateToProps = (state: IState) => {
   const user = state.user.user;
   return {
     ...dictionaries,
-    ...user,
+    user,
     getBreedsByAnimal: getBreedsByAnimal(state)
   };
 };

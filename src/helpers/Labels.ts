@@ -1,4 +1,5 @@
 import { Gender, YesNo } from '../enum/Form';
+import { ICityItem } from '../api/apiDictionaries';
 
 export const getLabelSterilization = (gender: Gender | undefined) => {
   switch (gender) {
@@ -36,6 +37,10 @@ export const getLabelAge = (age: number) => {
   }
 
   return 'лет';
+}
+
+export const getLabelCity = (city: ICityItem | undefined) : string => {
+  return city ? city.name : 'Город не выбран';
 }
 
 export const getLabelGender = (gender: Gender | undefined, animal: number) => {

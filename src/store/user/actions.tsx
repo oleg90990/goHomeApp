@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { SET_USER, SET_TOKEN, LOGOUT } from './types';
-import API from '../../api/apiUser';
+import API, { IUserUpdateData } from '../../api/apiUser';
 import Auth from '../../utilites/auth';
 
 export const login = (email: string, password: string) => {
@@ -17,10 +17,10 @@ export const login = (email: string, password: string) => {
   };
 };
 
-export const register = (email: string, name: string, password: string, c_password: string) => {
+export const register = (userData: IUserUpdateData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data: { user, access_token } } = await API.register(email, name, password, c_password);
+      const { data: { user, access_token } } = await API.register(userData);
       await Auth.setToken(access_token);
       dispatch({type: SET_TOKEN, payload: access_token });
       dispatch({type: SET_USER, payload: user });
@@ -30,10 +30,10 @@ export const register = (email: string, name: string, password: string, c_passwo
   };
 };
 
-export const update = (email: string, name: string, password: string, c_password: string) => {
+export const update = (userData: IUserUpdateData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data } = await API.update(email, name, password, c_password);
+      const { data } = await API.update(userData);
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
       throw e;

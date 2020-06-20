@@ -5,3 +5,4 @@ export const ADD_BREED = 'ADD_BREED';
 export const REMOVE_BREED = 'REMOVE_BREED';
 export const SET_GENDER = 'SET_GENDER';
 export const SET_STERILIZATION = 'SET_STERILIZATION';
+export const SET_CITY = 'SET_CITY';

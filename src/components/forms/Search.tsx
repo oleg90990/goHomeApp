@@ -9,12 +9,14 @@ import AgeWidget from '../widgets/AgeWidget';
 import BreedsWidget from '../widgets/BreedsWidget';
 import GenderSelectWidget from '../widgets/GenderSelectWidget';
 import SterilizationCastrationSelectWidget from '../widgets/SterilizationCastrationSelectWidget';
+import CityWidget from '../widgets/CityWidget';
 
 import { connect } from 'react-redux';
-import { setAges, setAnimal, setColors, addBreed, removeBreed, setGender, setSterilization  } from '../../store/searchForm/actions';
+import { setAges, setAnimal, setColors, addBreed, removeBreed, setGender, setSterilization, setCity } from '../../store/searchForm/actions';
 import { IStateSearchFormReducer, AgeState } from '../../store/searchForm';
 import { IState } from '../../store/types';
 import { Gender , YesNo} from 'src/enum/Form';
+import { ICityItem } from '../../api/apiDictionaries';
 
 interface IProps extends IStateSearchFormReducer {
   setAnimal(id?: number): any;
@@ -24,6 +26,7 @@ interface IProps extends IStateSearchFormReducer {
   removeBreed(id: number): any;
   setGender(gender: Gender): any;
   setSterilization(value: YesNo): any;
+  setCity(city: ICityItem): any;
 }
 
 const Search: React.FC<IProps> = ({
@@ -32,10 +35,17 @@ const Search: React.FC<IProps> = ({
     colors, setColors,
     breeds, addBreed, removeBreed,
     gender, setGender,
-    sterilization, setSterilization
+    sterilization, setSterilization,
+    city, setCity
   }) => {
     return (
       <Form>
+        <View style={styles.Item}>
+            <CityWidget
+              value={city}
+              onChange={setCity}
+            />
+        </View>
         <View style={styles.Item}>
             <AnimalsSelectWidget
               value={animal}
@@ -110,5 +120,6 @@ export default connect(mapStateToProps, {
   addBreed,
   removeBreed,
   setGender,
-  setSterilization
+  setSterilization,
+  setCity
 })(Search);

@@ -1,14 +1,12 @@
 import { SET_USER, SET_TOKEN, LOGOUT } from './types';
 import { IAction } from '../types';
-import Auth from '../../utilites/auth';
+import { ICityItem } from '../../api/apiDictionaries';
 
 export interface IUser {
     id: number,
     name: string,
     email: string,
-    email_verified_at: boolean | null,
-    created_at: string,
-    updated_at: string
+    city?: ICityItem
 }
 
 export interface IStateUserReducer {
@@ -21,10 +19,7 @@ const INITIAL_STATE: IStateUserReducer = {
     user: {
         id: 0,
         name: '',
-        email: '',
-        email_verified_at: null,
-        created_at: '',
-        updated_at: ''
+        email: ''
     }
 };
 

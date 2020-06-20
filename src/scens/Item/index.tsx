@@ -5,7 +5,7 @@ import { StyleSheet, Text, Linking } from "react-native";
 import { IItemProps } from "./types";
 import { getColorsByIds, getBreedById, getAnimalById } from "../../store/dictionaries/getters";
 import Actions from './components/Actions';
-import { getLabelSterilization, getLabelYesNo, getLabelAge } from '../../helpers/Labels';
+import { getLabelSterilization, getLabelYesNo, getLabelAge, getLabelCity } from '../../helpers/Labels';
 import API from '../../api/apiAds';
 import { toEditPost } from '../../utilites/appNavigation';
 
@@ -61,6 +61,18 @@ const Item: React.FC<IItemProps> = ({
                     </Text>
 
                     <List style={{ marginLeft: -20 }}>
+                        <ListItem>
+                            <Left>
+                                <Text style={styles.Text}>
+                                    Город:
+                                </Text>
+                            </Left>
+                            <Body>
+                                <Text style={styles.Text}>
+                                    { getLabelCity(item.city) }
+                                </Text>
+                            </Body>
+                        </ListItem>
                         {( useBreed ? 
                         <ListItem>
                             <Left>
