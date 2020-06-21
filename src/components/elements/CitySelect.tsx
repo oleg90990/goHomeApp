@@ -30,7 +30,11 @@ const CitySelect: React.FC<IBreedsWidgetProps> = ({ includedRegins, onSelected, 
     };
 
     useEffect(() => {
-        updateCities('')
+        updateCities('');
+
+        return () => {
+            setInput('');
+        };
     }, []);
 
     return (

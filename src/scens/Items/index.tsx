@@ -43,6 +43,12 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
       setLastPage(2);
       setItems([]);
       loadNextItems();
+
+      () => {
+        setCurrentPage(0);
+        setLastPage(2);
+        setItems([]);
+      }
     }, [sortBy]);
 
     return (
