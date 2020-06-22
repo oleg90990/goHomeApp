@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, Spinner, Text } from 'native-base';
-import { StyleSheet } from "react-native";
+import { View } from 'native-base';
+import { StyleSheet, Image } from "react-native";
 import { ILoadingProps } from "./types";
 
 const Loading: React.FC<ILoadingProps> = (props) => { 
   return (
     <View style={styles.Spinner}>
-      <Text>Настя обещала тут сделать картинку</Text>
-      <Spinner />
+      <Image source={require(`../../assets/home.png`)}/>
     </View>
   );
 };
@@ -16,7 +15,8 @@ const styles = StyleSheet.create({
   Spinner: {
     flex: 1, 
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#3FB56F'
   }
 });
 
