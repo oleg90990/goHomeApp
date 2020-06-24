@@ -1,4 +1,4 @@
-package com.gohome;
+package com.friendshome;
 
 import com.facebook.react.ReactActivity;
 

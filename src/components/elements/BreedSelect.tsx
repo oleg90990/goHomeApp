@@ -24,7 +24,7 @@ const BreedSelect: React.FC<IBreedsWidgetProps> = ({ animals, onSelected, animal
             .find(({ id }) => id === animal);
 
         return selectedAnimal ? selectedAnimal.breeds.filter(({ name }) => {
-            return name.toString().search(input) !== -1;
+            return name.toLowerCase().includes(input.toLowerCase());
         }) : [];
     }
 

@@ -31,6 +31,8 @@ export const getLabelAge = (age: number) => {
     switch (i) {
       case (1):
         return  'год';
+      case (3):
+        return  'года';
       case (4):
         return 'года';
     }

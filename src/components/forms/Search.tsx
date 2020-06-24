@@ -52,14 +52,14 @@ const Search: React.FC<IProps> = ({
               onChange={setAnimal}
             />
         </View>
-        <View style={styles.Item}>
+        {( animal ? <View style={styles.Item}>
             <BreedsWidget
               animal={animal}
               addBreed={addBreed}
               removeBreed={removeBreed}
               value={breeds}
             />
-        </View>
+        </View> : null )}
         <View style={styles.Item}>
           <GenderSelectWidget
             value={gender}
