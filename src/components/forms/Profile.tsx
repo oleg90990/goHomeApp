@@ -19,6 +19,7 @@ interface IProps {
 const Profile: React.FC<IProps> = ({ user, update }) => {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
+  const [mobile, setMobile] = useState(user.mobile);
   const [password, setPassword] = useState('');
   const [c_password, setCPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,8 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
 
   function onSave() {
     setLoading(true);
-    update({ 
+    update({
+      mobile,
       email,
       name,
       password,
@@ -66,6 +68,14 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
           value={email}
           onChangeText={setEmail}
           disabled={loading}
+        />
+      </Item>
+      <Item stackedLabel style={styles.Item}>
+        <Label>Моб. номер</Label>
+        <Input
+          value={mobile}
+          disabled={true}
+          style={{ opacity: 0.3 }}
         />
       </Item>
       <Item stackedLabel style={styles.Item}>

@@ -53,7 +53,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
     const [colors, setColors] = useState<number[]>(defaultValues.colors);
     const [age, setAge] = useState<number>(defaultValues.age);
     const [breed_id, setBreed] = useState(defaultValues.breed_id);
-    const [phone, setPhone] = useState(defaultValues.phone);
+    const [phone, setPhone] = useState(user.mobile);
     const [content, setContent] = useState(defaultValues.content);
     const [gender, setGender] = useState<Gender>(defaultValues.gender);
     const [sterilization, setSterilization] = useState<YesNo>(defaultValues.sterilization);
@@ -211,12 +211,13 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
         </Item>
         <Item stackedLabel style={styles.Item}>
           <Label>
-            Телефон
+            Моб. номер
           </Label>
           <Input
             keyboardType='numeric'
             value={phone}
-            onChangeText={setPhone}
+            disabled={true}
+            style={{ opacity: 0.4 }}
           />
         </Item>
         <Item style={[styles.Item, styles.ViewItem]}>

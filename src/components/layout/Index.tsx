@@ -18,8 +18,8 @@ const buttons: IFooterButton[] = [
         }
     },
     {
-        title: 'Поиск',
-        icon: 'search',
+        title: 'Гланая',
+        icon: 'home',
         action: () => {
             toDashboard();
         }

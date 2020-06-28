@@ -6,7 +6,8 @@ export interface IUser {
     id: number,
     name: string,
     email: string,
-    city?: ICityItem
+    city?: ICityItem,
+    mobile: string
 }
 
 export interface IStateUserReducer {
@@ -19,7 +20,8 @@ const INITIAL_STATE: IStateUserReducer = {
     user: {
         id: 0,
         name: '',
-        email: ''
+        email: '',
+        mobile: ''
     }
 };
 

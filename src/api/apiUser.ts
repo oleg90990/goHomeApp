@@ -3,7 +3,8 @@ import Axios from '../utilites/axios';
 import { AxiosResponse } from 'axios';
 
 export interface IUserUpdateData {
-    email: string,
+    mobile?: string,
+    email?: string,
     name: string,
     password: string,
     c_password: string,
@@ -11,9 +12,9 @@ export interface IUserUpdateData {
 }
 
 export default class ApiUser {
-    public static async login(email: string, password: string): Promise<AxiosResponse<IStateUserReducer>> {
+    public static async login(mobile: string, password: string): Promise<AxiosResponse<IStateUserReducer>> {
         return Axios.post('user/login', {
-            email, password
+            mobile, password
         });
     }
 

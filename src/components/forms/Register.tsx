@@ -15,7 +15,7 @@ interface IRegisterProps {
 
 const Register: React.FC<IRegisterProps> = ({ register }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [c_password, setСPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
   function onRegister() {
     setLoading(true);
     register({
-      email,
+      mobile,
       name,
       password,
       c_password,
@@ -58,11 +58,11 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
         />
       </Item>
       <Item stackedLabel style={styles.Item}>
-        <Label>Email</Label>
+        <Label>Моб. номер</Label>
         <Input
-          value={email}
-          onChangeText={setEmail}
-          disabled={loading}
+          keyboardType='numeric'
+          value={mobile}
+          onChangeText={setMobile}
         />
       </Item>
       <Item stackedLabel style={styles.Item}>

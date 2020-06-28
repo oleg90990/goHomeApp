@@ -7,17 +7,17 @@ import { toAccounnt, toRegister } from '../../utilites/appNavigation';
 import Toast from '../../utilites/toastr';
 
 interface ILoginProps {
-  login: (email: string, password: string) => Promise<any>
+  login: (mobile: string, password: string) => Promise<any>
 }
 
 const Login: React.FC<ILoginProps> = ({ login }) => {
-  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   function toLogin() {
     setLoading(true);
-    login(email, password)
+    login(mobile, password)
       .then(() => {
         Toast.success('Добро пожаловать!');
         toAccounnt();
@@ -31,10 +31,10 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
   return (
     <Form >
         <Item inlineLabel style={styles.Item}>
-            <Label>Email</Label>
+            <Label>Моб. номер</Label>
             <Input
-              value={email}
-              onChangeText={setEmail}
+              value={mobile}
+              onChangeText={setMobile}
               disabled={loading}
             />
         </Item>
