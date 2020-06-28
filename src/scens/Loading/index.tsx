@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'native-base';
 import { StyleSheet, Image } from "react-native";
 import { ILoadingProps } from "./types";
+import { Color } from '../../enum/Color';
 
 const Loading: React.FC<ILoadingProps> = (props) => { 
   return (
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1, 
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#3FB56F'
+    backgroundColor: Color.theme
   }
 });
 

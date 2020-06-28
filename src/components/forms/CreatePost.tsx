@@ -235,7 +235,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
         </View>
         <View style={styles.ViewItem}>
           <Button block primary onPress={onSave}>
-            <Text> { defaultValues.id ? 'Редактировать пост' : 'Создать Пост' }</Text>
+            <Text> { defaultValues.id ? 'Сохранить' : 'Создать' }</Text>
           </Button>
         </View>
       </Form> : <Spinner />

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
-import { View, Button, Text, Icon } from 'native-base';
+import { View, Icon, Text } from 'native-base';
+import { Color } from '../../enum/Color';
 
 interface IImagesSelectProps  {
   onChange: (value: string[]) => void,
@@ -10,6 +11,9 @@ interface IImagesSelectProps  {
 
 var options = {
   title: 'Выберите изображение',
+  cancelButtonTitle: 'Отмена',
+  takePhotoButtonTitle: 'Сделать фото',
+  chooseFromLibraryButtonTitle: 'Выбрать из галереи',
   storageOptions: {
     skipBackup: true,
     path: 'images',
@@ -30,7 +34,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({ value, onChange }) => {
     }
 
     function selectFile() {
-      ImagePicker.showImagePicker(options, ({data}: ImagePickerResponse) => {
+      ImagePicker.showImagePicker(options, ({ data }: ImagePickerResponse) => {
         if (data) {
           addResource(data);
         }
@@ -60,10 +64,18 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({ value, onChange }) => {
                 <Image source={{ uri: getUri(uri) }} style={styles.Img} />
               </View>
             }) )}
-        </View> 
-        <Button block onPress={selectFile} style={styles.AddBtn}  >
-            <Text>Добавить файл</Text>
-        </Button>       
+
+          <TouchableOpacity onPress={selectFile} > 
+            <View style={styles.AddImage}>
+                <Icon
+                  style={styles.AddImageIcon}
+                  active
+                  name='camera'
+                  color={'white'}
+                />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     );
 };
@@ -72,6 +84,21 @@ const styles = StyleSheet.create({
   AddBtn: {
     width: 220,
     marginTop: 10
+  },
+  AddImageIcon: {
+    textAlign: 'center',
+    color: Color.theme,
+    fontSize: 30
+  },
+  AddImage: {
+    display: 'flex',
+    width: 80,
+    height: 80,
+    borderWidth: 3,
+    borderColor: Color.theme,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   Img: {
     width: 80,
@@ -88,7 +115,7 @@ const styles = StyleSheet.create({
   Icon: {
     color: 'white',
     fontSize: 20,
-    backgroundColor: '#3FB56F',
+    backgroundColor: Color.theme,
     position: 'absolute',
     zIndex: 1,
     right: 15,

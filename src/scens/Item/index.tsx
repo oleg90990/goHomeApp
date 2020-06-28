@@ -25,15 +25,10 @@ const Item: React.FC<IItemProps> = ({
         const [activeItem, setActive] = useState(item.active); 
 
         function toPublish(active: boolean) {
-            setLoading(true);
             API.publish(item.id, active)
                 .then(({ data }) => {
                     setActive(data.active);
-                    setLoading(false);
-                })
-                .catch(() => {
-                    setLoading(false);
-                })
+                });
         }
 
         function toCall() {
