@@ -61,11 +61,11 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
             (loading ? <Spinner/>: null)
           }
           ListHeaderComponent={
-            <RNPickerSelect
-            onValueChange={setSortBy}
-            items={sortByItems}
-            value={sortBy}
-          />
+            false ? <RNPickerSelect
+              onValueChange={setSortBy}
+              items={sortByItems}
+              value={sortBy}
+            /> : null
           }
           onEndReachedThreshold={0.4}
           onEndReached={() => {

@@ -63,7 +63,7 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
         />
       </Item>
       <Item stackedLabel style={styles.Item}>
-        <Label>Email</Label>
+        <Label>E-Mail адрес</Label>
         <Input
           value={email}
           onChangeText={setEmail}

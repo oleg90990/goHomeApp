@@ -10,7 +10,7 @@ interface IImagesSelectProps  {
 }
 
 var options = {
-  title: 'Выберите изображение',
+  title: undefined,
   cancelButtonTitle: 'Отмена',
   takePhotoButtonTitle: 'Сделать фото',
   chooseFromLibraryButtonTitle: 'Выбрать из галереи',
