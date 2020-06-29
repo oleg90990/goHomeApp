@@ -32,7 +32,7 @@ const Item: React.FC<IItemProps> = ({
         }
 
         function toCall() {
-            Linking.openURL(`tel:${item.phone}`);
+            Linking.openURL(`tel:+${item.phone}`);
         }
 
         function toEdit() {

@@ -8,6 +8,7 @@ import CitySelect from '../elements/CitySelect';
 import Toast from '../../utilites/toastr';
 import { IUserUpdateData } from '../../api/apiUser';
 import { ICityItem } from '../../api/apiDictionaries';
+import PhoneInput from '../elements/PhoneInput';
 
 interface IRegisterProps {
   register: (data: IUserUpdateData) => Promise<any>
@@ -59,10 +60,9 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
       </Item>
       <Item stackedLabel style={styles.Item}>
         <Label>Моб. номер</Label>
-        <Input
-          keyboardType='numeric'
+        <PhoneInput
           value={mobile}
-          onChangeText={setMobile}
+          onChange={setMobile}
         />
       </Item>
       <Item stackedLabel style={styles.Item}>

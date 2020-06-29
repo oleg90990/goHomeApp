@@ -10,6 +10,7 @@ import Toast from '../../utilites/toastr';
 import CitySelect from '../elements/CitySelect';
 import { IUserUpdateData } from '../../api/apiUser';
 import { ICityItem } from '../../api/apiDictionaries';
+import PhoneInput from '../elements/PhoneInput';
 
 interface IProps {
   user: IUser,
@@ -72,10 +73,10 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
       </Item>
       <Item stackedLabel style={styles.Item}>
         <Label>Моб. номер</Label>
-        <Input
+        <PhoneInput
           value={mobile}
+          onChange={() => {}}
           disabled={true}
-          style={{ opacity: 0.3 }}
         />
       </Item>
       <Item stackedLabel style={styles.Item}>

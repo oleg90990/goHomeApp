@@ -20,6 +20,7 @@ import { IItem } from '../../scens/Item/types';
 import { ICityItem } from '../../api/apiDictionaries';
 import CitySelect from '../elements/CitySelect';
 import Api from '../../api/apiAds';
+import PhoneInput from '../elements/PhoneInput';
 
 interface IValues extends Omit<IItem, 'user_id' | 'active'> {
 
@@ -213,11 +214,10 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
           <Label>
             Моб. номер
           </Label>
-          <Input
-            keyboardType='numeric'
+            <PhoneInput
             value={phone}
+            onChange={() => {}}
             disabled={true}
-            style={{ opacity: 0.4 }}
           />
         </Item>
         <Item style={[styles.Item, styles.ViewItem]}>

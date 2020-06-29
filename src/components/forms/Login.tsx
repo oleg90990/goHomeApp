@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { login  } from '../../store/user/actions';
 import { toAccounnt, toRegister } from '../../utilites/appNavigation';
 import Toast from '../../utilites/toastr';
+import PhoneInput from '../elements/PhoneInput';
 
 interface ILoginProps {
   login: (mobile: string, password: string) => Promise<any>
@@ -32,10 +33,9 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
     <Form >
         <Item inlineLabel style={styles.Item}>
             <Label>Моб. номер</Label>
-            <Input
+            <PhoneInput
               value={mobile}
-              onChangeText={setMobile}
-              disabled={loading}
+              onChange={setMobile}
             />
         </Item>
         <Item inlineLabel style={styles.Item}>
