@@ -9,7 +9,9 @@ export enum Scens {
     myAds = 'myAds',
     createPost = 'createPost',
     editPost = 'editPost',
-    register = 'register'
+    register = 'register',
+    social = 'social',
+    vk = 'vk'
 }
 
 export default Scens;

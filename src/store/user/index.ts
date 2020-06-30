@@ -7,7 +7,9 @@ export interface IUser {
     name: string,
     email: string,
     city?: ICityItem,
-    mobile: string
+    mobile: string,
+    vk: boolean,
+    vkGroups: number[]
 }
 
 export interface IStateUserReducer {
@@ -21,7 +23,9 @@ const INITIAL_STATE: IStateUserReducer = {
         id: 0,
         name: '',
         email: '',
-        mobile: ''
+        mobile: '',
+        vk: false,
+        vkGroups: []
     }
 };
 

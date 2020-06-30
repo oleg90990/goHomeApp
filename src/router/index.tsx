@@ -14,6 +14,9 @@ import CeratePost from '../scens/CreatePost';
 import EditPost from '../scens/EditPost';
 import Register from '../scens/Register';
 
+import Social from '../scens/Social';
+import Vk from '../scens/Social/pages/Vk';
+
 import Layout from "../components/layout/Index";
 
 import { connect } from 'react-redux';
@@ -53,6 +56,8 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
               <Scene key={Scens.createPost} component={CeratePost} title="Новый пост" />
               <Scene key={Scens.register} component={Register} title="Регистрация" />
               <Scene key={Scens.editPost} component={EditPost} title="Регистрация" />
+              <Scene key={Scens.social} component={Social} title="Социальне сети" />
+              <Scene key={Scens.vk} component={Vk} title="Вконтакте" />
           </Scene>
       </Router>
     </Layout>

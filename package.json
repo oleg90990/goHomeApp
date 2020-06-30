@@ -12,6 +12,7 @@
   "dependencies": {
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/checkbox": "^0.4.2",
     "axios": "^0.19.2",
     "libphonenumber-js": "^1.7.54",
     "native-base": "^2.13.12",
@@ -24,6 +25,7 @@
     "react-native-reanimated": "^1.9.0",
     "react-native-router-flux": "^4.2.0",
     "react-native-screens": "^2.8.0",
+    "react-native-vkontakte-login": "^1.0.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",

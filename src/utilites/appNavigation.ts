@@ -71,3 +71,11 @@ export const toEditPost = (props: IEditPostProps) => {
 export const toRegister = () => {
     middlewareAuth(Scens.register);
 }
+
+export const toSocial = () => {
+    middlewareAuth(Scens.social);
+}
+
+export const toVkPage = () => {
+    middlewareAuth(Scens.vk);
+}

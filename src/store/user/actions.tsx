@@ -1,7 +1,9 @@
 import { Dispatch } from 'redux';
 import { SET_USER, SET_TOKEN, LOGOUT } from './types';
 import API, { IUserUpdateData } from '../../api/apiUser';
+import APIvk from '../../api/apiVk';
 import Auth from '../../utilites/auth';
+import { VKLoginResult } from 'react-native-vkontakte-login';
 
 export const login = (mobile: string, password: string) => {
   return async (dispatch: Dispatch<any>) => {
@@ -48,6 +50,39 @@ export const loadData = () => {
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
       await Auth.removeToken();
+      throw e;
+    }
+  };
+};
+
+export const vkSave = (dataLoginResult: VKLoginResult) => {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const { data } = await APIvk.save(dataLoginResult);
+      dispatch({type: SET_USER, payload: data });
+    } catch (e) {
+      throw e;
+    }
+  };
+};
+
+export const vkGroups = () => {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const { data } = await APIvk.groups();
+      return data;
+    } catch (e) {
+      throw e;
+    }
+  };
+};
+
+export const vkGroupsStore = (groups: number[]) => {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const { data } = await APIvk.groupsStore(groups);
+      dispatch({type: SET_USER, payload: data });
+    } catch (e) {
       throw e;
     }
   };
