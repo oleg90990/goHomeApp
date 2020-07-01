@@ -67,7 +67,7 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
 
     if (!user.vk) {
       VKLogin
-        .login(['groups', 'wall'])
+        .login(['groups', 'wall', 'photos'])
         .then(save);
     } else {
       loadGroups();
@@ -79,30 +79,24 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
 
     if (index >= 0) {
       selected.splice(index, 1);
-    } else if (selected.length < 5) {
+    } else {
       selected.push(id);
     }
 
-    setSelected([...selected])
+    setSelected([...selected]);
   }
 
   return (
     <Content padder>
       { loading ? <Spinner /> :
       <View>
-        <Card>
-            <CardItem>
-              <Body>
-                <Text>
-                  Вы можете добавить не более 5 групп.
-                </Text>
-              </Body>
-            </CardItem>
-          </Card>
         <List>
           {groups.map(({ name, id }, key) => {
-              return <ListItem key={key} style={styles.Checkbox} onPress={() => onValueChange(id)}>
-                <CheckBox value={selected.indexOf(id) >= 0} />
+              return <ListItem key={key} style={styles.Checkbox}>
+                <CheckBox
+                  value={selected.indexOf(id) >= 0}
+                  onValueChange={() => onValueChange(id)}
+                />
                 <Text>
                   { name }
                 </Text>

@@ -1,6 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native";
-import { Form, Item, Input, Picker, Label, Textarea, View, Button, Text, Spinner } from 'native-base';
+import { Form,
+  Item,
+  Input,
+  Picker,
+  Label,
+  Textarea,
+  View,
+  Button,
+  Text,
+  Spinner,
+  Body,
+  Card,
+  CardItem,
+  List,
+  ListItem,
+  Image
+} from 'native-base';
 
 import ColorsSelect from '../../components/elements/ColorsSelect';
 import AgeSelect from '../../components/elements/AgeSelect';
@@ -14,6 +30,7 @@ import { IStateDictionariesReducer, IDictionaryItem } from '../../store/dictiona
 import { IUser } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
 import { Gender, YesNo } from '../../enum/Form';
+import { Social } from '../../enum/Social';
 import { getLabelSterilization } from '../../helpers/Labels';
 import { toItem } from '../../utilites/appNavigation';
 import { IItem } from '../../scens/Item/types';
@@ -21,6 +38,8 @@ import { ICityItem } from '../../api/apiDictionaries';
 import CitySelect from '../elements/CitySelect';
 import Api from '../../api/apiAds';
 import PhoneInput from '../elements/PhoneInput';
+
+import CheckBox from '@react-native-community/checkbox';
 
 interface IValues extends Omit<IItem, 'user_id' | 'active'> {
 
@@ -60,6 +79,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
     const [sterilization, setSterilization] = useState<YesNo>(defaultValues.sterilization);
     const [images, setImages] = useState<string[]>(defaultValues.images);
     const [city, setCity] = useState<ICityItem | undefined>(defaultValues.city);
+    const [socials, setSocials] = useState<Social[]>([Social.vk]);
 
     function onSave() {
       setLoading(true);
@@ -93,7 +113,8 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
         phone,
         gender,
         sterilization,
-        city_id: city ? city.id : undefined
+        city_id: city ? city.id : undefined,
+        socials
       }).then(({ data }) => {
         callback(data);
       }).catch(() => {
@@ -114,12 +135,25 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
         phone,
         gender,
         sterilization,
-        city_id: city ? city.id : undefined
+        city_id: city ? city.id : undefined,
+        socials
       }).then(({ data }) => {
         callback(data);
       }).catch(() => {
         callback();
       });
+    }
+
+    function onChangeSocial(id: Social) {
+      const index = socials.indexOf(id);
+
+      if (index >= 0) {
+        socials.splice(index, 1);
+      } else {
+        socials.push(id);
+      }
+
+      setSocials([...socials]);
     }
 
     return ( !loading ? 
@@ -234,9 +268,26 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
         <View style={styles.ViewItem}>
           <ImageSelect value={images} onChange={setImages} />
         </View>
+        <Card style={styles.ViewItem}>
+          <CardItem>
+            <Body>
+              <List>
+                <ListItem style={styles.Checkbox}>
+                  <CheckBox
+                    value={socials.indexOf(Social.vk) >= 0} 
+                    onValueChange={() => onChangeSocial(Social.vk)}
+                  />
+                  <Text>
+                    { defaultValues.id ? 'Отредактировать в группах vk' : 'Опубликовать в группах vk' }
+                  </Text>
+                </ListItem>
+              </List>
+            </Body>
+          </CardItem>
+        </Card>
         <View style={styles.ViewItem}>
           <Button block primary onPress={onSave}>
-            <Text> { defaultValues.id ? 'Сохранить' : 'Создать' }</Text>
+            <Text> { defaultValues.id ? 'Отредактировать' : 'Создать' }</Text>
           </Button>
         </View>
       </Form> : <Spinner />
@@ -244,6 +295,13 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user
 };
 
 const styles = StyleSheet.create({
+  SocialIcon: {
+    height: 20
+  },
+  Checkbox: {
+    flexDirection: "row",
+    marginLeft: 0
+  },
   Title: {
     fontSize: 20,
     marginBottom: 10

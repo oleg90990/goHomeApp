@@ -3,9 +3,16 @@ import { IStateSearchFormReducer } from '../store/searchForm';
 import { Sortby } from '../enum/Form';
 import Axios from '../utilites/axios';
 import { AxiosResponse } from 'axios';
+import { Social } from '../enum/Social';
 
-type IPostCreatedBody = Omit<IItem, 'id' | 'user_id' | 'active'>;
-type IPostUpdateBody = Omit<IItem, 'user_id' | 'active'>;
+interface IPostCreatedBody extends Omit<IItem, 'id' | 'user_id' | 'active'> {
+    socials: Social[]
+}
+
+interface IPostUpdateBody extends Omit<IItem, 'user_id' | 'active'> {
+    socials: Social[]
+}
+
 type IFindBody = {
     items: IItem[],
     lastPage: number,
