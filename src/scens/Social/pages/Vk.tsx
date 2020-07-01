@@ -8,7 +8,7 @@ import { IState } from '../../../store/types';
 import { vkSave, vkGroups, vkGroupsStore } from '../../../store/user/actions';
 import { IUser } from '../../../store/user';
 
-import { toSocial } from "../../../utilites/appNavigation";
+import { toBack } from "../../../utilites/appNavigation";
 
 import { IGroupItem } from '../../../api/apiVk';
 import CheckBox from '@react-native-community/checkbox';
@@ -35,7 +35,7 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
       })
       .catch(() => {
         setLoading(false);
-      })
+      });
   }
 
   function save(data: VKLoginResult) {
@@ -46,7 +46,7 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
       })
       .catch(() => {
         setLoading(false);
-      })
+      });
   }
 
   function submit() {
@@ -54,12 +54,12 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
     vkGroupsStore(selected)
       .then(() => {
         Toast.success('Сохранено');
-        toSocial();
-        setLoading(true);
+        toBack();
+        setLoading(false);
       })
       .catch(() => {
         setLoading(false);
-      })
+      });
   }
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
               </ListItem>
             })}
           </List>
-          <Button style={styles.Btn} onPress={() => submit()}>
+          <Button style={styles.Btn} onPress={submit}>
             <Text style={styles.BtnText}>
               Сохранить
             </Text>

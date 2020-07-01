@@ -15,7 +15,10 @@ const scensAuth: Scens[] = [
     Scens.accounnt,
     Scens.profile,
     Scens.myAds,
-    Scens.createPost
+    Scens.createPost,
+    Scens.editPost,
+    Scens.social,
+    Scens.vk
 ];
 
  async function middlewareAuth(scen: Scens, props: any = {}) {
@@ -26,6 +29,10 @@ const scensAuth: Scens[] = [
     } else {
         Actions[scen](props);
     }
+}
+
+export const toBack = () => {
+    Actions.pop();
 }
 
 export const toItems = () => {
