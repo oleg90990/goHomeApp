@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from "react-native";
-import { Form,
+import {
+  Form,
   Item,
   Input,
   Picker,
@@ -15,9 +16,9 @@ import { Form,
   CardItem
 } from 'native-base';
 
-import ColorsSelect from '../../components/elements/ColorsSelect';
-import AgeSelect from '../../components/elements/AgeSelect';
-import GenderSelect from '../../components/elements/GenderSelect';
+import ColorsSelect from '../elements/ColorsSelect';
+import AgeSelect from '../elements/AgeSelect';
+import GenderSelect from '../elements/GenderSelect';
 import SterilizationCastrationSelect from '../elements/SterilizationCastrationSelect';
 import ImageSelect from '../elements/ImagesSelect';
 import SocialSelect from '../elements/SocialSelect';
@@ -31,47 +32,41 @@ import { Gender, YesNo } from '../../enum/Form';
 import { Social } from '../../enum/Social';
 import { getLabelSterilization } from '../../helpers/Labels';
 import { toItem } from '../../utilites/appNavigation';
+import { IItem } from '../../scens/Item/types';
 import { ICityItem } from '../../api/apiDictionaries';
 import CitySelect from '../elements/CitySelect';
 import Api from '../../api/apiAds';
 import PhoneInput from '../elements/PhoneInput';
 
+interface IValues extends Omit<IItem, 'user_id' | 'active'> {
+
+}
+
 interface IProps extends IStateDictionariesReducer {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[],
+  values: IValues,
   user: IUser
 }
 
-const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, user }) => {
-    const defaultValues = {
-      id: 0,
-      title: '',
-      images: [],
-      content: '',
-      age: 1,
-      colors: [],
-      animal_id: 1,
-      breed_id: 1,
-      gender: Gender.none,
-      sterilization: YesNo.none,
-      city: user.city
-    };
-  
+const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }) => { 
     const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState(defaultValues.title);
-    const [animal_id, setAnimal] = useState(defaultValues.animal_id);
-    const [colors, setColors] = useState<number[]>(defaultValues.colors);
-    const [age, setAge] = useState<number>(defaultValues.age);
-    const [breed_id, setBreed] = useState(defaultValues.breed_id);
-    const [content, setContent] = useState(defaultValues.content);
-    const [gender, setGender] = useState<Gender>(defaultValues.gender);
-    const [sterilization, setSterilization] = useState<YesNo>(defaultValues.sterilization);
-    const [images, setImages] = useState<string[]>(defaultValues.images);
-    const [city, setCity] = useState<ICityItem | undefined>(defaultValues.city);
+    const [title, setTitle] = useState(values.title);
+    const [animal_id, setAnimal] = useState(values.animal_id);
+    const [colors, setColors] = useState<number[]>(values.colors);
+    const [age, setAge] = useState<number>(values.age);
+    const [breed_id, setBreed] = useState(values.breed_id);
+    const [content, setContent] = useState(values.content);
+    const [gender, setGender] = useState<Gender>(values.gender);
+    const [sterilization, setSterilization] = useState<YesNo>(values.sterilization);
+    const [images, setImages] = useState<string[]>(values.images);
+    const [city, setCity] = useState<ICityItem | undefined>(values.city);
     const [socials, setSocials] = useState<Social[]>([Social.vk]);
 
     function onSave() {
       setLoading(true);
-      Api.create({
+
+      Api.update({
+        id: values.id,
         title,
         images,
         content,
@@ -84,15 +79,15 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, user }) => {
         city_id: city ? city.id : undefined,
         socials
       }).then(({ data }) => {
-        setLoading(false)
         toItem({ item: data });
-      }).catch(() => [
-        setLoading(false)
-      ]);
+        setLoading(false);
+      }).catch(() => {
+        setLoading(false);
+      });
     }
 
-    const isShowVkPublish = () => {
-      return user.vkGroups.length > 0;
+    const isShowVkEdit = () => {
+      return values.vkPosts.length > 0;
     }
 
     return ( !loading ? 
@@ -197,21 +192,21 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, user }) => {
         <View style={styles.ViewItem}>
           <ImageSelect value={images} onChange={setImages} />
         </View>
-        { isShowVkPublish() ? <Card style={styles.ViewItem}>
+        { isShowVkEdit() ? <Card style={styles.ViewItem}>
           <CardItem>
             <Body>
-                <SocialSelect
-                  value={socials}
-                  onChange={setSocials}
-                  prefix={'Опубликовать'}
-                  vk={user.vkGroups.length > 0}
-                />
+              <SocialSelect
+                value={socials}
+                onChange={setSocials}
+                prefix={'Отредактировать'}
+                vk={values.vkPosts.length > 0}
+              />
             </Body>
           </CardItem>
         </Card> : null }
         <View style={styles.ViewItem}>
           <Button block primary onPress={onSave}>
-            <Text> { 'Создать' }</Text>
+            <Text> { 'Отредактировать' }</Text>
           </Button>
         </View>
       </Form> : <Spinner />
@@ -247,4 +242,4 @@ const mapStateToProps = (state: IState) => {
   };
 };
 
-export default connect(mapStateToProps, {})(CreatePost);
+export default connect(mapStateToProps, {})(EditPost);

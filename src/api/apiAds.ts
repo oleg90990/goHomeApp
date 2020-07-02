@@ -5,11 +5,11 @@ import Axios from '../utilites/axios';
 import { AxiosResponse } from 'axios';
 import { Social } from '../enum/Social';
 
-interface IPostCreatedBody extends Omit<IItem, 'id' | 'user_id' | 'active'> {
+interface IPostCreatedBody extends Omit<IItem, 'id' | 'user_id' | 'active' | 'vkPosts'> {
     socials: Social[]
 }
 
-interface IPostUpdateBody extends Omit<IItem, 'user_id' | 'active'> {
+interface IPostUpdateBody extends Omit<IItem, 'user_id' | 'active' | 'vkPosts'> {
     socials: Social[]
 }
 

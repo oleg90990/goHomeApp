@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { IEditPostProps } from "./types";
 import { Content } from 'native-base';
-import CreatePostForm from '../../components/forms/CreatePost';
+import EditPostForm from '../../components/forms/EditPost';
 
 const EditPost: React.FC<IEditPostProps> = ({ item }) => {
     return (
       <Content padder>
-        <CreatePostForm values={item} />
+        <EditPostForm values={item} />
       </Content>
     );
 };

@@ -22,12 +22,12 @@ const Actions: React.FC<IActionsProps> = ({ user, active, user_id, toPublish, to
 
         return (
             <View>
-                <Button primary block onPress={toCall} style={styles.BtnEdit}>
+                { active ? <Button primary block onPress={toCall} style={styles.BtnEdit}>
                     <Text style={styles.Button}>
                         Позвонить
                     </Text>
-                </Button>
-                {(isEdit ? <Button warning block onPress={toEdit} style={styles.BtnEdit}>
+                </Button> : null }
+                {(isEdit && active ? <Button warning block onPress={toEdit} style={styles.BtnEdit}>
                     <Text style={styles.Button}>
                         Редактировать
                     </Text>
@@ -39,9 +39,9 @@ const Actions: React.FC<IActionsProps> = ({ user, active, user_id, toPublish, to
                             Снять с публикации
                         </Text>
                     </Button> : 
-                    <Button warning block onPress={() => toPublish(true)} style={styles.BtnEdit}>
+                    <Button warning block style={styles.BtnEdit} disabled={!active}>
                         <Text style={styles.Button}>
-                            Опубликовать
+                            Объявление не активно
                         </Text>
                     </Button>)
                 : null )}

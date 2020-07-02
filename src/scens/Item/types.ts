@@ -11,13 +11,13 @@ export interface IItem {
     colors: number[],
     animal_id: number,
     breed_id: number,
-    phone: string,
     active: boolean,
     user_id: number,
     gender: Gender,
     sterilization: YesNo
     city?: ICityItem,
-    city_id?: number
+    city_id?: number,
+    vkPosts: number[]
 }
 
 export interface IItemProps {

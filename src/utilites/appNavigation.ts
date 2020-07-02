@@ -3,7 +3,7 @@ import { Scens } from '../enum/Scens'
 import Auth from './auth';
 
 import { IItemsProps } from '../scens/Items/types';
-import { IItemProps } from '../scens/Item/types';
+import { IItem } from '../scens/Item/types';
 import { IDashboardProps } from '../scens/Dashboard/types';
 import { ILoginProps } from '../scens/Login/types';
 import { IAccountProps } from '../scens/Account/types';
@@ -39,7 +39,7 @@ export const toItems = () => {
     middlewareAuth(Scens.items);
 }
 
-export const toItem = (props: IItemProps) => {
+export const toItem = (props: { item: IItem }) => {
     middlewareAuth(Scens.item, props);
 }
 
