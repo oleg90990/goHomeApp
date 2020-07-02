@@ -1,5 +1,5 @@
 import React from 'react';
-import { Content, CardItem, Card, Icon, Right, } from 'native-base';
+import { Content, CardItem, Card, Icon, Right, Body } from 'native-base';
 import { StyleSheet, Text, Image, ImageSourcePropType, TouchableOpacity } from "react-native";
 import { ISocialProps } from "./types";
 import { toVkPage } from "../../utilites/appNavigation";
@@ -25,6 +25,16 @@ const Social: React.FC<ISocialProps> = ({ user }) => {
   
   return (
     <Content padder>
+        <Card style={styles.Message}>
+          <CardItem>
+            <Body>
+                <Text>
+                  Прикрепите социальные сети для того что бы автоматически создавать и редактиравать объявления. Таким образом ваше объявление увидит больше человек
+                </Text>
+            </Body>
+          </CardItem>
+        </Card>
+
         { items.map(({ title, icon, action }, key) => {
           return <TouchableOpacity key={key} onPress={action}>
             <Card>
@@ -43,6 +53,9 @@ const Social: React.FC<ISocialProps> = ({ user }) => {
 };
 
 const styles = StyleSheet.create({
+  Message: {
+    marginBottom: 10
+  },
   Icon: {
     height: 30,
     width: 55,

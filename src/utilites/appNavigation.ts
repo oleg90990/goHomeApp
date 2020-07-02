@@ -2,13 +2,7 @@ import { Actions } from 'react-native-router-flux';
 import { Scens } from '../enum/Scens'
 import Auth from './auth';
 
-import { IItemsProps } from '../scens/Items/types';
 import { IItem } from '../scens/Item/types';
-import { IDashboardProps } from '../scens/Dashboard/types';
-import { ILoginProps } from '../scens/Login/types';
-import { IAccountProps } from '../scens/Account/types';
-import { ILoadingProps } from '../scens/Loading/types';
-import { IProfileProps } from '../scens/Profile/types';
 import { IEditPostProps } from '../scens/EditPost/types';
 
 const scensAuth: Scens[] = [

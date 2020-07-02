@@ -88,6 +88,15 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
 
   return (
     <Content padder>
+      <Card style={styles.Message}>
+        <CardItem>
+          <Body>
+              <Text>
+                Укажите группы в которых будут публиковаться посты. Созданные посты будут редактироваться и удалятся в случае закрытия объявления.
+              </Text>
+          </Body>
+        </CardItem>
+      </Card>
       { loading ? <Spinner /> :
       <View>
         <List>
@@ -115,6 +124,9 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
 };
 
 const styles = StyleSheet.create({
+  Message: {
+    marginBottom: 10
+  },
   Checkbox: {
     flexDirection: "row",
     marginLeft: 0
