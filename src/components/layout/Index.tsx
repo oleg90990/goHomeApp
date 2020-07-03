@@ -11,14 +11,14 @@ interface IFooterButton {
 
 const buttons: IFooterButton[] = [
     {
-        title: 'профиль',
+        title: 'Профиль',
         icon: 'person',
         action: () => {
             toAccounnt();
         }
     },
     {
-        title: 'Гланая',
+        title: 'Домой',
         icon: 'home',
         action: () => {
             toDashboard();
