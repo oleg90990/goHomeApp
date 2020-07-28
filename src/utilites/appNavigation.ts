@@ -12,7 +12,8 @@ const scensAuth: Scens[] = [
     Scens.createPost,
     Scens.editPost,
     Scens.social,
-    Scens.vk
+    Scens.vk,
+    Scens.instagram
 ];
 
  async function middlewareAuth(scen: Scens, props: any = {}) {
@@ -79,4 +80,8 @@ export const toSocial = () => {
 
 export const toVkPage = () => {
     middlewareAuth(Scens.vk);
+}
+
+export const toInstagramPage = () => {
+    middlewareAuth(Scens.instagram);
 }

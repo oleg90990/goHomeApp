@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from "react-native";
 import { Social } from '../../enum/Social';
-import { Text, List, ListItem  } from 'native-base';
+import { Text, List, View  } from 'native-base';
 import CheckBox from '@react-native-community/checkbox';
 
 interface IColorsSelectProps {
@@ -25,8 +25,8 @@ const SocialSelect: React.FC<IColorsSelectProps> = ({ value, onChange, prefix, v
     }
 
     return (
-        <List>
-           {vk ? <ListItem style={styles.Checkbox}>
+        <View>
+           {vk ? <View style={styles.Checkbox}>
                 <CheckBox
                 value={value.indexOf(Social.vk) >= 0} 
                 onValueChange={() => onChangeSocial(Social.vk)}
@@ -34,15 +34,17 @@ const SocialSelect: React.FC<IColorsSelectProps> = ({ value, onChange, prefix, v
                 <Text>
                     { `${prefix} в группах vk` }
                 </Text>
-            </ListItem> : null }
-        </List>
+            </View> : null }
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     Checkbox: {
         flexDirection: "row",
-        marginLeft: 0
+        marginLeft: 0,
+        display: 'flex',
+        alignItems: 'center'
     }
 });
 

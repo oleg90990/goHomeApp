@@ -11,7 +11,8 @@ export enum Scens {
     editPost = 'editPost',
     register = 'register',
     social = 'social',
-    vk = 'vk'
+    vk = 'vk',
+    instagram = 'instagram'
 }
 
 export default Scens;

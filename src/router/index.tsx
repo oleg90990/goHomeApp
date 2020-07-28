@@ -16,6 +16,7 @@ import Register from '../scens/Register';
 
 import Social from '../scens/Social';
 import Vk from '../scens/Social/pages/Vk';
+import Instagram from '../scens/Social/pages/Instagram';
 
 import Layout from "../components/layout/Index";
 
@@ -58,6 +59,8 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
               <Scene key={Scens.editPost} component={EditPost} title="Регистрация" />
               <Scene key={Scens.social} component={Social} title="Социальне сети" />
               <Scene key={Scens.vk} component={Vk} title="Вконтакте" />
+              <Scene key={Scens.vk} component={Vk} title="Вконтакте" />
+              <Scene key={Scens.instagram} component={Instagram} title="Instagram" />
           </Scene>
       </Router>
     </Layout>

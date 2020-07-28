@@ -2,7 +2,7 @@ import React from 'react';
 import { Content, CardItem, Card, Icon, Right, Body } from 'native-base';
 import { StyleSheet, Text, Image, ImageSourcePropType, TouchableOpacity } from "react-native";
 import { ISocialProps } from "./types";
-import { toVkPage } from "../../utilites/appNavigation";
+import { toVkPage, toInstagramPage } from "../../utilites/appNavigation";
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
@@ -20,6 +20,11 @@ const Social: React.FC<ISocialProps> = ({ user }) => {
       title: !user.vk ? 'Не подключено' : 'Подключено',
       icon: require(`../../assets/social/vk.png`),
       action: toVkPage
+    },
+    {
+      title: 'Не подключено',
+      icon: require(`../../assets/social/instagram.png`),
+      action: toInstagramPage
     },
   ];
   

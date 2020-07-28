@@ -16,8 +16,7 @@ export interface IItem {
     gender: Gender,
     sterilization: YesNo
     city?: ICityItem,
-    city_id?: number,
-    vkPosts: number[]
+    city_id?: number
 }
 
 export interface IItemProps {
