@@ -1,5 +1,5 @@
 import { IAction } from '../types';
-import { ICityItem, IUser, IStateUserResponse } from 'friendshome-api';
+import { IStateUserResponse } from 'friendshome-api';
 import {
   SET_USER,
   SET_TOKEN,

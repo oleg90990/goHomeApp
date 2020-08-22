@@ -65,7 +65,7 @@ export const toCreatePost = (): void => {
   middlewareAuth(Scens.createPost);
 }
 
-export const toEditPost = (props: IEditPostProps) => {
+export const toEditPost = (props: IEditPostProps): void  => {
   middlewareAuth(Scens.editPost, props);
 }
 

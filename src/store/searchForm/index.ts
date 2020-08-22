@@ -1,5 +1,5 @@
 import { IAction } from '../types';
-import { ICityItem, Gender, YesNo, AgeState, IStateSearchBody } from 'friendshome-api';
+import { Gender, YesNo, IStateSearchBody } from 'friendshome-api';
 import {
   SET_AGES,
   SET_ANIMAL,
