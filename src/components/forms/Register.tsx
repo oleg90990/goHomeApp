@@ -39,7 +39,7 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
         setLoading(false);
       });
     } else {
-      Toast.error('Выбирите пожалуйста город');
+      Toast.error('Выберите пожалуйста город');
     }
   }
 

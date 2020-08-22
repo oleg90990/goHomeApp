@@ -16,6 +16,7 @@ import {
   CardItem
 } from 'native-base';
 
+import Toast from '../../utilites/toastr';
 import ColorsSelect from '../elements/ColorsSelect';
 import AgeSelect from '../elements/AgeSelect';
 import GenderSelect from '../elements/GenderSelect';
@@ -56,7 +57,6 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
     const [sterilization, setSterilization] = useState<YesNo>(values.sterilization);
     const [images, setImages] = useState<string[]>(values.images);
     const [city, setCity] = useState<ICityItem | undefined>(values.city);
-    const [socials, setSocials] = useState<Social[]>([Social.vk]);
 
     function onSave() {
       if (city) {
@@ -72,7 +72,6 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
           breed_id,
           gender,
           sterilization,
-          socials,
           city_id: city.id
         }).then(({ data }) => {
           toItem({ item: data });
@@ -81,12 +80,8 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
           setLoading(false);
         });
       } else {
-
+        Toast.error('Выберите пожалуйста город');
       }
-    }
-
-    const isShowVkEdit = () => {
-      return values.vkPosts.length > 0;
     }
 
     return ( !loading ? 
@@ -191,18 +186,6 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
         <View style={styles.ViewItem}>
           <ImageSelect value={images} onChange={setImages} />
         </View>
-        { isShowVkEdit() ? <Card style={styles.ViewItem}>
-          <CardItem>
-            <Body>
-              <SocialSelect
-                value={socials}
-                onChange={setSocials}
-                prefix={'Отредактировать'}
-                vk={values.vkPosts.length > 0}
-              />
-            </Body>
-          </CardItem>
-        </Card> : null }
         <View style={styles.ViewItem}>
           <Button block primary onPress={onSave}>
             <Text> { 'Отредактировать' }</Text>

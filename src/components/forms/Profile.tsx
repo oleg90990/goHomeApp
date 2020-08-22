@@ -43,7 +43,7 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
         setLoading(false);
       });
     } else {
-      Toast.error('Выбирите пожалуйста город');
+      Toast.error('Выберите пожалуйста город');
     }
   }
 

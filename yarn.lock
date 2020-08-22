@@ -3102,7 +3102,7 @@ fresh@0.5.2:
 
 "friendshome-api@git+https://github.com/oleg90990/goHomeApi.git":
   version "1.0.1"
-  resolved "git+https://github.com/oleg90990/goHomeApi.git#4462dd030acd748e2e971d0714176679d50e9386"
+  resolved "git+https://github.com/oleg90990/goHomeApi.git#d7d5845c1eaef146731e2c785ae43d31f95a461a"
 
 fs-constants@^1.0.0:
   version "1.0.0"

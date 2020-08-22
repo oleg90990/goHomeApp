@@ -15,6 +15,7 @@ import { Form,
   CardItem
 } from 'native-base';
 
+import Toast from '../../utilites/toastr';
 import ColorsSelect from '../../components/elements/ColorsSelect';
 import AgeSelect from '../../components/elements/AgeSelect';
 import GenderSelect from '../../components/elements/GenderSelect';
@@ -67,25 +68,29 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, user }) => {
     const [socials, setSocials] = useState<Social[]>([Social.vk]);
 
     function onSave() {
-      setLoading(true);
-      adsApi.create({
-        title,
-        images,
-        content,
-        age,
-        colors,
-        animal_id,
-        breed_id,
-        gender,
-        sterilization,
-        city_id: city ? city.id : undefined,
-        socials
-      }).then(({ data }) => {
-        setLoading(false)
-        toItem({ item: data });
-      }).catch(() => [
-        setLoading(false)
-      ]);
+      if (city) {
+        setLoading(true);
+        adsApi.create({
+          title,
+          images,
+          content,
+          age,
+          colors,
+          animal_id,
+          breed_id,
+          gender,
+          sterilization,
+          city_id: city.id,
+          socials
+        }).then(({ data }) => {
+          setLoading(false)
+          toItem({ item: data });
+        }).catch(() => [
+          setLoading(false)
+        ]);
+      } else {
+        Toast.error('Выберите пожалуйста город');
+      }
     }
 
     const isShowVkPublish = () => {
