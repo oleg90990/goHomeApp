@@ -39,8 +39,7 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
         toAccounnt();
         setLoading(false);
       })
-      .catch((e) => {
-        Toast.error(e);
+      .catch(() => {
         setLoading(false);
       });
     } else {

@@ -10,37 +10,37 @@ interface IAgesWidgetsProps {
 }
 
 const AgeWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange }) => {  
-    return (
-        <Card>
-            <CardItem header>
-                <Label style={styles.Title}>
-                    { `Возраст` }
-                </Label>
-            </CardItem>
-            <CardItem>
-                <Body>
-                    <View style={styles.Pickers}>
-                        <Text style={styles.PickerTitle}>
-                            От
-                        </Text>
-                        <AgeSelect 
-                            value={value.from}
-                            onChange={(from) => onChange({...value, from})}
-                            to={value.to}
-                        />
-                        <Text style={styles.PickerTitle}>
-                            До
-                        </Text>
-                        <AgeSelect 
-                            value={value.to}
-                            onChange={(to) => onChange({...value, to})}
-                            from={value.from}
-                        />
-                    </View>
-                </Body>
-            </CardItem>
-        </Card>
-    );
+  return (
+    <Card>
+      <CardItem header>
+        <Label style={styles.Title}>
+          { `Возраст` }
+        </Label>
+      </CardItem>
+      <CardItem>
+        <Body>
+          <View style={styles.Pickers}>
+            <Text style={styles.PickerTitle}>
+              От
+            </Text>
+            <AgeSelect 
+              value={value.from}
+              onChange={(from) => onChange({...value, from})}
+              to={value.to}
+            />
+            <Text style={styles.PickerTitle}>
+              До
+            </Text>
+            <AgeSelect 
+              value={value.to}
+              onChange={(to) => onChange({...value, to})}
+              from={value.from}
+            />
+          </View>
+        </Body>
+      </CardItem>
+    </Card>
+  );
 };
 
 const styles = StyleSheet.create({

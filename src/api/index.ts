@@ -1,9 +1,10 @@
 import ApiBase, { Mode } from 'friendshome-api';
 import Toast from '../utilites/toastr';
+import Auth from '../utilites/auth'
 
 // const mode = process.env.NODE_ENV === 'development' ? Mode.dev : Mode.prod
 
-const api = new ApiBase(Mode.dev, null, error => {
+const api = new ApiBase(Mode.dev, Auth.getToken(), error => {
     Toast.error(error);
 })
 
