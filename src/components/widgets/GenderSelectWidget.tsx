@@ -11,22 +11,22 @@ interface IAgesWidgetsProps {
 }
 
 const GenderSelectWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange, animal }) => {  
-    return (
-        animal ?<Card>
-            <CardItem header>
-                <Label style={styles.Title}>
-                    { `Пол` }
-                </Label>
-            </CardItem>
-            <CardItem>
-                <GenderSelect
-                    value={value}
-                    onChange={onChange}
-                    animal={animal}
-                />
-            </CardItem>
-        </Card> : null
-    );
+  return (
+    animal ?<Card>
+      <CardItem header>
+        <Label style={styles.Title}>
+          { `Пол` }
+        </Label>
+      </CardItem>
+      <CardItem>
+        <GenderSelect
+          value={value}
+          onChange={onChange}
+          animal={animal}
+        />
+      </CardItem>
+    </Card> : null
+  );
 };
 
 const styles = StyleSheet.create({

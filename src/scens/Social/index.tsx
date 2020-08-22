@@ -25,29 +25,29 @@ const Social: React.FC<ISocialProps> = ({ user }) => {
   
   return (
     <Content padder>
-        <Card style={styles.Message}>
-          <CardItem>
-            <Body>
-                <Text>
+      <Card style={styles.Message}>
+        <CardItem>
+          <Body>
+            <Text>
                   Прикрепите социальные сети для того что бы автоматически создавать и редактиравать объявления. Таким образом ваше объявление увидит больше человек
-                </Text>
-            </Body>
-          </CardItem>
-        </Card>
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
 
-        { items.map(({ title, icon, action }, key) => {
-          return <TouchableOpacity key={key} onPress={action}>
-            <Card>
-              <CardItem>
-                <Image style={styles.Icon} source={icon}/>
-                <Text>{ title }</Text>
-                <Right>
-                  <Icon name="arrow-forward" />
-                </Right>
-              </CardItem>
-            </Card>
-          </TouchableOpacity>
-        })}
+      { items.map(({ title, icon, action }, key) => {
+        return <TouchableOpacity key={key} onPress={action}>
+          <Card>
+            <CardItem>
+              <Image style={styles.Icon} source={icon}/>
+              <Text>{ title }</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </CardItem>
+          </Card>
+        </TouchableOpacity>
+      })}
     </Content>
   );
 };

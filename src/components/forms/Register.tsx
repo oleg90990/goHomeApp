@@ -35,9 +35,9 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
         toAccounnt();
         setLoading(false);
       })
-      .catch((e) => {
-        setLoading(false);
-      });
+        .catch((e) => {
+          setLoading(false);
+        });
     } else {
       Toast.error('Выберите пожалуйста город');
     }

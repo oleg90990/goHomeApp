@@ -4,7 +4,7 @@ import dictionaries from './dictionaries';
 import user from './user';
 
 export default combineReducers({
-    searchForm,
-    dictionaries,
-    user
+  searchForm,
+  dictionaries,
+  user
 });

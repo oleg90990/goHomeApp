@@ -31,30 +31,30 @@ const Login: React.FC<ILoginProps> = ({ login }) => {
 
   return (
     <Form >
-        <Item inlineLabel style={styles.Item}>
-            <Label>Моб. номер</Label>
-            <PhoneInput
-              value={mobile}
-              onChange={setMobile}
-            />
-        </Item>
-        <Item inlineLabel style={styles.Item}>
-            <Label>Пароль</Label>
-            <Input
-              value={password}
-              onChangeText={setPassword}
-              disabled={loading}
-              secureTextEntry={true}
-            />
-        </Item>
-        <View style={styles.Actions}>
-          <Button style={styles.BtnLogin} block onPress={toLogin} disabled={loading}>
-              {( loading ? <Spinner color={'white'} /> : <Text>Вход</Text> )}
-          </Button>
-          <Text style={styles.BtnRegister} onPress={toRegister}>
+      <Item inlineLabel style={styles.Item}>
+        <Label>Моб. номер</Label>
+        <PhoneInput
+          value={mobile}
+          onChange={setMobile}
+        />
+      </Item>
+      <Item inlineLabel style={styles.Item}>
+        <Label>Пароль</Label>
+        <Input
+          value={password}
+          onChangeText={setPassword}
+          disabled={loading}
+          secureTextEntry={true}
+        />
+      </Item>
+      <View style={styles.Actions}>
+        <Button style={styles.BtnLogin} block onPress={toLogin} disabled={loading}>
+          {( loading ? <Spinner color={'white'} /> : <Text>Вход</Text> )}
+        </Button>
+        <Text style={styles.BtnRegister} onPress={toRegister}>
              Регистрация
-          </Text>
-        </View>
+        </Text>
+      </View>
     </Form>
   );
 };

@@ -6,77 +6,77 @@ import { IItem } from 'friendshome-api';
 import { IEditPostProps } from '../scens/EditPost/types';
 
 const scensAuth: Scens[] = [
-    Scens.accounnt,
-    Scens.profile,
-    Scens.myAds,
-    Scens.createPost,
-    Scens.editPost,
-    Scens.social,
-    Scens.vk
+  Scens.accounnt,
+  Scens.profile,
+  Scens.myAds,
+  Scens.createPost,
+  Scens.editPost,
+  Scens.social,
+  Scens.vk
 ];
 
- async function middlewareAuth(scen: Scens, props: any = {}) {
-    const isAuth = await Auth.isAuth();
+async function middlewareAuth(scen: Scens, props: object = {}): void  {
+  const isAuth = await Auth.isAuth();
 
-    if (!isAuth && scensAuth.indexOf(scen) > -1) {
-        Actions[Scens.login]();
-    } else {
-        Actions[scen](props);
-    }
+  if (!isAuth && scensAuth.indexOf(scen) > -1) {
+    Actions[Scens.login]();
+  } else {
+    Actions[scen](props);
+  }
 }
 
-export const toBack = () => {
-    Actions.pop();
+export const toBack = (): void => {
+  Actions.pop();
 }
 
-export const toItems = () => {
-    middlewareAuth(Scens.items);
+export const toItems = (): void => {
+  middlewareAuth(Scens.items);
 }
 
-export const toItem = (props: { item: IItem }) => {
-    middlewareAuth(Scens.item, props);
+export const toItem = (props: { item: IItem }): void => {
+  middlewareAuth(Scens.item, props);
 }
 
-export const toAccounnt = () => {
-    middlewareAuth(Scens.accounnt);
+export const toAccounnt = (): void => {
+  middlewareAuth(Scens.accounnt);
 }
 
-export const toLogin = () => {
-    middlewareAuth(Scens.login);
+export const toLogin = (): void => {
+  middlewareAuth(Scens.login);
 }
 
-export const toProfile = () => {
-    middlewareAuth(Scens.profile);
+export const toProfile = (): void => {
+  middlewareAuth(Scens.profile);
 }
 
-export const toDashboard = () => {
-    middlewareAuth(Scens.dashboard);
+export const toDashboard = (): void => {
+  middlewareAuth(Scens.dashboard);
 }
 
-export const toLoading = () => {
-    middlewareAuth(Scens.loading);
+export const toLoading = (): void => {
+  middlewareAuth(Scens.loading);
 }
 
-export const toMyAds = () => {
-    middlewareAuth(Scens.myAds);
+export const toMyAds = (): void => {
+  middlewareAuth(Scens.myAds);
 }
 
-export const toCreatePost = () => {
-    middlewareAuth(Scens.createPost);
+export const toCreatePost = (): void => {
+  middlewareAuth(Scens.createPost);
 }
 
 export const toEditPost = (props: IEditPostProps) => {
-    middlewareAuth(Scens.editPost, props);
+  middlewareAuth(Scens.editPost, props);
 }
 
-export const toRegister = () => {
-    middlewareAuth(Scens.register);
+export const toRegister = (): void => {
+  middlewareAuth(Scens.register);
 }
 
-export const toSocial = () => {
-    middlewareAuth(Scens.social);
+export const toSocial = (): void => {
+  middlewareAuth(Scens.social);
 }
 
-export const toVkPage = () => {
-    middlewareAuth(Scens.vk);
+export const toVkPage = (): void => {
+  middlewareAuth(Scens.vk);
 }

@@ -9,27 +9,27 @@ export interface IItemListInterface {
 }
 
 export const Item = memo(({ item }: IItemListInterface) => (
-    <TouchableNativeFeedback onPress={() => toItemScen({ item })}>
-        <Card>
-            {( item.images[0] ? <CardItem cardBody>
-                <Image source={{uri: item.thumbnail }} style={styles.Image}/>
-            </CardItem> : null)}
-            <CardItem>
-                <Body>
-                    <Text>{ item.title }</Text>
-                </Body>
-            </CardItem>
-        </Card>
-    </TouchableNativeFeedback>
+  <TouchableNativeFeedback onPress={() => toItemScen({ item })}>
+    <Card>
+      {( item.images[0] ? <CardItem cardBody>
+        <Image source={{uri: item.thumbnail }} style={styles.Image}/>
+      </CardItem> : null)}
+      <CardItem>
+        <Body>
+          <Text>{ item.title }</Text>
+        </Body>
+      </CardItem>
+    </Card>
+  </TouchableNativeFeedback>
 ))
 
 
 const styles = StyleSheet.create({
-    Image: {
-        height: 200,
-        width: '100%',
-        flex: 1
-    }
+  Image: {
+    height: 200,
+    width: '100%',
+    flex: 1
+  }
 });
 
 export default Item;

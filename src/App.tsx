@@ -29,9 +29,9 @@ const App = () => {
   return (
     <Root>
       <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
-          <StyleProvider style={getTheme(commonColor)}>
-            <Router />
-          </StyleProvider>
+        <StyleProvider style={getTheme(commonColor)}>
+          <Router />
+        </StyleProvider>
       </Provider>
     </Root>
   );

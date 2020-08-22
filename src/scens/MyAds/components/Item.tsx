@@ -9,38 +9,38 @@ export interface IItemListInterface {
 }
 
 const Item: React.FC<IItemListInterface> = ({ item }) => { 
-    function toItem() {
-        toItemScen({ item });
-    }
+  function toItem() {
+    toItemScen({ item });
+  }
 
-    function setActiveStyle() {
-        return {
-            opacity: item.active ? 1 : 0.4
-        }
+  function setActiveStyle() {
+    return {
+      opacity: item.active ? 1 : 0.4
     }
+  }
 
-    return (
-        <TouchableNativeFeedback onPress={toItem}>
-            <Card style={setActiveStyle()}>
-                {( item.images[0] ? <CardItem cardBody>
-                    <Image source={{uri: item.images[0] }} style={styles.Image}/>
-                </CardItem> : null)}
-                <CardItem>
-                    <Body>
-                        <Text>{ item.title }</Text>
-                    </Body>
-                </CardItem>
-            </Card>
-        </TouchableNativeFeedback>
-    );
+  return (
+    <TouchableNativeFeedback onPress={toItem}>
+      <Card style={setActiveStyle()}>
+        {( item.images[0] ? <CardItem cardBody>
+          <Image source={{uri: item.images[0] }} style={styles.Image}/>
+        </CardItem> : null)}
+        <CardItem>
+          <Body>
+            <Text>{ item.title }</Text>
+          </Body>
+        </CardItem>
+      </Card>
+    </TouchableNativeFeedback>
+  );
 };
 
 const styles = StyleSheet.create({
-    Image: {
-        height: 200,
-        width: '100%',
-        flex: 1
-    }
+  Image: {
+    height: 200,
+    width: '100%',
+    flex: 1
+  }
 });
 
 export default Item;

@@ -90,16 +90,16 @@ const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {
       <Card style={styles.Message}>
         <CardItem>
           <Body>
-              <Text>
+            <Text>
                 Укажите группы в которых будут публиковаться посты. Созданные посты будут редактироваться и удалятся в случае закрытия объявления.
-              </Text>
+            </Text>
           </Body>
         </CardItem>
       </Card>
       { loading ? <Spinner /> :
-      <View>
-        <List>
-          {groups.map(({ name, id }, key) => {
+        <View>
+          <List>
+            {groups.map(({ name, id }, key) => {
               return <ListItem key={key} style={styles.Checkbox}>
                 <CheckBox
                   value={selected.indexOf(id) >= 0}

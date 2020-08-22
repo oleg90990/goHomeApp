@@ -11,16 +11,16 @@ interface IAnimalsWidgetsState {
 const AnimalsSelectWidget: React.FC<IAnimalsWidgetsState> = ({ value, onChange }) => {
   return (
     <Card>
-        <CardItem header>
-            <Label style={styles.Title}>
-            { `Я ищу` }
-            </Label>
-        </CardItem>
-        <CardItem>
-            <Body>
-              <AnimalsSelect onChange={onChange} value={value} />
-            </Body>
-        </CardItem>
+      <CardItem header>
+        <Label style={styles.Title}>
+          { `Я ищу` }
+        </Label>
+      </CardItem>
+      <CardItem>
+        <Body>
+          <AnimalsSelect onChange={onChange} value={value} />
+        </Body>
+      </CardItem>
     </Card>
   );
 };

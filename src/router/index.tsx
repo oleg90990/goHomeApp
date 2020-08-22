@@ -45,20 +45,20 @@ const RouterApp: React.FC<IRouterProps> = (props) => {
   return ( loading ? <Loading /> : 
     <Layout>
       <Router>
-          <Scene key="root">
-              <Scene key={Scens.login} component={Login} title="Вход" />
-              <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" initial />
-              <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
-              <Scene key={Scens.items} component={Items} title="Объявления" />
-              <Scene key={Scens.item} component={Item} title="Объявление" />
-              <Scene key={Scens.profile} component={Profile} title="Профиль" />
-              <Scene key={Scens.myAds} component={MyAds} title="Мои объявления" />
-              <Scene key={Scens.createPost} component={CeratePost} title="Новый пост" />
-              <Scene key={Scens.register} component={Register} title="Регистрация" />
-              <Scene key={Scens.editPost} component={EditPost} title="Регистрация" />
-              <Scene key={Scens.social} component={Social} title="Социальне сети" />
-              <Scene key={Scens.vk} component={Vk} title="Вконтакте" />
-          </Scene>
+        <Scene key="root">
+          <Scene key={Scens.login} component={Login} title="Вход" />
+          <Scene key={Scens.dashboard} component={Dashboard} title="Поиск" initial />
+          <Scene key={Scens.accounnt} component={Account} title="Аккаунт" />
+          <Scene key={Scens.items} component={Items} title="Объявления" />
+          <Scene key={Scens.item} component={Item} title="Объявление" />
+          <Scene key={Scens.profile} component={Profile} title="Профиль" />
+          <Scene key={Scens.myAds} component={MyAds} title="Мои объявления" />
+          <Scene key={Scens.createPost} component={CeratePost} title="Новый пост" />
+          <Scene key={Scens.register} component={Register} title="Регистрация" />
+          <Scene key={Scens.editPost} component={EditPost} title="Регистрация" />
+          <Scene key={Scens.social} component={Social} title="Социальне сети" />
+          <Scene key={Scens.vk} component={Vk} title="Вконтакте" />
+        </Scene>
       </Router>
     </Layout>
   )

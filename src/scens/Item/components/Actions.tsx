@@ -16,48 +16,48 @@ interface IActionsProps {
 }
 
 const Actions: React.FC<IActionsProps> = ({ user, active, user_id, toPublish, toEdit, toCall }) => {
-        const isEdit = user.id === user_id;
+  const isEdit = user.id === user_id;
 
-        return (
-            <View>
-                { active ? <Button primary block onPress={toCall} style={styles.BtnEdit}>
-                    <Text style={styles.Button}>
+  return (
+    <View>
+      { active ? <Button primary block onPress={toCall} style={styles.BtnEdit}>
+        <Text style={styles.Button}>
                         Позвонить
-                    </Text>
-                </Button> : null }
-                {(isEdit && active ? <Button warning block onPress={toEdit} style={styles.BtnEdit}>
-                    <Text style={styles.Button}>
+        </Text>
+      </Button> : null }
+      {(isEdit && active ? <Button warning block onPress={toEdit} style={styles.BtnEdit}>
+        <Text style={styles.Button}>
                         Редактировать
-                    </Text>
-                </Button> : null )}
-                {(isEdit ? 
-                ( active ?  
-                    <Button warning block onPress={() => toPublish(false)} style={styles.BtnEdit}>
-                        <Text style={styles.Button}>
+        </Text>
+      </Button> : null )}
+      {(isEdit ? 
+        ( active ?  
+          <Button warning block onPress={() => toPublish(false)} style={styles.BtnEdit}>
+            <Text style={styles.Button}>
                             Снять с публикации
-                        </Text>
-                    </Button> : 
-                    <Button warning block style={styles.BtnEdit} disabled={!active}>
-                        <Text style={styles.Button}>
+            </Text>
+          </Button> : 
+          <Button warning block style={styles.BtnEdit} disabled={!active}>
+            <Text style={styles.Button}>
                             Объявление не активно
-                        </Text>
-                    </Button>)
-                : null )}
-            </View>
-        );
+            </Text>
+          </Button>)
+        : null )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    BtnEdit: {
-        marginBottom: 10
-    },
-    Button: {
-        color: 'white'
-    },
+  BtnEdit: {
+    marginBottom: 10
+  },
+  Button: {
+    color: 'white'
+  },
 });
 
 const mapStateToProps = ({ user: { user }}: IState) => {
-    return { user };
-  };
+  return { user };
+};
 
 export default connect(mapStateToProps, {})(Actions);

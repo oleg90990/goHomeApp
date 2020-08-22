@@ -10,50 +10,50 @@ interface IFooterButton {
 }
 
 const buttons: IFooterButton[] = [
-    {
-        title: 'Профиль',
-        icon: 'person',
-        action: () => {
-            toAccounnt();
-        }
-    },
-    {
-        title: 'Домой',
-        icon: 'home',
-        action: () => {
-            toDashboard();
-        }
+  {
+    title: 'Профиль',
+    icon: 'person',
+    action: () => {
+      toAccounnt();
     }
+  },
+  {
+    title: 'Домой',
+    icon: 'home',
+    action: () => {
+      toDashboard();
+    }
+  }
 ];
 
 const Layout: React.FC = (props) => {
-    return (
-        <Container theme={{
-            brandPrimary: 'red'
-        }}> 
-            { props.children }
-            <Footer>
-                <FooterTab>
-                    {(
-                        buttons.map((button, i) => {
-                            return (
-                                <Button key={i} vertical onPress={button.action}>
-                                    <Icon style={styles.Footer} name={button.icon} />
-                                    <Text style={styles.Footer}>{button.title}</Text>
-                                </Button>
-                            )
-                        })
-                    )}
-                </FooterTab>
-            </Footer>
-        </Container>
-    );
+  return (
+    <Container theme={{
+      brandPrimary: 'red'
+    }}> 
+      { props.children }
+      <Footer>
+        <FooterTab>
+          {(
+            buttons.map((button, i) => {
+              return (
+                <Button key={i} vertical onPress={button.action}>
+                  <Icon style={styles.Footer} name={button.icon} />
+                  <Text style={styles.Footer}>{button.title}</Text>
+                </Button>
+              )
+            })
+          )}
+        </FooterTab>
+      </Footer>
+    </Container>
+  );
 };
 
 const styles = StyleSheet.create({
-    Footer: {
-      color: 'white'
-    }
+  Footer: {
+    color: 'white'
+  }
 });
 
 export default Layout;

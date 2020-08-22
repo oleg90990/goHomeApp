@@ -12,19 +12,19 @@ interface ISterilizationCastrationSelectWidgetProps {
 }
 
 const GenderSelectWidget: React.FC<ISterilizationCastrationSelectWidgetProps> = ({ value, gender, onChange }) => {  
-    return (<Card>
-            <CardItem header>
-                <Label style={styles.Title}>
-                    { getLabelSterilization(gender) }
-                </Label>
-            </CardItem>
-            <CardItem>
-                <SterilizationCastrationSelect
-                    value={value}
-                    onChange={onChange}
-                />
-            </CardItem>
-        </Card>);
+  return (<Card>
+    <CardItem header>
+      <Label style={styles.Title}>
+        { getLabelSterilization(gender) }
+      </Label>
+    </CardItem>
+    <CardItem>
+      <SterilizationCastrationSelect
+        value={value}
+        onChange={onChange}
+      />
+    </CardItem>
+  </Card>);
 };
 
 const styles = StyleSheet.create({

@@ -5,11 +5,11 @@ import { Content } from 'native-base';
 import CreatePostForm from '../../components/forms/CreatePost';
 
 const CreatePost: React.FC<ICreatePostProps> = ({ item }) => {
-    return (
-      <Content padder>
-        <CreatePostForm />
-      </Content>
-    );
+  return (
+    <Content padder>
+      <CreatePostForm />
+    </Content>
+  );
 };
 
 // styles

@@ -5,11 +5,11 @@ import { Content } from 'native-base';
 import EditPostForm from '../../components/forms/EditPost';
 
 const EditPost: React.FC<IEditPostProps> = ({ item }) => {
-    return (
-      <Content padder>
-        <EditPostForm values={item} />
-      </Content>
-    );
+  return (
+    <Content padder>
+      <EditPostForm values={item} />
+    </Content>
+  );
 };
 
 // styles

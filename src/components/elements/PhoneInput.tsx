@@ -10,33 +10,33 @@ interface IPhoneInputProps  {
 }
 
 const PhoneInput: React.FC<IPhoneInputProps> = ({ value, onChange, disabled }) => {
-    const toFormat = (input: string) => {
-      return formatNumber(`+7${input.replace(/^\+7/, "")}`, "International")
-    }
+  const toFormat = (input: string) => {
+    return formatNumber(`+7${input.replace(/^\+7/, "")}`, "International")
+  }
     
-    const [phoneNumber, setPhoneNumber] = useState(toFormat('+' + value));
+  const [phoneNumber, setPhoneNumber] = useState(toFormat('+' + value));
 
-    useEffect(() => {
-      const tempPhone = phoneNumber.replace(/\+/g, '');
-      const removeSpaces = tempPhone.replace(/ /g, '');
+  useEffect(() => {
+    const tempPhone = phoneNumber.replace(/\+/g, '');
+    const removeSpaces = tempPhone.replace(/ /g, '');
 
-      onChange(removeSpaces)
-    }, [phoneNumber, onChange])
+    onChange(removeSpaces)
+  }, [phoneNumber, onChange])
 
-    const onBlur = () => {
-      setPhoneNumber(toFormat(phoneNumber));
-    };
+  const onBlur = () => {
+    setPhoneNumber(toFormat(phoneNumber));
+  };
 
-    return (
-        <Input
-          onBlur={onBlur}
-          onChangeText={setPhoneNumber}
-          value={phoneNumber}
-          keyboardType={'phone-pad'}
-          disabled={disabled}
-          style={{ opacity: disabled ? 0.4 : 1}}
-        />
-    );
+  return (
+    <Input
+      onBlur={onBlur}
+      onChangeText={setPhoneNumber}
+      value={phoneNumber}
+      keyboardType={'phone-pad'}
+      disabled={disabled}
+      style={{ opacity: disabled ? 0.4 : 1}}
+    />
+  );
 };
 
 const styles = StyleSheet.create({

@@ -5,11 +5,11 @@ import { Text, Content } from 'native-base';
 import Profile from '../../components/forms/Profile';
 
 const Account: React.FC<IProfileProps> = props => {
-    return (
-      <Content padder>
-        <Profile />
-      </Content>
-    );
+  return (
+    <Content padder>
+      <Profile />
+    </Content>
+  );
 };
 
 // styles

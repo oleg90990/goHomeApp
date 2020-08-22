@@ -33,68 +33,68 @@ interface IProps extends IStateSearchBody {
 }
 
 const Search: React.FC<IProps> = ({
-    animal, setAnimal,
-    ages, setAges,
-    colors, setColors,
-    breeds, addBreed, removeBreed,
-    gender, setGender,
-    sterilization, setSterilization,
-    city, setCity
-  }) => {
-    return (
-      <Form>
-        <View style={styles.Item}>
-            <CityWidget
-              value={city}
-              onChange={setCity}
-            />
-        </View>
-        <View style={styles.Item}>
-            <AnimalsSelectWidget
-              value={animal}
-              onChange={setAnimal}
-            />
-        </View>
-        {( animal ? <View style={styles.Item}>
-            <BreedsWidget
-              animal={animal}
-              addBreed={addBreed}
-              removeBreed={removeBreed}
-              value={breeds}
-            />
-        </View> : null )}
-        <View style={styles.Item}>
-          <GenderSelectWidget
-            value={gender}
-            onChange={setGender}
-            animal={animal}
-          />
-        </View>
-        <View style={styles.Item}>
-          <SterilizationCastrationSelectWidget
-            value={sterilization}
-            onChange={setSterilization}
-            gender={gender}
-          />
-        </View>
-        <View style={styles.Item}>
-          <AgeWidget
-            value={ages}
-            onChange={setAges}
-          />
-        </View>
-        <View style={styles.Item}>
-          <ColorWidget
-            value={colors}
-            onChange={setColors}
-          />
-        </View>
-        <View style={[styles.Item, { marginTop: 5 }]}>
-          <Button block primary onPress={() => toItems()}>
-            <Text>Поиск друзей</Text>
-          </Button>
-        </View>
-      </Form>
+  animal, setAnimal,
+  ages, setAges,
+  colors, setColors,
+  breeds, addBreed, removeBreed,
+  gender, setGender,
+  sterilization, setSterilization,
+  city, setCity
+}) => {
+  return (
+    <Form>
+      <View style={styles.Item}>
+        <CityWidget
+          value={city}
+          onChange={setCity}
+        />
+      </View>
+      <View style={styles.Item}>
+        <AnimalsSelectWidget
+          value={animal}
+          onChange={setAnimal}
+        />
+      </View>
+      {( animal ? <View style={styles.Item}>
+        <BreedsWidget
+          animal={animal}
+          addBreed={addBreed}
+          removeBreed={removeBreed}
+          value={breeds}
+        />
+      </View> : null )}
+      <View style={styles.Item}>
+        <GenderSelectWidget
+          value={gender}
+          onChange={setGender}
+          animal={animal}
+        />
+      </View>
+      <View style={styles.Item}>
+        <SterilizationCastrationSelectWidget
+          value={sterilization}
+          onChange={setSterilization}
+          gender={gender}
+        />
+      </View>
+      <View style={styles.Item}>
+        <AgeWidget
+          value={ages}
+          onChange={setAges}
+        />
+      </View>
+      <View style={styles.Item}>
+        <ColorWidget
+          value={colors}
+          onChange={setColors}
+        />
+      </View>
+      <View style={[styles.Item, { marginTop: 5 }]}>
+        <Button block primary onPress={() => toItems()}>
+          <Text>Поиск друзей</Text>
+        </Button>
+      </View>
+    </Form>
   );
 };
 

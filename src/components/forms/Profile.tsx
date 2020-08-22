@@ -39,9 +39,9 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
         toAccounnt();
         setLoading(false);
       })
-      .catch(() => {
-        setLoading(false);
-      });
+        .catch(() => {
+          setLoading(false);
+        });
     } else {
       Toast.error('Выберите пожалуйста город');
     }

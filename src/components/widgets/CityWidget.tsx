@@ -10,26 +10,26 @@ interface IAgesWidgetsProps {
 }
 
 const CityWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange }) => {  
-    return (
-        <Card>
-            <CardItem header>
-                <Label style={styles.Title}>
-                    { `Город` }
-                </Label>
-            </CardItem>
-            <CardItem>
-                <Body>
-                    <View style={styles.Pickers}>
-                        <CitySelect
-                            onSelected={onChange}
-                            includedRegins={true}
-                            value={value}
-                        />
-                    </View>
-                </Body>
-            </CardItem>
-        </Card>
-    );
+  return (
+    <Card>
+      <CardItem header>
+        <Label style={styles.Title}>
+          { `Город` }
+        </Label>
+      </CardItem>
+      <CardItem>
+        <Body>
+          <View style={styles.Pickers}>
+            <CitySelect
+              onSelected={onChange}
+              includedRegins={true}
+              value={value}
+            />
+          </View>
+        </Body>
+      </CardItem>
+    </Card>
+  );
 };
 
 const styles = StyleSheet.create({

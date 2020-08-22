@@ -12,82 +12,82 @@ import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
 const Items: React.FC<IItemsProps> = ({ searchForm }) => {
-    const [sortBy, setSortBy] = useState(Sortby.date);
-    const [loading, setLoading] = useState(true);
-    const [items, setItems] = useState<IItem[]>([]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [lastPage, setLastPage] = useState(2);
+  const [sortBy, setSortBy] = useState(Sortby.date);
+  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState<IItem[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [lastPage, setLastPage] = useState(2);
 
-    const sortByItems = [
-      { label: 'По возрасту', value: Sortby.age },
-      { label: 'По дате', value: Sortby.date },
-    ];
+  const sortByItems = [
+    { label: 'По возрасту', value: Sortby.age },
+    { label: 'По дате', value: Sortby.date },
+  ];
 
-    function loadNextItems() {
-        setLoading(true);
+  function loadNextItems() {
+    setLoading(true);
 
-        adsApi.find(searchForm, sortBy, currentPage + 1)
-            .then(({ data }) => {
-              setItems([...items, ...data.items]);
-              setCurrentPage(data.currentPage);
-              setLastPage(data.lastPage);
-              setLoading(false);
-            });
-    }
+    adsApi.find(searchForm, sortBy, currentPage + 1)
+      .then(({ data }) => {
+        setItems([...items, ...data.items]);
+        setCurrentPage(data.currentPage);
+        setLastPage(data.lastPage);
+        setLoading(false);
+      });
+  }
 
-    useEffect((loadNextItems), []);
+  useEffect((loadNextItems), []);
 
-    useEffect(() => {
+  useEffect(() => {
+    setCurrentPage(0);
+    setLastPage(2);
+    setItems([]);
+    loadNextItems();
+
+    () => {
       setCurrentPage(0);
       setLastPage(2);
       setItems([]);
-      loadNextItems();
+    }
+  }, [sortBy]);
 
-      () => {
-        setCurrentPage(0);
-        setLastPage(2);
-        setItems([]);
-      }
-    }, [sortBy]);
-
-    return (
-      <View padder>
-        <FlatList
-          data={items}
-          renderItem={({ item }) => <Item item={item} />}
-          keyExtractor={(item, index) => index.toString()}
-          ListFooterComponent={
-            (loading ? <Spinner/>: null)
+  return (
+    <View padder>
+      <FlatList
+        data={items}
+        renderItem={({ item }) => <Item item={item} />}
+        keyExtractor={(item, index) => index.toString()}
+        ListFooterComponent={
+          (loading ? <Spinner/>: null)
+        }
+        ListHeaderComponent={
+          false ? <RNPickerSelect
+            onValueChange={setSortBy}
+            items={sortByItems}
+            value={sortBy}
+          /> : null
+        }
+        onEndReachedThreshold={0.4}
+        onEndReached={() => {
+          if (!loading && lastPage != currentPage) {
+            loadNextItems();
           }
-          ListHeaderComponent={
-            false ? <RNPickerSelect
-              onValueChange={setSortBy}
-              items={sortByItems}
-              value={sortBy}
-            /> : null
-          }
-          onEndReachedThreshold={0.4}
-          onEndReached={() => {
-            if (!loading && lastPage != currentPage) {
-              loadNextItems();
-            }
-          }}
-        />
-      </View>
-    );
+        }}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    Spinner: {
-        flex: 1, 
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 600
-    }
+  Spinner: {
+    flex: 1, 
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 600
+  }
 });
 
 const mapStateToProps = (state: IState) => {
-    return state;
+  return state;
 };
 
 export default connect(mapStateToProps, {})(Items);

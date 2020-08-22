@@ -19,15 +19,15 @@ const AnimalsSelect: React.FC<IAnimalState> = (props) => {
   }
 
   return (
-      <View style={styles.Options}>
-        {(
-          props.animals.map(({ name, id, img }) => {
-            return <TouchableNativeFeedback key={name} onPress={() => props.onChange(id)}>
-              <Image source={{ uri: img }} style={[styles.Image, getImageStyle(id)]} />
-            </TouchableNativeFeedback>
-          })
-        )}
-      </View>
+    <View style={styles.Options}>
+      {(
+        props.animals.map(({ name, id, img }) => {
+          return <TouchableNativeFeedback key={name} onPress={() => props.onChange(id)}>
+            <Image source={{ uri: img }} style={[styles.Image, getImageStyle(id)]} />
+          </TouchableNativeFeedback>
+        })
+      )}
+    </View>
   );
 };
 
