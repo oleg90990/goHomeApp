@@ -59,25 +59,30 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
     const [socials, setSocials] = useState<Social[]>([Social.vk]);
 
     function onSave() {
-      setLoading(true);
-      adsApi.update({
-        id: values.id,
-        title,
-        images,
-        content,
-        age,
-        colors,
-        animal_id,
-        breed_id,
-        gender,
-        sterilization,
-        socials
-      }).then(({ data }) => {
-        toItem({ item: data });
-        setLoading(false);
-      }).catch(() => {
-        setLoading(false);
-      });
+      if (city) {
+        setLoading(true);
+        adsApi.update({
+          id: values.id,
+          title,
+          images,
+          content,
+          age,
+          colors,
+          animal_id,
+          breed_id,
+          gender,
+          sterilization,
+          socials,
+          city_id: city.id
+        }).then(({ data }) => {
+          toItem({ item: data });
+          setLoading(false);
+        }).catch(() => {
+          setLoading(false);
+        });
+      } else {
+
+      }
     }
 
     const isShowVkEdit = () => {

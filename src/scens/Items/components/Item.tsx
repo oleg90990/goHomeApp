@@ -12,7 +12,7 @@ export const Item = memo(({ item }: IItemListInterface) => (
     <TouchableNativeFeedback onPress={() => toItemScen({ item })}>
         <Card>
             {( item.images[0] ? <CardItem cardBody>
-                <Image source={{uri: item.images[0] }} style={styles.Image}/>
+                <Image source={{uri: item.thumbnail }} style={styles.Image}/>
             </CardItem> : null)}
             <CardItem>
                 <Body>

@@ -26,7 +26,7 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
 
   function onSave() {
     if (city) {
-       setLoading(true);
+      setLoading(true);
       update({
         mobile,
         email,
@@ -39,7 +39,8 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
         toAccounnt();
         setLoading(false);
       })
-      .catch(() => {
+      .catch((e) => {
+        Toast.error(e);
         setLoading(false);
       });
     } else {
