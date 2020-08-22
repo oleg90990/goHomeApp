@@ -4,9 +4,9 @@ import { List, Item, ListItem, Thumbnail, Left, Body, Button, Input, Icon } from
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { IStateDictionariesReducer } from '../../store/dictionaries';
+import { IStateDictionaries } from 'friendshome-api';
 
-interface IBreedsWidgetProps extends IStateDictionariesReducer {
+interface IBreedsWidgetProps extends IStateDictionaries {
   onSelected: (value: number) => void,
   animal: number | undefined
 }

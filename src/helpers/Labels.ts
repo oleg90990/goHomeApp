@@ -1,5 +1,4 @@
-import { Gender, YesNo } from '../enum/Form';
-import { ICityItem } from '../api/apiDictionaries';
+import { ICityItem, Gender, YesNo } from 'friendshome-api';
 
 export const getLabelSterilization = (gender: Gender | undefined) => {
   switch (gender) {

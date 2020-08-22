@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from "react-native";
 import { Label, Card, CardItem, Body, View } from 'native-base';
-import { Gender } from '../../enum/Form';
+import { Gender } from 'friendshome-api';
 import GenderSelect from '../../components/elements/GenderSelect';
 
 interface IAgesWidgetsProps {

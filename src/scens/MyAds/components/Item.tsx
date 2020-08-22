@@ -2,7 +2,7 @@ import React from 'react';
 import { CardItem, Text , Card, Left, Body } from 'native-base';
 import { Image, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import { toItem as toItemScen  } from '../../../utilites/appNavigation';
-import { IItem } from '../../Item/types';
+import { IItem } from 'friendshome-api';
 
 export interface IItemListInterface {
     item: IItem

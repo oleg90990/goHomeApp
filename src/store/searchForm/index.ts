@@ -1,3 +1,5 @@
+import { IAction } from '../types';
+import { ICityItem, Gender, YesNo, AgeState, IStateSearchBody } from 'friendshome-api';
 import {
   SET_AGES,
   SET_ANIMAL,
@@ -8,26 +10,9 @@ import {
   SET_STERILIZATION,
   SET_CITY
 } from './types';
-import { IAction } from '../types';
-import { Gender, YesNo } from '../../enum/Form';
-import { ICityItem } from '../../api/apiDictionaries';
 
-export interface AgeState {
-  from: number
-  to: number
-}
-
-export interface IStateSearchFormReducer {
-  animal?: number;
-  ages: AgeState;
-  colors: number[];
-  breeds: number[];
-  gender: Gender,
-  sterilization: YesNo,
-  city?: ICityItem
-}
-
-const INITIAL_STATE: IStateSearchFormReducer = {
+const INITIAL_STATE: IStateSearchBody = {
+  city: undefined,
   animal: undefined,
   ages: {
     from: 0,

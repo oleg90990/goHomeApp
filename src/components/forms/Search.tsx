@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { Form, View, Button, Text } from 'native-base';
 import { toItems } from '../../utilites/appNavigation';
+import { IStateSearchBody, AgeState, Gender, YesNo, ICityItem } from 'friendshome-api';
 
 import AnimalsSelectWidget from '../widgets/AnimalsSelectWidget';
 import ColorWidget from '../widgets/ColorWidget';
@@ -12,13 +13,15 @@ import SterilizationCastrationSelectWidget from '../widgets/SterilizationCastrat
 import CityWidget from '../widgets/CityWidget';
 
 import { connect } from 'react-redux';
-import { setAges, setAnimal, setColors, addBreed, removeBreed, setGender, setSterilization, setCity } from '../../store/searchForm/actions';
-import { IStateSearchFormReducer, AgeState } from '../../store/searchForm';
+import {
+  setAges,
+  setAnimal,
+  setColors,
+  addBreed,
+  removeBreed, setGender, setSterilization, setCity } from '../../store/searchForm/actions';
 import { IState } from '../../store/types';
-import { Gender , YesNo} from 'src/enum/Form';
-import { ICityItem } from '../../api/apiDictionaries';
 
-interface IProps extends IStateSearchFormReducer {
+interface IProps extends IStateSearchBody {
   setAnimal(id?: number): any;
   setColors(colors: number[]): any;
   setAges(age: AgeState): any;

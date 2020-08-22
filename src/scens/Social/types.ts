@@ -1,4 +1,4 @@
-import { IUser } from '../../store/user';
+import { IUser } from 'friendshome-api';
 
 export interface ISocialProps {
     user: IUser

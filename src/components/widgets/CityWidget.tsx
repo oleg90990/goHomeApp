@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from "react-native";
 import { Label, View, Card, CardItem, Body, Text } from 'native-base';
 import CitySelect from '../elements/CitySelect';
-import { ICityItem } from '../../api/apiDictionaries';
+import { ICityItem } from 'friendshome-api';
 
 interface IAgesWidgetsProps {
     value?: ICityItem,

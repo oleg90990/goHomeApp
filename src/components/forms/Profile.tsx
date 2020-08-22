@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
+import { IUser, IUserUpdateData, ICityItem } from 'friendshome-api';
 import { StyleSheet } from "react-native";
 import { Form, Item, Label, Input, Button, Spinner, Text } from 'native-base';
 import { toAccounnt } from '../../utilites/appNavigation'
 import { connect } from 'react-redux';
-import { IUser } from '../../store/user';
 import { update } from '../../store/user/actions';
 import { IState } from '../../store/types';
 import Toast from '../../utilites/toastr';
 import CitySelect from '../elements/CitySelect';
-import { IUserUpdateData } from '../../api/apiUser';
-import { ICityItem } from '../../api/apiDictionaries';
 import PhoneInput from '../elements/PhoneInput';
 
 interface IProps {
@@ -27,22 +25,26 @@ const Profile: React.FC<IProps> = ({ user, update }) => {
   const [city, setCity] = useState<ICityItem | undefined>(user.city);
 
   function onSave() {
-    setLoading(true);
-    update({
-      mobile,
-      email,
-      name,
-      password,
-      c_password,
-      city_id: city ? city.id : undefined
-    }).then(() => {
-      Toast.success('Успешно обновлено');
-      toAccounnt();
-      setLoading(false);
-    })
-    .catch(() => {
-      setLoading(false);
-    });
+    if (city) {
+       setLoading(true);
+      update({
+        mobile,
+        email,
+        name,
+        password,
+        c_password,
+        city_id: city.id
+      }).then(() => {
+        Toast.success('Успешно обновлено');
+        toAccounnt();
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+    } else {
+      Toast.error('Выбирите пожалуйста город');
+    }
   }
 
   return (

@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { ICityItem, Gender, YesNo, AgeState } from 'friendshome-api';
 import {
   SET_AGES,
   SET_ANIMAL,
@@ -9,9 +10,6 @@ import {
   SET_STERILIZATION,
   SET_CITY
 } from './types';
-import { AgeState} from './index';
-import { Gender, YesNo } from '../../enum/Form';
-import { ICityItem } from '../../api/apiDictionaries';
 
 export const setCity = (payload: ICityItem) => {
   return (dispatch: Dispatch<any>) => {

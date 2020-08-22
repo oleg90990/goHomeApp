@@ -1,6 +1,8 @@
-import { IStateSearchFormReducer } from './searchForm';
-import { IStateDictionariesReducer } from './dictionaries';
-import { IStateUserReducer } from './user';
+import {
+  IStateSearchBody,
+  IStateDictionaries,
+  IStateUserResponse
+} from 'friendshome-api';
 
 export interface IAction<T> {
   type: string;
@@ -8,7 +10,7 @@ export interface IAction<T> {
 }
 
 export interface IState {
-  searchForm: IStateSearchFormReducer;
-  dictionaries: IStateDictionariesReducer;
-  user: IStateUserReducer
+  searchForm: IStateSearchBody;
+  dictionaries: IStateDictionaries;
+  user: IStateUserResponse
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { IItem } from 'friendshome-api';
 import { StyleSheet, ScrollView } from "react-native";
 import { Button, Spinner, View, Text } from 'native-base';
 import { IMyAdsProps } from "./types";
-import ApiItems from '../../api/apiAds';
+import { adsApi } from '../../api';
 import Item from './components/Item';
-import { IItem } from '../Item/types';
 import { toCreatePost } from '../../utilites/appNavigation';
 
 const MyAds: React.FC<IMyAdsProps> = () => {
@@ -12,7 +12,7 @@ const MyAds: React.FC<IMyAdsProps> = () => {
     const [items, setItems] = useState<IItem[]>([]);
 
     useEffect(() => {
-        ApiItems.me()
+        adsApi.me()
             .then(({ data }) => {
                 setItems(data);
                 setLoading(false);

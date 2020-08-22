@@ -1,5 +1,5 @@
 import { IState } from '../types';
-import { IDictionaryAnimalType, IDictionaryColorItem, IDictionaryItem } from '../dictionaries';
+import { IDictionaryAnimalType, IDictionaryColorItem, IDictionaryItem } from 'friendshome-api';
 
 export const getAnimalById = ({ dictionaries }: IState) => (animalId: number): IDictionaryAnimalType | undefined  => {
     return dictionaries.animals.find(({ id }) => id === animalId);

@@ -1,14 +1,14 @@
 import { Dispatch } from 'redux';
 import { SET_USER, SET_TOKEN, LOGOUT } from './types';
-import API, { IUserUpdateData } from '../../api/apiUser';
-import APIvk from '../../api/apiVk';
+import { userApi, vkApi } from '../../api';
+import { IUserUpdateData } from 'friendshome-api';
 import Auth from '../../utilites/auth';
 import { VKLoginResult } from 'react-native-vkontakte-login';
 
 export const login = (mobile: string, password: string) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data: { user, access_token } } = await API.login(mobile, password);
+      const { data: { user, access_token } } = await userApi.login(mobile, password);
       await Auth.setToken(access_token);
       dispatch({type: SET_TOKEN, payload: access_token });
       dispatch({type: SET_USER, payload: user });
@@ -22,7 +22,7 @@ export const login = (mobile: string, password: string) => {
 export const register = (userData: IUserUpdateData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data: { user, access_token } } = await API.register(userData);
+      const { data: { user, access_token } } = await userApi.register(userData);
       await Auth.setToken(access_token);
       dispatch({type: SET_TOKEN, payload: access_token });
       dispatch({type: SET_USER, payload: user });
@@ -35,7 +35,7 @@ export const register = (userData: IUserUpdateData) => {
 export const update = (userData: IUserUpdateData) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data } = await API.update(userData);
+      const { data } = await userApi.update(userData);
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
       throw e;
@@ -46,7 +46,7 @@ export const update = (userData: IUserUpdateData) => {
 export const loadData = () => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data } = await API.me();
+      const { data } = await userApi.me();
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
       await Auth.removeToken();
@@ -58,7 +58,7 @@ export const loadData = () => {
 export const vkSave = (dataLoginResult: VKLoginResult) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data } = await APIvk.save(dataLoginResult);
+      const { data } = await vkApi.save(dataLoginResult);
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
       throw e;
@@ -69,7 +69,7 @@ export const vkSave = (dataLoginResult: VKLoginResult) => {
 export const vkGroups = () => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data } = await APIvk.groups();
+      const { data } = await vkApi.groups();
       return data;
     } catch (e) {
       throw e;
@@ -80,7 +80,7 @@ export const vkGroups = () => {
 export const vkGroupsStore = (groups: number[]) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const { data } = await APIvk.groupsStore(groups);
+      const { data } = await vkApi.groupsStore(groups);
       dispatch({type: SET_USER, payload: data });
     } catch (e) {
       throw e;

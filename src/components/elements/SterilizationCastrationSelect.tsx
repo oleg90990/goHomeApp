@@ -1,6 +1,6 @@
 import React from 'react';
 import { Picker} from 'native-base';
-import { YesNo } from '../../enum/Form';
+import { YesNo } from 'friendshome-api';
 
 interface ISterilizationCastrationSelectProps  {
   onChange: (value: YesNo) => void,

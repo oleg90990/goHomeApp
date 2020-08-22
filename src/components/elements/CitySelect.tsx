@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, ScrollView } from "react-native";
 import { View, Text, Item, Input, Icon, List, ListItem, Body } from 'native-base';
-import Api, { ICityItem } from "../../api/apiDictionaries";
+import { ICityItem } from 'friendshome-api';
+import { dictionariesApi } from '../../api';
 import { getLabelCity } from '../../helpers/Labels';
 
 interface IBreedsWidgetProps {
@@ -22,8 +23,7 @@ const CitySelect: React.FC<IBreedsWidgetProps> = ({ includedRegins, onSelected, 
 
     function updateCities(text: string) {
         setInput(text);
-
-        Api.findCity(text, includedRegins)
+        dictionariesApi.findCity(text, includedRegins)
             .then(({ data }) => {
                 setCities(data)
             });

@@ -22,27 +22,23 @@ import GenderSelect from '../elements/GenderSelect';
 import SterilizationCastrationSelect from '../elements/SterilizationCastrationSelect';
 import ImageSelect from '../elements/ImagesSelect';
 import SocialSelect from '../elements/SocialSelect';
+import { IStateDictionaries, IDictionaryItem, Gender, YesNo, IUser, IItem, ICityItem } from 'friendshome-api';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { IStateDictionariesReducer, IDictionaryItem } from '../../store/dictionaries';
-import { IUser } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
-import { Gender, YesNo } from '../../enum/Form';
 import { Social } from '../../enum/Social';
 import { getLabelSterilization } from '../../helpers/Labels';
 import { toItem } from '../../utilites/appNavigation';
-import { IItem } from '../../scens/Item/types';
-import { ICityItem } from '../../api/apiDictionaries';
 import CitySelect from '../elements/CitySelect';
-import Api from '../../api/apiAds';
+import { adsApi } from '../../api';
 import PhoneInput from '../elements/PhoneInput';
 
 interface IValues extends Omit<IItem, 'user_id' | 'active'> {
 
 }
 
-interface IProps extends IStateDictionariesReducer {
+interface IProps extends IStateDictionaries {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[],
   values: IValues,
   user: IUser
@@ -64,8 +60,7 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
 
     function onSave() {
       setLoading(true);
-
-      Api.update({
+      adsApi.update({
         id: values.id,
         title,
         images,
@@ -76,7 +71,6 @@ const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }
         breed_id,
         gender,
         sterilization,
-        city_id: city ? city.id : undefined,
         socials
       }).then(({ data }) => {
         toItem({ item: data });

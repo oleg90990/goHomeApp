@@ -3,10 +3,10 @@ import { StyleSheet, Image, TouchableNativeFeedback } from "react-native";
 import { View } from 'native-base';
 
 import { connect } from 'react-redux';
-import { IStateDictionariesReducer } from '../../store/dictionaries';
+import { IStateDictionaries } from 'friendshome-api';
 import { IState } from '../../store/types';
 
-interface IAnimalState extends IStateDictionariesReducer {
+interface IAnimalState extends IStateDictionaries {
   value?: number;
   onChange: (id?: number) => void;
 }

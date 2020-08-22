@@ -4,9 +4,8 @@ import { Content, Spinner, View } from 'native-base';
 import { ScrollView, FlatList, RefreshControl, Text } from "react-native";
 import Item from './components/Item';
 import { IItemsProps } from "./types";
-import ApiItems from "../../api/apiAds";
-import { Sortby } from '../../enum/Form';
-import { IItem } from '../Item/types';
+import { adsApi } from '../../api';
+import { IItem, Sortby } from 'friendshome-api';
 import RNPickerSelect from 'react-native-picker-select';
 
 import { connect } from 'react-redux';
@@ -27,7 +26,7 @@ const Items: React.FC<IItemsProps> = ({ searchForm }) => {
     function loadNextItems() {
         setLoading(true);
 
-        ApiItems.find(searchForm, sortBy, currentPage + 1)
+        adsApi.find(searchForm, sortBy, currentPage + 1)
             .then(({ data }) => {
               setItems([...items, ...data.items]);
               setCurrentPage(data.currentPage);

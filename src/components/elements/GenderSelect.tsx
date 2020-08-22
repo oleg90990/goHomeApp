@@ -4,8 +4,7 @@ import { Picker} from 'native-base';
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 import { getAnimalById } from '../../store/dictionaries/getters';
-import { IDictionaryAnimalType } from '../../store/dictionaries';
-import { Gender } from '../../enum/Form';
+import { IDictionaryAnimalType, Gender } from 'friendshome-api';
 
 interface IGenderSelectProps  {
   onChange: (value: Gender) => void,

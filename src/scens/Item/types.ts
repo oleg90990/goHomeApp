@@ -1,24 +1,9 @@
-import { IDictionaryColorItem, IDictionaryItem, IDictionaryAnimalType } from '../../store/dictionaries';
-import { Gender, YesNo } from '../../enum/Form';
-import { ICityItem } from '../../api/apiDictionaries';
-
-export interface IItem {
-    id: number,
-    title: string,
-    images: string[],
-    content: string,
-    age: number,
-    colors: number[],
-    animal_id: number,
-    breed_id: number,
-    active: boolean,
-    user_id: number,
-    gender: Gender,
-    sterilization: YesNo
-    city?: ICityItem,
-    city_id?: number,
-    vkPosts: number[]
-}
+import {
+  IItem,
+  IDictionaryColorItem,
+  IDictionaryItem,
+  IDictionaryAnimalType
+} from 'friendshome-api';
 
 export interface IItemProps {
     item: IItem,

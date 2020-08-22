@@ -5,9 +5,9 @@ import BreedSelect from '../elements/BreedSelect';
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { IStateDictionariesReducer } from '../../store/dictionaries';
+import { IStateDictionaries } from 'friendshome-api';
 
-interface IBreedsWidgetProps extends IStateDictionariesReducer {
+interface IBreedsWidgetProps extends IStateDictionaries {
   animal: number | undefined,
   value: number[],
   addBreed: (value: number) => void

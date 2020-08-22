@@ -1,4 +1,4 @@
-import { IItem } from '../Item/types';
+import { IItem } from 'friendshome-api';
 
 export interface ICreatePostProps {
     item: IItem

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Form, Item, Label, Input, Button, Text, Spinner } from 'native-base';
+import { IUserUpdateData, ICityItem } from 'friendshome-api';
 import { connect } from 'react-redux';
 import { register } from '../../store/user/actions';
 import { toAccounnt } from '../../utilites/appNavigation';
 import CitySelect from '../elements/CitySelect';
 import Toast from '../../utilites/toastr';
-import { IUserUpdateData } from '../../api/apiUser';
-import { ICityItem } from '../../api/apiDictionaries';
 import PhoneInput from '../elements/PhoneInput';
 
 interface IRegisterProps {
@@ -23,21 +22,25 @@ const Register: React.FC<IRegisterProps> = ({ register }) => {
   const [city, setCity] = useState<ICityItem | undefined>();
 
   function onRegister() {
-    setLoading(true);
-    register({
-      mobile,
-      name,
-      password,
-      c_password,
-      city_id: city ? city.id : undefined
-    }).then(() => {
-      Toast.success('Добро пожаловать!');
-      toAccounnt();
-      setLoading(false);
-    })
-    .catch((e) => {
-      setLoading(false);
-    });
+    if (city) {
+      setLoading(true);
+      register({
+        mobile,
+        name,
+        password,
+        c_password,
+        city_id: city.id
+      }).then(() => {
+        Toast.success('Добро пожаловать!');
+        toAccounnt();
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
+    } else {
+      Toast.error('Выбирите пожалуйста город');
+    }
   }
 
   return (

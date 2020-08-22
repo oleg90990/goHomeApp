@@ -6,9 +6,8 @@ import { IItemProps } from "./types";
 import { getColorsByIds, getBreedById, getAnimalById } from "../../store/dictionaries/getters";
 import Actions from './components/Actions';
 import { getLabelSterilization, getLabelYesNo, getLabelAge, getLabelCity } from '../../helpers/Labels';
-import API from '../../api/apiAds';
+import { adsApi } from '../../api';
 import { toEditPost } from '../../utilites/appNavigation';
-
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
 
@@ -25,7 +24,7 @@ const Item: React.FC<IItemProps> = ({
         const [activeItem, setActive] = useState(item.active); 
 
         function toPublish(active: boolean) {
-            API.publish(item.id, active)
+            adsApi.publish(item.id, active)
                 .then(({ data }) => {
                     setActive(data.active);
                 });

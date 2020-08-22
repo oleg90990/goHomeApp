@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from "react-native";
 import { Label, Card, CardItem, Body, View } from 'native-base';
-import { YesNo, Gender } from '../../enum/Form';
+import { YesNo, Gender } from 'friendshome-api';
 import SterilizationCastrationSelect from '../../components/elements/SterilizationCastrationSelect';
 import { getLabelSterilization } from '../../helpers/Labels';
 

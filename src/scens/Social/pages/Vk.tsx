@@ -6,11 +6,10 @@ import VKLogin, { VKLoginResult } from 'react-native-vkontakte-login';
 import { connect } from 'react-redux';
 import { IState } from '../../../store/types';
 import { vkSave, vkGroups, vkGroupsStore } from '../../../store/user/actions';
-import { IUser } from '../../../store/user';
+import { IUser, IGroupItem } from 'friendshome-api';
 
 import { toBack } from "../../../utilites/appNavigation";
 
-import { IGroupItem } from '../../../api/apiVk';
 import CheckBox from '@react-native-community/checkbox';
 import Toast from '../../../utilites/toastr';
 

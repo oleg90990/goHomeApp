@@ -21,22 +21,19 @@ import GenderSelect from '../../components/elements/GenderSelect';
 import SterilizationCastrationSelect from '../elements/SterilizationCastrationSelect';
 import ImageSelect from '../elements/ImagesSelect';
 import SocialSelect from '../elements/SocialSelect';
-
+import { IStateDictionaries, IDictionaryItem, Gender, YesNo, IUser } from 'friendshome-api';
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { IStateDictionariesReducer, IDictionaryItem } from '../../store/dictionaries';
-import { IUser } from '../../store/user';
 import { getBreedsByAnimal } from '../../store/dictionaries/getters';
-import { Gender, YesNo } from '../../enum/Form';
 import { Social } from '../../enum/Social';
 import { getLabelSterilization } from '../../helpers/Labels';
 import { toItem } from '../../utilites/appNavigation';
-import { ICityItem } from '../../api/apiDictionaries';
+import { ICityItem } from 'friendshome-api';
+import { adsApi } from '../../api';
 import CitySelect from '../elements/CitySelect';
-import Api from '../../api/apiAds';
 import PhoneInput from '../elements/PhoneInput';
 
-interface IProps extends IStateDictionariesReducer {
+interface IProps extends IStateDictionaries {
   getBreedsByAnimal: (animal: number) => IDictionaryItem[],
   user: IUser
 }
@@ -71,7 +68,7 @@ const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, user }) => {
 
     function onSave() {
       setLoading(true);
-      Api.create({
+      adsApi.create({
         title,
         images,
         content,

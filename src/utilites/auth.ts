@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { IUser } from '../store/user';
+import { IUser } from 'friendshome-api';
 
 export default {
     setToken: async (token: string) => {

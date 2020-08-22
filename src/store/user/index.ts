@@ -1,32 +1,21 @@
-import { SET_USER, SET_TOKEN, LOGOUT } from './types';
 import { IAction } from '../types';
-import { ICityItem } from '../../api/apiDictionaries';
+import { ICityItem, IUser, IStateUserResponse } from 'friendshome-api';
+import {
+  SET_USER,
+  SET_TOKEN,
+  LOGOUT
+} from './types';
 
-export interface IUser {
-    id: number,
-    name: string,
-    email: string,
-    city?: ICityItem,
-    mobile: string,
-    vk: boolean,
-    vkGroups: number[]
-}
-
-export interface IStateUserReducer {
-    access_token: string,
-    user: IUser
-}
-
-const INITIAL_STATE: IStateUserReducer = {
-    access_token: '',
-    user: {
-        id: 0,
-        name: '',
-        email: '',
-        mobile: '',
-        vk: false,
-        vkGroups: []
-    }
+const INITIAL_STATE: IStateUserResponse = {
+  access_token: '',
+  user: {
+    id: 0,
+    name: '',
+    email: '',
+    mobile: '',
+    vk: false,
+    vkGroups: []
+  }
 };
 
 export default (state = INITIAL_STATE, action: IAction<any>) => {

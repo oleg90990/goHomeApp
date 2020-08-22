@@ -3,9 +3,9 @@ import { StyleSheet, TouchableNativeFeedback, View } from "react-native";
 
 import { connect } from 'react-redux';
 import { IState } from '../../store/types';
-import { IStateDictionariesReducer } from '../../store/dictionaries';
+import { IStateDictionaries } from 'friendshome-api';
 
-interface IColorsSelectProps extends IStateDictionariesReducer {
+interface IColorsSelectProps extends IStateDictionaries {
   onChange: (value: number[]) => void,
   value: number[]
 }

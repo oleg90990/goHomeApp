@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from "react-native";
 import { Label, View, Card, CardItem, Body, Text } from 'native-base';
-import { AgeState } from '../../store/searchForm';
+import { AgeState } from 'friendshome-api';
 import AgeSelect from '../../components/elements/AgeSelect';
 
 interface IAgesWidgetsProps {

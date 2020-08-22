@@ -2,7 +2,7 @@ import { Actions } from 'react-native-router-flux';
 import { Scens } from '../enum/Scens'
 import Auth from './auth';
 
-import { IItem } from '../scens/Item/types';
+import { IItem } from 'friendshome-api';
 import { IEditPostProps } from '../scens/EditPost/types';
 
 const scensAuth: Scens[] = [

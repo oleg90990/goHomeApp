@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, Button } from 'native-base';
 import { StyleSheet, Text, Linking } from "react-native";
-
-import { IUser } from "../../../store/user";
+import { IUser, IItem } from 'friendshome-api';
 
 import { connect } from 'react-redux';
-import { IItem } from "../types";
 import { IState } from '../../../store/types';
 
 interface IActionsProps {
