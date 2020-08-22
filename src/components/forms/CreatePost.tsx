@@ -35,8 +35,8 @@ import CitySelect from '../elements/CitySelect';
 import PhoneInput from '../elements/PhoneInput';
 
 interface IProps extends IStateDictionaries {
-  getBreedsByAnimal: (animal: number) => IDictionaryItem[],
-  user: IUser
+  getBreedsByAnimal: (animal: number) => IDictionaryItem[];
+  user: IUser;
 }
 
 const CreatePost: React.FC<IProps> = ({ getBreedsByAnimal, animals, user }) => {

@@ -5,7 +5,7 @@ import { toItem as toItemScen  } from '../../../utilites/appNavigation';
 import { IItem } from 'friendshome-api';
 
 export interface IItemListInterface {
-    item: IItem
+    item: IItem;
 }
 
 const Item: React.FC<IItemListInterface> = ({ item }) => { 

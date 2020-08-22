@@ -1,3 +1,3 @@
 export interface IAccountProps {
-    logout: () => void
+    logout: () => void;
 }

@@ -10,7 +10,7 @@ import Toast from '../../utilites/toastr';
 import PhoneInput from '../elements/PhoneInput';
 
 interface IRegisterProps {
-  register: (data: IUserUpdateData) => Promise<any>
+  register: (data: IUserUpdateData) => Promise<any>;
 }
 
 const Register: React.FC<IRegisterProps> = ({ register }) => {

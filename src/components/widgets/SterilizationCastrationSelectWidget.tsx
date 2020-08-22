@@ -6,9 +6,9 @@ import SterilizationCastrationSelect from '../../components/elements/Sterilizati
 import { getLabelSterilization } from '../../helpers/Labels';
 
 interface ISterilizationCastrationSelectWidgetProps {
-    value: YesNo,
-    gender?: Gender,
-    onChange: (value: YesNo) => void
+    value: YesNo;
+    gender?: Gender;
+    onChange: (value: YesNo) => void;
 }
 
 const GenderSelectWidget: React.FC<ISterilizationCastrationSelectWidgetProps> = ({ value, gender, onChange }) => {  

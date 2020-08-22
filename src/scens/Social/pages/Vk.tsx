@@ -14,10 +14,10 @@ import CheckBox from '@react-native-community/checkbox';
 import Toast from '../../../utilites/toastr';
 
 interface IProps {
-  user: IUser,
-  vkSave: (data: VKLoginResult) => Promise<any>
-  vkGroups: () => Promise<IGroupItem[]>
-  vkGroupsStore: (groups: number[]) => Promise<any>
+  user: IUser;
+  vkSave: (data: VKLoginResult) => Promise<any>;
+  vkGroups: () => Promise<IGroupItem[]>;
+  vkGroupsStore: (groups: number[]) => Promise<any>;
 }
 
 const Vk: React.FC<IProps> = ({ user, vkSave, vkGroups, vkGroupsStore }) => {

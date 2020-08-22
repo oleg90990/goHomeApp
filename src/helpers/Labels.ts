@@ -40,7 +40,7 @@ export const getLabelAge = (age: number) => {
   return 'лет';
 }
 
-export const getLabelCity = (city: ICityItem | undefined) : string => {
+export const getLabelCity = (city: ICityItem | undefined): string => {
   return city ? city.name : 'Город не выбран';
 }
 

@@ -24,8 +24,8 @@ import { loadDictionaries  } from '../store/dictionaries/actions';
 import { loadData as loadUserData  } from '../store/user/actions';
 
 interface IRouterProps {
-    loadDictionaries(): any,
-    loadUserData(): any
+    loadDictionaries(): any;
+    loadUserData(): any;
 }
 
 const RouterApp: React.FC<IRouterProps> = (props) => {

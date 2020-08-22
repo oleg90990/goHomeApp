@@ -5,10 +5,10 @@ import { Text, List, ListItem  } from 'native-base';
 import CheckBox from '@react-native-community/checkbox';
 
 interface IColorsSelectProps {
-  onChange: (value: Social[]) => void,
-  value: Social[],
-  prefix: string,
-  vk: boolean
+  onChange: (value: Social[]) => void;
+  value: Social[];
+  prefix: string;
+  vk: boolean;
 }
 
 const SocialSelect: React.FC<IColorsSelectProps> = ({ value, onChange, prefix, vk }) => {

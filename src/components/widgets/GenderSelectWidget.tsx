@@ -5,9 +5,9 @@ import { Gender } from 'friendshome-api';
 import GenderSelect from '../../components/elements/GenderSelect';
 
 interface IAgesWidgetsProps {
-    value: Gender,
-    onChange: (value: Gender) => void,
-    animal?: number
+    value: Gender;
+    onChange: (value: Gender) => void;
+    animal?: number;
 }
 
 const GenderSelectWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange, animal }) => {  

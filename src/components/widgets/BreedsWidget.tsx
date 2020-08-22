@@ -8,10 +8,10 @@ import { IState } from '../../store/types';
 import { IStateDictionaries } from 'friendshome-api';
 
 interface IBreedsWidgetProps extends IStateDictionaries {
-  animal: number | undefined,
-  value: number[],
-  addBreed: (value: number) => void
-  removeBreed: (value: number) => void
+  animal: number | undefined;
+  value: number[];
+  addBreed: (value: number) => void;
+  removeBreed: (value: number) => void;
 }
 
 const BreedsWidget: React.FC<IBreedsWidgetProps> = ({ animal, value, addBreed, removeBreed, animals }) => {   

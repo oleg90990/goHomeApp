@@ -16,7 +16,7 @@ const INITIAL_STATE: IStateDictionaries = {
 
 export default (state = INITIAL_STATE, action: IAction<IStateDictionaries>) => {
   switch (action.type) {
-    case SET_ALL:;
+    case SET_ALL:
         const { animals, colors } = action.payload;
 
         return {

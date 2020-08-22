@@ -11,8 +11,8 @@ import CitySelect from '../elements/CitySelect';
 import PhoneInput from '../elements/PhoneInput';
 
 interface IProps {
-  user: IUser,
-  update: (data: IUserUpdateData) => Promise<any>
+  user: IUser;
+  update: (data: IUserUpdateData) => Promise<any>;
 }
 
 const Profile: React.FC<IProps> = ({ user, update }) => {

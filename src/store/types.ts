@@ -12,5 +12,5 @@ export interface IAction<T> {
 export interface IState {
   searchForm: IStateSearchBody;
   dictionaries: IStateDictionaries;
-  user: IStateUserResponse
+  user: IStateUserResponse;
 }

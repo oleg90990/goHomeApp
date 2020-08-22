@@ -6,8 +6,8 @@ import { IState } from '../../store/types';
 import { IStateDictionaries } from 'friendshome-api';
 
 interface IColorsSelectProps extends IStateDictionaries {
-  onChange: (value: number[]) => void,
-  value: number[]
+  onChange: (value: number[]) => void;
+  value: number[];
 }
 
 const ColorsSelect: React.FC<IColorsSelectProps> = ({ colors, onChange, value }) => {

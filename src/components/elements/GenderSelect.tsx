@@ -7,10 +7,10 @@ import { getAnimalById } from '../../store/dictionaries/getters';
 import { IDictionaryAnimalType, Gender } from 'friendshome-api';
 
 interface IGenderSelectProps  {
-  onChange: (value: Gender) => void,
-  value?: Gender,
-  animal?: number,
-  getAnimalById: (animalId: number) => IDictionaryAnimalType | undefined
+  onChange: (value: Gender) => void;
+  value?: Gender;
+  animal?: number;
+  getAnimalById: (animalId: number) => IDictionaryAnimalType | undefined;
 }
 
 const GenderSelect: React.FC<IGenderSelectProps> = ({ onChange, value, animal, getAnimalById }) => {

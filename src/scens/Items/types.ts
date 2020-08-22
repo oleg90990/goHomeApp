@@ -1,4 +1,3 @@
 import { IState } from '../../store/types';
 
-export interface IItemsProps extends IState {
-}
+export type IItemsProps = IState

@@ -5,8 +5,8 @@ import { AgeState } from 'friendshome-api';
 import AgeSelect from '../../components/elements/AgeSelect';
 
 interface IAgesWidgetsProps {
-    value: AgeState,
-    onChange: (value: AgeState) => void
+    value: AgeState;
+    onChange: (value: AgeState) => void;
 }
 
 const AgeWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange }) => {  

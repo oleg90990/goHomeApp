@@ -5,7 +5,7 @@ import AnimalsSelect from '../elements/AnimalsSelect';
 
 interface IAnimalsWidgetsState {
   value?: number;
-  onChange: (id?: number) => void
+  onChange: (id?: number) => void;
 }
 
 const AnimalsSelectWidget: React.FC<IAnimalsWidgetsState> = ({ value, onChange }) => {

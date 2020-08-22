@@ -4,8 +4,8 @@ import { Label, Card, CardItem, Body } from 'native-base';
 import ColorsSelect from '../../components/elements/ColorsSelect';
 
 interface IColorWidgetsState {
-  value: number[],
-  onChange: (value: number[]) => void
+  value: number[];
+  onChange: (value: number[]) => void;
 }
 
 const ColorWidget: React.FC<IColorWidgetsState> = ({ value, onChange }) => {

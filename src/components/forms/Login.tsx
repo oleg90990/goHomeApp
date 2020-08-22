@@ -8,7 +8,7 @@ import Toast from '../../utilites/toastr';
 import PhoneInput from '../elements/PhoneInput';
 
 interface ILoginProps {
-  login: (mobile: string, password: string) => Promise<any>
+  login: (mobile: string, password: string) => Promise<any>;
 }
 
 const Login: React.FC<ILoginProps> = ({ login }) => {

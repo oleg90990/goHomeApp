@@ -3,8 +3,8 @@ import { Picker} from 'native-base';
 import { YesNo } from 'friendshome-api';
 
 interface ISterilizationCastrationSelectProps  {
-  onChange: (value: YesNo) => void,
-  value?: YesNo
+  onChange: (value: YesNo) => void;
+  value?: YesNo;
 }
 
 const SterilizationCastrationSelect: React.FC<ISterilizationCastrationSelectProps> = ({ onChange, value }) => {

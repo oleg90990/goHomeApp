@@ -5,11 +5,11 @@ import { View, Icon, Text } from 'native-base';
 import { Color } from '../../enum/Color';
 
 interface IImagesSelectProps  {
-  onChange: (value: string[]) => void,
-  value: string[],
+  onChange: (value: string[]) => void;
+  value: string[];
 }
 
-var options = {
+const options = {
   title: undefined,
   cancelButtonTitle: 'Отмена',
   takePhotoButtonTitle: 'Сделать фото',
@@ -28,7 +28,7 @@ const ImagesSelect: React.FC<IImagesSelectProps> = ({ value, onChange }) => {
     }
 
     function removeResource(index: number) {
-      let images = [...value];
+      const images = [...value];
       images.splice(index, 1);
       onChange(images);
     }

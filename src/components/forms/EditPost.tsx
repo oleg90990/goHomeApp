@@ -35,14 +35,12 @@ import CitySelect from '../elements/CitySelect';
 import { adsApi } from '../../api';
 import PhoneInput from '../elements/PhoneInput';
 
-interface IValues extends Omit<IItem, 'user_id' | 'active'> {
-
-}
+type IValues = Omit<IItem, 'user_id' | 'active'>
 
 interface IProps extends IStateDictionaries {
-  getBreedsByAnimal: (animal: number) => IDictionaryItem[],
-  values: IValues,
-  user: IUser
+  getBreedsByAnimal: (animal: number) => IDictionaryItem[];
+  values: IValues;
+  user: IUser;
 }
 
 const EditPost: React.FC<IProps> = ({ getBreedsByAnimal, animals, values, user }) => { 

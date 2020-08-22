@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { IState } from '../../../store/types';
 
 interface IActionsProps {
-    user_id: number
-    active: boolean
-    user: IUser
-    toPublish: (active: boolean) => void
-    toEdit: () => void
-    toCall: () => void
+    user_id: number;
+    active: boolean;
+    user: IUser;
+    toPublish: (active: boolean) => void;
+    toEdit: () => void;
+    toCall: () => void;
 }
 
 const Actions: React.FC<IActionsProps> = ({ user, active, user_id, toPublish, toEdit, toCall }) => {

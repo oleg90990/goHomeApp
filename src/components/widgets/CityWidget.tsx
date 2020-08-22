@@ -5,8 +5,8 @@ import CitySelect from '../elements/CitySelect';
 import { ICityItem } from 'friendshome-api';
 
 interface IAgesWidgetsProps {
-    value?: ICityItem,
-    onChange: (value: ICityItem) => void
+    value?: ICityItem;
+    onChange: (value: ICityItem) => void;
 }
 
 const CityWidget: React.FC<IAgesWidgetsProps> = ({ value, onChange }) => {  

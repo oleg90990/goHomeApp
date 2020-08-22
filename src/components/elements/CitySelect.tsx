@@ -6,9 +6,9 @@ import { dictionariesApi } from '../../api';
 import { getLabelCity } from '../../helpers/Labels';
 
 interface IBreedsWidgetProps {
-  onSelected: (city: ICityItem) => void,
-  includedRegins: boolean,
-  value?: ICityItem
+  onSelected: (city: ICityItem) => void;
+  includedRegins: boolean;
+  value?: ICityItem;
 }
 
 const CitySelect: React.FC<IBreedsWidgetProps> = ({ includedRegins, onSelected, value }) => {
@@ -27,7 +27,7 @@ const CitySelect: React.FC<IBreedsWidgetProps> = ({ includedRegins, onSelected, 
             .then(({ data }) => {
                 setCities(data)
             });
-    };
+    }
 
     useEffect(() => {
         updateCities('');

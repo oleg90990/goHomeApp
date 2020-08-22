@@ -9,9 +9,9 @@ import { IState } from '../../store/types';
 
 
 interface SocialButtons {
-  icon: ImageSourcePropType,
-  title: string,
-  action: () => void,
+  icon: ImageSourcePropType;
+  title: string;
+  action: () => void;
 }
 
 const Social: React.FC<ISocialProps> = ({ user }) => { 

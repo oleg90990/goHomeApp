@@ -64,14 +64,14 @@ export default (state = INITIAL_STATE, action: IAction<any>) => {
         sterilization
       };
     case ADD_BREED:
-      let breedsAdded = state.breeds;
+      const breedsAdded = state.breeds;
       breedsAdded.push(action.payload);
       return {
         ...state,
         breeds: [ ...breedsAdded ]
       };
     case REMOVE_BREED:
-      let breedsRemoved = state.breeds;
+      const breedsRemoved = state.breeds;
       const index = breedsRemoved.indexOf(action.payload);
       breedsRemoved.splice(index, 1)
       return {

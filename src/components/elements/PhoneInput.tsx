@@ -4,9 +4,9 @@ import { formatNumber } from "libphonenumber-js";
 import { Input, View, Text } from 'native-base';
 
 interface IPhoneInputProps  {
-  onChange: (value: string) => void,
-  value: string,
-  disabled?: boolean
+  onChange: (value: string) => void;
+  value: string;
+  disabled?: boolean;
 }
 
 const PhoneInput: React.FC<IPhoneInputProps> = ({ value, onChange, disabled }) => {
@@ -17,8 +17,8 @@ const PhoneInput: React.FC<IPhoneInputProps> = ({ value, onChange, disabled }) =
     const [phoneNumber, setPhoneNumber] = useState(toFormat('+' + value));
 
     useEffect(() => {
-      let tempPhone = phoneNumber.replace(/\+/g, '');
-      let removeSpaces = tempPhone.replace(/ /g, '');
+      const tempPhone = phoneNumber.replace(/\+/g, '');
+      const removeSpaces = tempPhone.replace(/ /g, '');
 
       onChange(removeSpaces)
     }, [phoneNumber, onChange])

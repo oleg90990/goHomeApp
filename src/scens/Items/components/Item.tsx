@@ -5,7 +5,7 @@ import { toItem as toItemScen  } from '../../../utilites/appNavigation';
 import { IItem } from 'friendshome-api';
 
 export interface IItemListInterface {
-    item: IItem
+    item: IItem;
 }
 
 export const Item = memo(({ item }: IItemListInterface) => (
