@@ -13,7 +13,7 @@
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/checkbox": "^0.4.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "friendshome-api": "git+https://github.com/oleg90990/goHomeApi.git",
     "libphonenumber-js": "^1.7.54",
     "native-base": "^2.13.12",
